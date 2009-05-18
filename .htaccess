@@ -1,0 +1,7 @@
+#AddType application/x-httpd-php .php .htm .htmlAddHandler ad .ad
+#Options +FollowSymlinks
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule    ^resources/(.*)$  /var/www/shop/resources/$1 [L]
+    RewriteRule    .*       index.php
+</IfModule>

@@ -1,0 +1,10 @@
+html	{ margin: 0; }
+body	{ margin: 0; padding: 30px 10px; }
+#header, #sidebar, #footer, #logo, #breadcrumbs, .noprint, #menu, #basket		{ display: none; }
+table	{ border: 2px solid black; border-collapse: collapse; width: 100%; }
+th		{ border-bottom: 2px solid black; border-top: 2px solid black; border-right: 1px solid #a0a0a0; }
+td		{ border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid #a0a0a0; }
+img		{ border: none; }
+.center	{ text-align: center; }
+.left	{ text-align: left; }
+.right	{ text-align: right; }
