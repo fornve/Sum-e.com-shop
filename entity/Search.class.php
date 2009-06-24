@@ -33,7 +33,7 @@
 			return $entity->Collection( $query, null, __CLASS__ );
 		}
 
-		public static function PerformSearch( $sentence )
+		public static function PerformSearch( $sentence, $search_vars )
 		{
 			$search = Search::RetrieveBySentence( $sentence );
 
@@ -43,8 +43,13 @@
 				$search->sentence = $sentence;
 			}
 
-			$result[ 'products' ] = $search->SearchProducts();
-			$result[ 'categories' ] = $search->SearchCategories();
+			$search->search_vars = $search_vars;
+
+			if( !$search_vars->type || $search_vars->type == 'products' )
+				$result[ 'products' ] = $search->SearchProducts();
+
+			if( !$search_vars->type || $search_vars->type == 'categories' )
+				$result[ 'categories' ] = $search->SearchCategories();
 			
 			$search->results = count( $result[ 'products' ] ) + count( $result[ 'categories' ] );
 			$search->count++;
@@ -58,11 +63,36 @@
 
 		public function SearchProducts()
 		{
-			return Product::Search( $this->sentence );
+			return Product::Search( $this->sentence, $this->search_vars );
 		}
 
 		public function SearchCategories()
 		{
-			return Category::Search( $this->sentence );
+			return Category::Search( $this->sentence, $this->search_vars );
+		}
+
+		public static function PriceRanges()
+		{
+			$array = array(
+					array( 'id' => '1', 'name' => 'Up to &pound;100', 'min_value' => '0', 'max_value' => '100' ),
+					array( 'id' => '2', 'name' => '&pound;101 - &pound;500', 'min_value' => '101', 'max_value' => '500' ),
+					array( 'id' => '3', 'name' => '&pound;501 - &pound;1000', 'min_value' => '501', 'max_value' => '1000' ),
+					array( 'id' => '4', 'name' => 'More than &pound;1000', 'min_value' => '1001', 'max_value' => '999999999' )
+				);
+
+			return $array;
+		}
+
+		public static function PriceRangeGetByID( $id )
+		{
+			$array = Search::PriceRanges();
+
+			foreach( $array as $price_range )
+			{
+				if( $price_range[ 'id' ] == htmlentities( $id ) )
+				{
+					return $price_range;
+				}
+			}
 		}
 	}

@@ -17,7 +17,7 @@
 		theme_advanced_resizing : true,
 
 		// Example content CSS (should be your site CSS)
-		content_css : "/resources/images/style.css"
+		content_css : "/resources/css/default.css"
 
 	});
 </script>

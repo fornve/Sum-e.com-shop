@@ -21,6 +21,7 @@
 							<input name="item_name_{$items}" value="{$product->name}{if $variants|@count} ({foreach from=$variants item=variant_object name=variantsloop}{$variant_object->type}: {$variant_object->name}{if not $smarty.foreach.variantsloop.last},{/if}{/foreach} ){/if}" type="hidden" />
 							<input name="quantity_{$items}" value="{$variant.quantity}" type="hidden" />
 							<input name="amount_{$items}" value="{$variant.item_value|string_format:'%.2f'}" type="hidden" />
+							<input name="tax_rate_{$items}" value="{$tax_rate}" type="hidden" />
 						{/if}
 					{/foreach}
 				{/foreach}

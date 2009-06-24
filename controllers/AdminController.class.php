@@ -45,7 +45,7 @@
 
 		function Logout()
 		{
-			$_SESSION[ 'user_notification' ][] = array( 'type' => 'notify', 'text' => "Admin logged out." );
+			$_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => "Admin logged out." );
 			unset( $_SESSION['admin'] );
 			header( "Location: /" );
 			exit;
@@ -136,6 +136,13 @@
 			$this->assign( 'admin', $admin );
 			echo $this->Decorate( 'admin/admin/change_password.tpl' );
 		}
+
+		// so far we do not need to edit admin
+		/*function ListAdmins()
+		{
+			$this->Assign( "admins", Admin::GetAll() );
+			echo $this->Decorate( "admin/admin/list.tpl" );
+		}*/
 
         static function EnsureAdminAndProductOwner( $id )
         {

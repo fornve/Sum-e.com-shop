@@ -11,7 +11,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/resources/css/default.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
     <link href="/resources/css/thickbox.css" rel="stylesheet" type="text/css" media="screen" />
     <script type="text/javascript" src="/resources/js/jquery.js"></script>
@@ -63,12 +63,15 @@
 	<div id="subheader">
 		<div id="menu">
 			<ul>
-				<li><a href="/">Home</a></li>
-				<li><a href="/Blog">Blog</a></li>
-				<li><a href="/Admin/">Admin</a></li>
-				<li><a href="/Page/View/10/Links">Links</a></li>
-				<li><a href="/TermsAndConditions">Tnc</a></li>
-				<li><a href="/Contactus/">Contact</a></li>
+				<li><a href="/" title="Shop homepage">Home</a></li>
+				<li><a href="/Search/Advanced" title="Advanced search">Search</a></li>
+				<li><a href="/Blog/" title="Shop blog">Blog</a></li>
+				{if $smarty.session.admin}
+					<li><a href="/Admin/" titl="Shop administration">Admin</a></li>
+				{/if}
+				<li><a href="/Page/View/10/Links" title="Shop links">Links</a></li>
+				<li><a href="/TermsAndConditions" title="Terms and Conditions">Tnc</a></li>
+				<li><a href="/Contactus/" title="Contact us">Contact</a></li>
 			</ul>
 		</div>
 		<!-- end #menu -->
@@ -84,75 +87,26 @@
 <div id="page">
 
     <div id="breadcrumbs">
-        <ul>
-            <li><a href="/" title="Home">Home</a></li>
-            {foreach from=$breadcrumbs item=breadcrumb}
-            <li> &gt; {if $breadcrumb.link}<a href="{$breadcrumb.link}" title="{$breadcrumb.name}">{$breadcrumb.name}</a>{else}{$breadcrumb.name}{/if}</li>
-            {/foreach}
-        </ul>
+		{include file='misc/breadcrumbs.tpl'}
     </div>
 
 	<div id="content">
         {$content}
     </div>
+
 	<!-- end #content -->
 	<div id="sidebar">
 		<ul>
 			{if $smarty.const.SHOP_OPEN || $smarty.session.admin}
 			<li>
 				<h2>Categories</h2>
-				<ul>
-                    {if $categories}
-                    {foreach from=$categories item=category_list_item}
-                        <li {if $category_list_item->id==$category->id || $category_list_item->id==$category->parent->id} class="selected"{/if}>
-                            <a href="/Category/Index/{$category_list_item->id}/{$category_list_item->name}" title="{$category_list_item->name}">{$category_list_item->name}</a>
-                            {if $category_list_item->id==$category->id && $category}
-                                {assign var=category_menu_kids value=$category->LevelCollection($category->id)}
-                            {elseif $category_list_item->id==$category->parent->id && $category}
-                                {assign var=category_menu_kids value=$category->LevelCollection($category->parent->id)}
-                            {/if}
-
-                            {if $category_menu_kids}
-                                <ul>
-                                {foreach from=$category_menu_kids item=category_kid}
-                                    <li>
-                                        <a href="/Category/Index/{$category_kid->id}/{$category_kid->name}" title="{$category_kid->name}">{$category_kid->name}</a>
-                                    </li>
-                                {/foreach}
-                                </ul>
-                            {/if}
-
-                            {assign var=category_menu_kids value=0}
-                        </li>
-                    {/foreach}
-                    {/if}
+				<ul id="category_menu">
+					{include file="category/menu.tpl"}
                 </ul>
 			</li>
 			{/if}
 
             {if $smarty.session.admin}
-			<li>
-				<h2>Todo</h2>
-				<ul class="decimal-list">
-					<li style="color: red;">Advanced Search &amp; Search relevance</li>
-					<li style="color: red;">Shop (vendor) logo</li>
-					<li style="color: blue;">Admin orders pagination</li>
-					<li style="color: blue;">Admin Products pagination</li>
-					<li style="color: blue;">Category Products pagination</li>
-					<li style="color: blue;">Category Products sortation</li>
-					<li style="color: blue;">Admin menu icons</li>
-					<li>Apply discount in admin order</li>
-					<li>Finish print invoice - shop information</li>
-					<li>Sitemap</li>
-					<li>Vat</li>
-					<li>Templates</li>
-					<li>Copy design from<a href="http://www.touchrichmond.com/business/list/bid/6464222">here</a></li>
-					<li>Shop controll through mobile - extra &pound;10 a week</li>
-					<li>Make sum-e.com looks like <a href="http://www.smashingmagazine.com/2009/05/15/optimizing-conversion-rates-its-all-about-usability/">this</a></li>
-					<li>Paypal Pro - extra &pound;20 a week</li>
-				</ul>
-			</li>
-
 			<li>
 				<h2>Shop admin</h2>
 				<ul class="collapsable">
@@ -263,6 +217,17 @@
     </div>
     {/if}
 
-
+	{literal}
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-1892634-15");
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+	{/literal}
 </body>
 </html>

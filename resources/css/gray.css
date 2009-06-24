@@ -1,9 +1,8 @@
 body {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 13px;
-	color: #837669;
-    background: #FFFFFF url('/resources/images/img01.jpg') repeat-x left top;
-
+	color: #000;
+	background: #fff url('/resources/images/gray/bg.jpg') top left repeat-x;
 }
 
 h1, h2, h3 {
@@ -30,7 +29,7 @@ ul, ol { }
 
 blockquote { }
 
-a { color: #000000; text-decoration: none; }
+a { text-decoration: none; }
 
 a:hover { text-decoration: underline; }
 
@@ -49,6 +48,8 @@ img.right {
 }
 
 hr { display: none; }
+
+div.hr	{ border-bottom: 1px solid #c0c0d0; }
 
 .list1 {
 }
@@ -81,12 +82,12 @@ div#wrapper {
 
 #header {
 	width: 940px;
-	height: 60px;
 	margin: 0 auto;
-	background: url('/resources/images/img02.png') no-repeat left top;
+	height: 65px;
+	position: relative;
 }
 
-#header .logo	{ float: left; padding: 18px; font-size: 20px; width: 150px; }
+#header .logo	{ float: left; padding: 0px; font-size: 20px; width: 250px; }
 #header .logo a	{ color: #fff; }
 
 #header .shop_description	{ float: left; padding-top: 14px;  width: 200px; color: #c0c0d0; }
@@ -117,7 +118,7 @@ div#wrapper {
 	float: left;
 	margin-right: 5px;
 	padding: 5px 12px 5px 28px;
-	background: url(/resources/images/img06.gif) no-repeat left 50%;
+	background: transparent url('/resources/images/img06.gif') no-repeat left 50%;
 	text-decoration: none;
 	font: 14px Arial, Helvetica, sans-serif;
 	color: #FFFFFF;
@@ -132,15 +133,16 @@ div#wrapper {
 /* Search */
 
 #search {
-	float: right;
-	width: 255px;
-	height: 76px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
 #search form {
-	float: right;
+	border: 2px solid #808080;
+	-moz-border-radius: 5px;
 	margin: 0;
-	padding: 23px 32px 0 0;
+	padding: 2px 0 0 0;
 }
 
 #search fieldset {
@@ -159,7 +161,7 @@ div#wrapper {
 	width: 185px;
 	height: 18px;
 	padding: 1px 0 0 5px;
-	background: transparent;
+	background: transparent url('/resources/images/gray/search.gif') right bottom no-repeat;
 	color: #343434;
 }
 
@@ -174,18 +176,18 @@ div#wrapper {
 #page {
 	width: 940px;
 	margin: 0 auto;
-	padding: 10px 0px 0px 0px;
+	padding: 0;
 }
 
 /** subheader */
 
 #subheader {
+	border: 1px solid red;
     position: relative;
 	width: 940px;
 	height: 60px;
 	margin: 0 auto;
     padding: 0;
-	background: url(/resources/images/img07a.jpg) no-repeat left top;
 }
 
 #subheader h1, #subheader p {
@@ -198,6 +200,7 @@ div#wrapper {
 /* Content */
 
 #content {
+	background: #fff url('/resources/images/gray/bg-short.jpg') top left repeat-x;
 	float: right;
 	width: 660px;
 }
@@ -206,7 +209,8 @@ div#wrapper {
 #breadcrumbs ul
 {
     list-style: none;
-    padding: 0 0 0 10px;
+    padding: 0;
+	margin: 0 0 10px 0;
 }
 
 #breadcrumbs li
@@ -218,16 +222,18 @@ div#wrapper {
 
 .post {
 	margin-bottom: 25px;
+	border: 1px solid #dcdcdc; border-bottom: none;
 }
 
 .post h3	{ margin: 10px 0; }
 
 .post h2.title {
-	height: 30px;
-	margin-bottom: 10px;
-	padding: 8px 0px 2px 40px;
-	background: url(/resources/images/img05.jpg) no-repeat left top;
-	color: #FFFFFF;
+	padding: 5px 10px;
+	margin: 2px;
+	border-bottom: 2px solid #dcdcdc;
+	color: #000;
+	font-weight: bold;
+	font-size: 18px;
 }
 
 .post .date {
@@ -267,6 +273,8 @@ div#wrapper {
 	padding-left: 17px;
 }
 
+.post .post_content		{ margin: 0 10px; }
+
 /* Sidebar */
 
 #sidebar {
@@ -283,22 +291,36 @@ div#wrapper {
 
 #sidebar li {
 	font-size: 14px;
-	margin-bottom: 30px;
-	padding: 0 0 0 0px;
+	padding: 0;
 }
 
 #sidebar li ul {
-	padding: 0; margin: 0;
+	-moz-border-radius: 5px;
+	border: 2px solid #dcdcdc;
+	padding: 0; margin: 0 0 20px 0;
 }
 
 #sidebar li li {
-	margin: 0;
-	padding: 7px 0 0 0;
-	background: url('/resources/images/menu_item.png') repeat-y left top;
-	min-height: 28px;
+	background-color: #ffffff;
+	background-image: url(/resources/images/gray/bg-leftcol.jpg);
+	background-repeat: repeat-y;
+	background-attachment: scroll;
+	background-position: left top;
+	border-bottom-width: medium;
+	border-bottom-style: none;
+	border-bottom-color: black;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	margin-top: 1px;
+	display: block;
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
 }
 
-#sidebar li a			{ margin-left: 20px; }
+#sidebar li a			{ margin-left: 20px; color: #000; }
 #sidebar li.selected a	{ font-weight: bold; color: #800000; }
 #sidebar li.selected li a	{ font-weight: normal; color: #000; margin-left: 40px; }
 
@@ -306,75 +328,25 @@ div#wrapper {
 #sidebar li.selected li	{ font-size: 13px; }
 #sidebar li.selected li	{ font-size: 13px; }
 
-#sidebar li li:hover, #sidebar li.selected	{ background: url('/resources/images/menu_item_selected.png') repeat-y left bottom; }
+#sidebar li li:hover, #sidebar li.selected	{ background-image: none; }
 
 #sidebar li ul.decimal-list li	{ padding-left: 20px; width: 220px; }
 
-#sidebar p {
-	margin: 0;
-	padding: 0 20px;
-}
-
 #sidebar h2 {
-	height: 32px;
+	background: #dcdcdc url('/resources/images/gray/bg-short.jpg') 0 -10px repeat-x;
+	color: #404040;
+	text-align: center;
 	margin: 0;
-	padding: 8px 0 0 40px;
-	background: url('/resources/images/menu_header.png') no-repeat left top;
-	font-size: 20px;
-	color: #FFFFFF;
+	font-size: 17px;
+	font-style: italic;
 }
 
-
-#sidebar p {
-	line-height: 200%;
-}
+#sidebar .header	{ padding: 0; margin: 0; }
 
 /* decimal-list list */
 ul.decimal-list 		{ padding: 0; margin-left: 20px; }
 .decimal-list li		{ padding-left: 10px; line-height: 120%; list-style-type: decimal; list-style-position: inside; }
 
-/* Calendar */
-
-#calendar {
-}
-
-#calendar caption {
-	padding-bottom: 5px;
-	font-weight: bold;
-}
-
-#calendar table {
-	width: 100%;
-	border-collapse: collapse;
-	border-right: 1px solid #F5F2EF;
-}
-
-#calendar thead th {
-	padding: 5px 0;
-	text-align: center;
-	border-top: 1px solid #F5F2EF;
-	border-left: 1px solid #F5F2EF;
-	background: #F5F2EF;
-}
-
-#calendar tbody td {
-	padding: 5px 0;
-	text-align: center;
-	border-top: 1px solid #F5F2EF;
-	border-left: 1px solid #F5F2EF;
-}
-
-#calendar tfoot td {
-	padding: 5px;
-}
-
-#calendar tfoot #next {
-	text-align: right;
-}
-
-#calendar #today {
-	background: #E7F1E1;
-}
 
 /* Footer */
 
@@ -382,8 +354,10 @@ ul.decimal-list 		{ padding: 0; margin-left: 20px; }
 	width: 940px;
 	margin: 0 auto;
 	padding: 0;
-	background: url(/resources/images/img07.jpg) no-repeat left top;
 	height: 61px;
+	background-color: #6c6e6f;
+	border: 1px solid #888;
+	-moz-border-radius: 10px;
 }
 
 #footer p {
@@ -408,10 +382,14 @@ div#user_notification
 	top: 10%;
 	width: 300px;
 	font-size: 13px;
-	background-image: url('/resources/images/action_stop.gif');
+	z-index: 99;
+}
+
+#user_notification .error
+{
+	background-image: url('http://sunforum.co.uk/resources/icons/silk/cancel.png');
 	background-position: 303px 3px;
 	background-repeat: no-repeat;
-	z-index: 99;
 }
 
 #user_notification img.close_icon
@@ -430,19 +408,20 @@ div.tab
 
 ul.tabs
 {
-    list-style:none;
-    border-bottom: 1px solid #a2a2a2;
-    margin: 10px 0;
-    padding: 0 0 0 10px;
-    height: 28px;
+	list-style:none;
+    margin: 0 0 10px 0;
+    padding: 2px 0;
+	border-top: 1px solid #a2a2a2;
+	background-color: #a2a2a2;
 }
 
 .tabs li
 {
     display: inline;
     border: 1px solid #a2a2a2;
-    padding: 3px 5px;
-    margin: 0 2px;
+	background-color: #fff;
+    padding: 2px 5px;
+    margin: 0;
     height: 23px;
 }
 
@@ -459,8 +438,20 @@ ul.collapsable strong       { padding-left: 24px; background: transparent url('h
 .collapsable li li          { display: block; line-height: 150%; padding-left: 50px;}
 
 /* mini basket */
-#subheader div#basket            { color: #c0c0d0; position: absolute; padding: 5px 5px 5px 24px; bottom: 15px; right: 30px; border: 1px solid #434343; -moz-border-radius: 5px; background: transparent url('http://sunforum.co.uk/resources/icons/silk/cart.png') 5px 5px no-repeat; }
-#subheader div#basket h4         { padding: 0; margin: 0; }
+#basket
+{ 
+	color: #202020;
+	padding: 5px 5px 5px 24px;
+	bottom: 15px; right: 30px;
+	border: 1px solid #fff;
+	-moz-border-radius: 5px;
+	margin-bottom: 10px;
+	background: transparent url('http://sunforum.co.uk/resources/icons/silk/cart.png') 5px 5px no-repeat;
+}
+
+#basket h4
+{
+	padding: 0; margin: 0; }
 
 .button
 { 
@@ -487,16 +478,39 @@ table.checkout_stages			{ border-collapse: separate; border-spacing: 5px; margin
 .checkout_stages td	a			{ color: #808080; }
 .checkout_stages td.selected 	{ border: 2px solid red; font-weight: bold; color: #000; }
 
-.tile_product_view, .tile_category_view					{ width: 137px; height: 250px; margin: 0 10px 20px 10px; padding: 20px; float: left; text-align: center; border: 1px solid silver; }
-.tile_category_view										{ padding: 50px 20px 20px 20px; }
+.tile_product_view, .tile_category_view					{ width: 137px; margin: 0 10px 20px 10px; float: left; text-align: center; border: 1px solid silver; }
+.tile_product_view										{ height: 250px; padding: 20px; }
+.tile_category_view										{ height: 250px; padding: 20px 20px 20px 20px; }
 .tile_product_view h3, .tile_category_view h3			{ height: 50px; }
 .tile_product_view h3									{ color: #232323; font-size: 15px; }
 .tile_category_view h3									{ color: #232323; font-weight: bold; font-size: 17px; }
 .tile_product_view_.price, .tile_product_view_.price	{ padding: 10px 0; }
 .tile_category_view .details_button						{ padding-top: 20px; }
 
+
+/* pager */
+ul.pager			{ margin: 10px 0; font-size: 12px; }
+.pager li			{ display: inline; }
+.tags a:link, .tags a:visited	{ text-decoration: none; }
+.tags a:hover		{ text-decoration: underline; }
+.tags li			{ display: inline; }
+.tags .weight_0	a	{ font-size: 10px; }
+.tags .weight_1	a	{ font-size: 12px; }
+.tags .weight_2	a	{ font-size: 14px; }
+.tags .weight_3	a	{ font-size: 16px; }
+.tags .weight_4	a	{ font-size: 18px; }
+.tags .weight_5	a	{ font-size: 20px; }
+.tags .weight_6	a	{ font-size: 22px; }
+.tags .weight_7	a	{ font-size: 24px; }
+.tags .weight_8	a	{ font-size: 26px; }
+.tags .weight_9	a	{ font-size: 28px; }
+.tags .weight_10 a	{ font-size: 30px; }
+
 /* admin tile */
-.admin_tile			{ border: 1px solid #c0c0c0; width: 100px; height: 100px; margin: 10px 5px; float: left; }
-.admin_tile:hover	{ border: 1px solid #808080; }
-img.admin_image		{ width: 70%; height: 70%; padding: 15%; }
-img.admin_image:hover		{ width: 80%; height: 80%; padding: 10%; }
+.admin_tile					{ border: 1px solid #c0c0c0; width: 100px; height: 100px; margin: 10px 5px; float: left; text-align: center; }
+.admin_tile:hover a			{ text-decoration: none; }
+.admin_tile:hover			{ border: 1px solid #808080; }
+img.admin_image				{ width: 70%; height: 70%; padding: 4% 15% 0 15%; }
+img.admin_image:hover		{ width: 75%; height: 75%; padding: 2% 10% 0 10%; text-decoration: none; }
+
+

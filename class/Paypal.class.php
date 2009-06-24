@@ -1,4 +1,4 @@
-<?php
+<?php defined('SYSPATH') OR die('No direct access allowed.');
 /**
  * Paypal Payment Driver. Express Checkout transactions consist of 3 stages with
  * a separate API call for each: SetExpressCheckout, GetExpressCheckout (optional)
@@ -10,13 +10,12 @@
  *
  *
  * @package    Payment
- * @author     Kohana Team, Marek Dajnowski
+ * @author     Kohana Team
  * @copyright  (c) 2007-2008 Kohana Team
  * @license    http://kohanaphp.com/license.html
- * @version		2009-04-11
 */
-class Paypal
-{
+class Payment_Paypal_Driver implements Payment_Driver {
+
 	// this array details the required fields within the arrays $set_express_checkout_fields,
 	// $get_express_checkout_fields, $do_express_checkout_fields as well as the
 	// fields wihtin api_connection and api_authorization
@@ -222,9 +221,9 @@ class Paypal
 
 		$this->curl_config = $config['curl_config'];
 
-		//$this->session = Session::instance();
+		$this->session = Session::instance();
 
-		//Kohana::log('debug', 'PayPal Payment Driver Initialized');
+		Kohana::log('debug', 'PayPal Payment Driver Initialized');
 	}
 
 	/**
@@ -273,7 +272,7 @@ class Paypal
 				}
 			}
 
-			//throw new Kohana_Exception('payment.required', implode(', ', $fields));
+			throw new Kohana_Exception('payment.required', implode(', ', $fields));
 		}
 
 		// stage 1 - if no token yet set then we know we just need to run set_express_checkout
@@ -397,10 +396,10 @@ class Paypal
 
 		if (strtoupper($this->nvp_response_array['ACK']) != 'SUCCESS')
 		{
-			//throw new Kohana_User_Exception('DoExpressCheckoutPayment ERROR', Kohana::debug($this->nvp_response_array));
-var_dump( 'SUCCCESS'); exit;
-			//Kohana::log('error', Kohana::debug('GetExpressCheckout response:'.$response));
-			//url::redirect($this->api_connection_fields['ERRORURL']);
+			throw new Kohana_User_Exception('DoExpressCheckoutPayment ERROR', Kohana::debug($this->nvp_response_array));
+
+			Kohana::log('error', Kohana::debug('GetExpressCheckout response:'.$response));
+			url::redirect($this->api_connection_fields['ERRORURL']);
 		}
 	}
 

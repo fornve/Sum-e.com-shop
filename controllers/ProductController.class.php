@@ -20,10 +20,21 @@
 
             $metas[] = array( 'name' => 'description', 'content' => strip_tags( $product->description ) );
 
+			$category = Category::Retrieve( $product->categories[ 0 ] );
+
+			if( $category->parent )
+				$breadcrumbs[] =  array( 'link' => "/Category/index/{$category->parent->id}/{$category->parent->name}", 'name' => $category->parent->name );
+		
+			$breadcrumbs[] =  array( 'link' => "/Category/index/{$category->id}/{$category->name}", 'name' => $category->name );
+			$breadcrumbs[] = array( 'name' => $product->name );
+
+			$this->assign( 'breadcrumbs', $breadcrumbs );
+			$this->assign( 'category', $category );
             $this->assign( 'metas', $metas );
-            $this->assign( 'title', $product->name );
+			$this->assign( 'title', "{$product->name} - {$category->name}" );
             $this->assign( 'product', $product );
-            echo $this->Decorate( 'product/view.tpl' );
+			$this->assign( 'related_products', $product->RelatedCollection() );
+			echo $this->Decorate( 'product/view.tpl' );
         }
 
         function Image( $size, $id )
@@ -57,6 +68,6 @@
 
         function NotFound()
         {
-            echo "product not found... needs own page";
+            echo "product not found... needs own page with search and related";
         }
     }

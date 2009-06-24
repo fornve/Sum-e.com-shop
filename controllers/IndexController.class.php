@@ -3,14 +3,14 @@ class IndexController extends Controller
 {
 	function Index()
 	{
-		$this->assign( 'categories', Category::GetTree() );
+			$this->assign('categories', Category::LevelCollection(0));
 		echo $this->decorate( 'index.tpl' );
 	}
 
 	function NotFound()
 	{
         header( "HTTP/1.0 404 Not Found" );
-        $this->Decorate( "404.tpl" );
+        echo $this->Decorate( "404.tpl" );
 	}
 
 	function Image( $size = null, $file )

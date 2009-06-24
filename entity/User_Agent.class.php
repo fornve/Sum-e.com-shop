@@ -2,7 +2,7 @@
 
     class User_Agent extends Entity
     {
-        protected $schema = array( 'id', 'name', 'agent', 'type', 'count' );
+        protected $schema = array( 'id', 'name', 'agent', 'type', 'count', 'os' );
 
         static function Retrieve( $id )
         {
@@ -21,5 +21,12 @@
 			$query = "SELECT * FROM user_agent WHERE name = ?";
 			$entity = new Entity();
 			return $entity->GetFirstResult( $query, $name, __CLASS__ );
+		}
+
+		static function GetAll()
+		{
+			$query = "SELECT * from user_agent ORDER BY count DESC";
+			$entity = new Entity();
+			return $entity->Collection( $query, null, __CLASS__ );
 		}
     }

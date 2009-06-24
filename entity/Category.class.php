@@ -4,7 +4,7 @@
     {
         protected $schema = array( 'id', 'name', 'parent', 'image', 'sort_order' );
 
-        static function Retrieve( $id, $nocache = false )
+        static function Retrieve( $id, $nocache = false, $entity = null )
         {
             if( !$id )
                 return null;
@@ -20,9 +20,12 @@
 			if( $nocache || !$object )
 			{
 				$query = "SELECT * FROM category WHERE id = ?";
-            	$entity = new Entity();
-	            $object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
+				if( !$entity )
+					$entity = new Entity();
+					
+	            $object = $entity->GetFirstResult( $query, $id, __CLASS__ );
+ 
                 if( !$object )
                     return null;
 
@@ -61,20 +64,22 @@
 			return basename( $this->image );
 		}
 
-        static function LevelCollection( $parent = 0, $nocache = false )
+        static function LevelCollection( $parent = 0, $nocache = false, $entity = null )
 		{
 			$memcache = new Memcache();
 			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
 
-            if( $nocache )
-                $memcache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$parent}" );
+			$prefix ? $parent : 'root';
 
-			$objects = $memcache->get( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$parent}" );
+            if( $nocache )
+                $memcache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+
+			$objects = $memcache->get( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
 
 			// avoid overwritting object with garbage
 			if( get_class( $objects[ 0 ] ) != 'Category' )
 			{
-				$memcache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$parent}" );
+				$memcache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
 				unset( $objects );
 			}
 
@@ -86,7 +91,8 @@
 
                 if( $collection ) foreach( $collection as $item )
                 {
-                    $objects[] = Category::Retrieve( $item->id, true );
+					$object = Category::Retrieve( $item->id, $nocache, $entity );
+                    $objects[] = $object;
                 }
 
 				$memcache->set( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$parent}", $objects, false, MEMCACHE_LIFETIME * 10 );
@@ -129,7 +135,7 @@
             return $root;
         }
 
-		static function Search( $sentence )
+		static function Search( $sentence, $search_vars )
 		{
 			$query = "SELECT 
 							category.*
@@ -137,11 +143,29 @@
 							category
 						JOIN
 							category_description ON category.id = category_description.category
+						JOIN
+							product_category ON category.id = product_category.category
 						WHERE
-							category_description.description LIKE ? OR category.name LIKE ?";
+							( category_description.description LIKE ? OR category.name LIKE ? )";
 			
+			$attributes = array( "%{$sentence}%", "%{$sentence}%" );
+
+			// category
+			if( $search_vars->categories )
+			{
+				foreach( $search_vars->categories as $category )
+				{
+					$category_query[] = " product_category.category = ? ";
+					$attributes[] = $category;
+				}
+
+				$query .= " AND (". implode( 'OR', $category_query ) ." ) ";
+			}
+
+
+			$query .= " GROUP BY category.id";
 			$entity = new Entity();
 
-			return $entity->Collection( $query, array( "%{$sentence}%", "%{$sentence}%" ), __CLASS__ );
+			return $entity->Collection( $query, $attributes, __CLASS__ );
 		}
     }

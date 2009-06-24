@@ -49,4 +49,11 @@
             $entity = new Entity();
             return $entity->Collection( $query, $vendor );
         }
+
+		static function GetAll()
+		{
+			$query = "SELECT * FROM admin";
+			$entity = new Entity();
+			return $entity->Collection( $query, null, __CLASS__ );
+		}
     }

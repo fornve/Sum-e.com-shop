@@ -16,6 +16,14 @@
             return $object;
         }
 
+		static function GetValue( $name )
+		{
+            $query = "SELECT value FROM config WHERE name = ?";
+            $entity = new Entity();
+            $object = $entity->GetFirstResult( $query, $name, __CLASS__ );
+			return $object->value;
+		}
+
         static function FlushCache()
         {
             $memcache = new Memcache();
@@ -37,8 +45,9 @@
 		{
 			$memcache = new Memcache();
 			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$object = $memcache->get( MEMCACHE_PREFIX ."ShopConfig" );
 
-			if( !$object = $memcache->get( MEMCACHE_PREFIX ."ShopConfig" ) )
+			if( !$object )
 			{
 				$object = array();
 
@@ -63,10 +72,22 @@
 			
 			if( $object ) foreach( $object as $key => $value )
 			{
+				$key = strtoupper( $key );
 				if( !defined( $key ) )
 				{
 					define( $key, $value );
+					// var_dump( "{$key} => {$value}" ); // show all defined
 				}
 			}
+		}
+
+		static function GetVat()
+		{
+			if( constant( 'VAT_DISPLAY' ) == 1 && defined( 'VAT_VALUE' ) )
+				$vat = constant( 'VAT_VALUE' ) / 100;
+			else
+				$vat = 0;
+
+			return $vat;
 		}
     }

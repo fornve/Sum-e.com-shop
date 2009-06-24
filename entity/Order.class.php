@@ -106,7 +106,9 @@
 
 			$entity = new Entity();
 
-			return $entity->Collection( $query, $args, __CLASS__ );
+			$result = $entity->Collection( $query, $args, __CLASS__ );
+	
+			return $result;
 
 		}
 

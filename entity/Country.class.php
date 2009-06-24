@@ -16,12 +16,26 @@
             return $object;
         }
 
-        static function GetAll()
+        static function GetAll( $entity = null )
         {
-			$query = "SELECT * FROM country ORDER BY name";
-			$entity = new Entity();
-			$object = $entity->Collection( $query, null, __CLASS__ );
+			$memcache = new Memcache();
+			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
 
-            return $object;
+            if( $nocache )
+                $memcache->delete( MEMCACHE_PREFIX ."Countries" );
+
+			if( $nocache || !$object = $memcache->get( MEMCACHE_PREFIX ."Countries" ) )
+			{
+				$query = "SELECT * FROM country ORDER BY name";
+
+				if( !$entity )
+					$entity = new Entity();
+
+				$object = $entity->Collection( $query, null, __CLASS__ );
+
+				$memcache->set( MEMCACHE_PREFIX ."Countries", $object, false, MEMCACHE_LIFETIME * 100 );
+			}
+
+			return $object;
         }
 	}

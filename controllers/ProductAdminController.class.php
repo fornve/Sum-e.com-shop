@@ -2,19 +2,41 @@
 
     class ProductAdminController extends AdminController
     {
-        public $breadcrumbs = array( array( 'link' => '/ProductAdmin/', 'name' => 'Product Admin' ) );
+        public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ), array( 'link' => '/ProductAdmin/', 'name' => 'Product Admin' ) );
+		public $list_limit = 10;
 
         function Index()
         {
             self::Redirect( "/ProductAdmin/ProductList/" );
         }
 
-        function ProductList()
+        function ProductList( $page = 1 )
         {
 			$this->ChangeStatus();
-            $this->Assign( 'products', Product::AdminCollection() );
-            $this->Decorate( 'admin/product/list.tpl' );
+			$offset = ( $page - 1 ) * $this->list_limit;
+			$products_in_shop = count( Product::AdminCollection() );
+			$max = ceil( $products_in_shop / $this->list_limit );
+			
+			$pager = array(
+				'offset' => $page,
+				'max' => $max,
+				'self' => '/ProductAdmin/ProductList'
+			);
+			$this->Assign( 'pager', $pager );
+			
+            $this->Assign( 'products', Product::AdminCollection( $this->list_limit, $offset ) );
+			$this->Assign( 'products_in_shop', $products_in_shop );
+            $this->Assign( 'breadcrumbs', $this->breadcrumbs );
+            echo $this->Decorate( 'admin/product/index.tpl' );
         }
+
+		function InCategoryList( $category_id )
+		{
+			$this->assign( 'category', Category::Retrieve( $category_id ) );
+			$this->assign( 'products', Product_Category::CategoryProductCollection( $category_id ) );
+            $this->Assign( 'breadcrumbs', $this->breadcrumbs );
+			echo $this->Decorate( 'admin/product/index.tpl' );
+		}
 
         function Edit( $id = null )
         {
@@ -49,6 +71,20 @@
             $this->Assign( 'category_tree',  Category::GetTree() );
             echo $this->Decorate( 'admin/product/edit.tpl' );
         }
+
+		public function ListOrderUp( $product_id, $category_id )
+		{
+			$product = Product::Retrieve( $product_id, true );
+			$product->MoveUp( $category_id );
+			self::RedirectReferer();
+		}
+
+		public function ListOrderDown( $product_id, $category_id )
+		{
+			$product = Product::Retrieve( $product_id, true );
+			$product->MoveDown( $category_id );
+			self::RedirectReferer();
+		}
 
 
         // private methods

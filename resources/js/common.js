@@ -23,3 +23,16 @@ function addProductToBasket(id)
 	}
 	return false;
 }
+
+function showCategory(id)
+{
+	var category_menu;
+	var content;
+	$.get( '/Category/GetMenu/'+ id +'?ajax=1', null, function(data) {
+		$('#content').load('/Category/Index/'+ id +'/1/?ajax=1');
+		$('#category_menu').html(data);
+		$('#breadcrumbs').load( '/Category/GetBreadcrumbs/'+ id +'?ajax=1' );
+	} );
+
+	return false;
+}

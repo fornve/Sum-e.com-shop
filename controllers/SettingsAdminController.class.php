@@ -2,7 +2,7 @@
 
     class SettingsAdminController extends AdminController
     {
-        public $breadcrumbs = array( array( 'link' => '/SettingsAdmin/', 'name' => 'Settings Admin' ) );
+        public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ), array( 'link' => '/SettingsAdmin/', 'name' => 'Settings Admin' ) );
 		
         function FlushCache()
         {

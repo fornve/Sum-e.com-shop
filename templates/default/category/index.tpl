@@ -1,11 +1,25 @@
 <div class="post">
     <h2 class="title">
         {if $smarty.session.admin->vendor->id}
-            <span style="float: right; font-size: smaller; margin-right: 10px;"><a href="/CategoryAdmin/Edit/{$category->id}">Edit</a> / <a href="/CategoryAdmin/Delete/{$category->id}" onclick="return confirm('Do you really want to delete this category?')">Delete</a> </span>
+            <span style="float: right; margin-right: 10px;  font-size: 9px; text-align: center; font-weight: normal;">
+				<a href="/CategoryAdmin/Edit/{$category->id}" title="Edit category">
+					<img src="http://sunforum.co.uk/resources/icons/silk/application_edit.png" alt="Edit" style="padding: 0; margin: 0;" />
+					Edit
+				</a>
+				<a href="/ProductAdmin/InCategoryList/{$category->id}" title="Sort products in this category">
+					<img src="http://sunforum.co.uk/resources/icons/silk/arrow_switch.png" alt="Sort products" />
+					Sort
+				</a>
+				<a href="/CategoryAdmin/Delete/{$category->id}" onclick="return confirm('Do you really want to delete this category?')" title="Delete category">
+					<img src="http://sunforum.co.uk/resources/icons/silk/bomb.png" alt="Delete" />
+					Delete
+				</a>
+			</span>
         {/if}
-        <span>{$category->name}<span>
+        <span>{$category->name}</span>
     </h2>
 
+	{*
 	<form acrion="{$smarty.server.REWQUEST_URI}" method="get" style="width: 400px; border: 1px solid #808080; -moz-border-radius: 4px; float: right; margin-left: 10px;">
 		<div>
 			<input name="q" id="q" style="float: left; width: 190px;" value="{$category_search_sentence}" />
@@ -13,6 +27,7 @@
 			<br />
 		</div>
 	</form>
+	*}
 
 	<div style="clear: both;"></div>
 
@@ -27,16 +42,23 @@
 		<div style=" margin: 20px 0; padding: 0;"></div>
 	{/if}
 
-	{assign var=kids value=$category->LevelCollection($category->id)}
-	{foreach from=$kids item=kid_category}
-		{include file='category/tile_view.tpl'}
-	{/foreach}
+	<div class="post_content" style="padding: 10px 15px;">
+		{assign var=kids value=$category->LevelCollection($category->id)}
+		{foreach from=$kids item=kid_category}
+			{include file='category/tile_view.tpl'}
+		{/foreach}
 
-	{if $products}
-    {foreach from=$products item=product}
-		{include file="product/in_category_view.tpl"}
-	{/foreach}
-	{/if}
+		{if $products}
+		{foreach from=$products item=product_mini}
+			{include file="product/in_category_view.tpl"}
+		{/foreach}
+		{/if}
+		
+		<div style="clear: both;"></div>
 
-    <div style="clear: both;"></div>
+		<div>
+			{include file='misc/pager.tpl'}
+		</div>
+	</div>
 </div>
+

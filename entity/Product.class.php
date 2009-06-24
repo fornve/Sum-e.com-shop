@@ -46,15 +46,16 @@
 			$memcache->delete( MEMCACHE_PREFIX ."ShopProductRetrieve{$this->id}" );
 		}
 
-        static function AdminCollection()
+        static function AdminCollection( $limit, $offset )
         {
             $query = "SELECT id FROM product WHERE deleted = false ORDER BY name";
             $entity = new Entity();
-            $result = $entity->Collection( $query, null, __CLASS__ );
+            $result = $entity->Collection( $query, null, __CLASS__, $limit, $offset );
 
             if( $result ) foreach ( $result as $item )
             {
-                $products[] = Product::Retrieve( $item->id );
+				$product = Product::Retrieve( $item->id );
+                $products[] = $product;
             }
 
             return $products;
@@ -68,6 +69,65 @@
                     return true;
             }
         }
+
+		function CategoryCollection( $category_id )
+		{
+			$query = "SELECT 
+							product.* 
+						FROM 
+							product 
+						JOIN 
+								product_category
+							ON
+								product.id = product_category.product
+						WHERE 
+									product_category.category = ?
+								AND
+									product.deleted = 0
+						ORDER BY
+								product_category.order";
+
+			return $this->Collection( $query, array( $category_id ), __CLASS__ );
+		}
+
+		function MoveInCategory( $category_id, $iteration )
+		{
+			$products = Product::CategoryCollection( $category_id );
+			
+			$i = 0;
+			
+			if( $products ) foreach ( $products as $product )
+			{
+				$product_category = Product_Category::Retrieve( $product->id, $category_id );
+
+				$i += 10;
+
+				if( $product->id == $this->id )
+				{
+					if( $iteration > 0 )
+						$product_category->order = $i - 15;
+					else
+						$product_category->order = $i + 15;
+
+					$product_category->Save();
+				}
+				elseif( $product_category->order != $i )
+				{
+					$product_category->order = $i;
+					$product_category->Save(); 
+				}
+			}
+		}
+
+		function MoveUp( $category_id )
+		{
+			$this->MoveInCategory( $category_id, 1 );
+		}
+
+		function MoveDown( $category_id )
+		{
+			$this->MoveInCategory( $category_id, -1 );
+		}
 
         function InBranch( $category_id )
         {
@@ -265,11 +325,73 @@
 			return $product;
 		}
 
-		static function Search( $sentence )
+		static function Search( $sentence, $search_vars )
 		{
-			$query = "SELECT * FROM product WHERE name LIKE ? OR description LIKE ? OR keywords LIKE ? OR upc LIKE ?";
+			$query = "SELECT  product.* FROM product JOIN product_category ON product.id = product_category.product WHERE ( product.name LIKE ? OR product.description LIKE ? OR product.keywords LIKE ? OR product.upc LIKE ? ) AND product.status = 1";
+			$attributes = array( "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%"  );
+
+			//price range 
+			if( $search_vars->price_ranges ) 
+			{
+				foreach( $search_vars->price_ranges as $price_range )
+				{
+					$price_range = Search::GetPriceRangeByName( $price_range );
+					$price_range_query[] = " ( product.price BETWEEN ? AND ? ) ";
+					$attributes[] = $price_range->min_value;
+					$attributes[] = $price_range->max_value;
+				}
+				
+				$query .= " AND (". implode( 'OR', $price_range_query ) ." ) ";
+			}
+
+			// category
+			if( $search_vars->categories ) 
+			{
+				foreach( $search_vars->categories as $category )
+				{
+					$category_query[] = " product_category.category = ? ";
+					$attributes[] = $category;
+				}
+				
+				$query .= " AND (". implode( 'OR', $category_query ) ." ) ";
+			}
+
+			// product type
+			if( $search_vars->condition )
+			{
+                foreach( $search_vars->conditions as $condition )
+				{
+					$price_range_query[] = " ( product.condition =  ? ) ";
+					$attributes[] = $condition;
+				}
+				                
+				$query .= " AND (". implode( 'OR', $price_range_query ) ." ) ";
+
+			}
+
+			$query .= " GROUP BY product.id";
+
 			$entity = new Entity();
-			return $entity->Collection( $query, array( "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%" ), __CLASS__ );
+			return $entity->Collection( $query, $attributes, __CLASS__ );
 		}
+
+		public function GetCategory( $category_id )
+		{
+			return Category::Retrieve( $category_id );
+		}
+
+		public function RelatedCollection()
+		{
+			$query = "SELECT product.id FROM product JOIN product_category ON product.id = product_category.product WHERE product_category.category = ? AND NOT product.id = ?";
+			$product_list = $this->Collection( $query, array( $this->categories[ 0 ], $this->id ), __CLASS__, 3 );
+
+			if( $product_list ) foreach( $product_list as $element )
+			{
+				$products[] = Product::Retrieve( $element->id );
+			}
+			
+			return $products;
+		}
+
 	}
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package todo
+ * @package shop 
  * @subpackage framework
  */
 class Controller
@@ -11,7 +11,7 @@ class Controller
 		Controller::Startup();
 		Controller::VisitHandle();
 
-		$this->entity = new Entity;
+		//$this->entity = new Entity;
 		$this->smarty = new Smarty;
 		$this->smarty->compile_dir = SMARTY_COMPILE_DIR;
 		$this->smarty->template_dir = SMARTY_TEMPLATES_DIR;
@@ -88,7 +88,7 @@ class Controller
 	{
 		if( !$dir ) $dir = SMARTY_TEMPLATES_DIR;
 
-		$this->assign( 'input', $this->input );
+		$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
 
 		$content = $this->smarty->fetch( $dir . $template );
 
@@ -97,11 +97,11 @@ class Controller
 			$this->assign( 'content', $content );
 
 			$this->PreDecorate();
-			echo $this->smarty->fetch( $dir .'decoration.tpl' );
+			$content = $this->smarty->fetch( $dir .'decoration.tpl' );
 			$this->PostDecorate();
 		}
-		else
-			echo $content;
+
+		return $content;
 	}
 
 	static function GetInput( $input_name, $input_type = INPUT_GET )
@@ -115,6 +115,11 @@ class Controller
 
 	static function Startup()
 	{
+		$template = 'gray';
+		//$template = 'default';
+		define( 'TEMPLATE_NAME', $template );
+		define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/{$template}/" );
+
 		Config::DefineAll();
 
 		// clean basket if empty
@@ -129,7 +134,7 @@ class Controller
 		$this->smarty->assign( 'entity_query', $_SESSION[ 'entity_query' ] );
 		unset( $_SESSION[ 'entity_query' ] );
 
-		$categories = Category::LevelCollection();
+		$categories = Category::LevelCollection( 0, false, $this->entity );
 		$this->assign( 'categories', $categories );
     }
 
@@ -144,21 +149,26 @@ class Controller
         exit;
 	}
 
+	static function RedirectReferer()
+	{
+		self::Redirect( $_SERVER[ 'HTTP_REFERER' ] );
+	}
+
 	static function VisitHandle()
 	{
-			if( !$_SESSION['visitor'] )
+		if( !$_SESSION['visitor'] )
+		{
+			$user_agent = User_Agent::GetByName( $_SERVER[ 'HTTP_USER_AGENT' ] );
+			if( !$user_agent )
 			{
-					$user_agent = User_Agent::GetByName( $_SERVER[ 'HTTP_USER_AGENT' ] );
-					if( !$user_agent )
-					{
-							$user_agent = new User_Agent();
-							$user_agent->name = $_SERVER[ 'HTTP_USER_AGENT' ];
+					$user_agent = new User_Agent();
+					$user_agent->name = $_SERVER[ 'HTTP_USER_AGENT' ];
 
-					}
-					$user_agent->count++;
-					$user_agent->Save();
-					$_SESSION['visitor'] = true; // to be finished with something more sensible
 			}
+			$user_agent->count++;
+			$user_agent->Save();
+			$_SESSION['visitor'] = true; // to be finished with something more sensible
+		}
 	}
 }
   

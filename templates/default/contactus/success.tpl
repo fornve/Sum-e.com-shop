@@ -1,9 +1,10 @@
-<div>
+<div class="post">
 
-	<h1>Thank you for your feedback.</h1>
+	<h2 class="title">Thank you for your feedback.</h2>
 	
-	<p>We will do our best to help with your query. If you provided valid email address, we will inform you about action we took.</p>
+	<div class="post_content">
+		<p>We will do our best to help with your query. If you provided valid email address, we will inform you about action we took.</p>
 
-	<p>Your message will be read within 48 hours.</p>
-
+		<p>Your message will be read within 48 hours.</p>
+	</div>
 </div>

@@ -10,7 +10,7 @@
         function View()
         {
             $this->assign( 'basket', $_SESSION[ 'basket' ] );
-            $this->Decorate( 'basket/view.tpl' );
+            echo $this->Decorate( 'basket/view.tpl' );
         }
 
         function Add( $id )
@@ -63,7 +63,7 @@
 			}
 			else
 			{
-				$this->Decorate( 'basket/mini.tpl' );
+				echo $this->Decorate( 'basket/mini.tpl' );
 			}
         }
 

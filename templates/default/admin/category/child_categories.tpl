@@ -17,7 +17,7 @@
                 <td>{$kid_category->id}</td>
                 <td>{$kid_category->name}<br /><span class="quiet">{$product->category}</span></td>
 
-                <td><a href="/CategoryAdmin/Edit/{$kid_category->id}">Edit</a><span> / </span><a href="/Category/Index/{$kid_category->id}">View</a></td>
+                <td><a href="/CategoryAdmin/Edit/{$kid_category->id}">Edit</a><span> / </span><a href="/Category/Index/{$kid_category->id}/1/{$kid_category->name}">View</a></td>
             </tr>
         {/foreach}
         </tbody>

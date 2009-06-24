@@ -9,7 +9,8 @@
 		function Index()
 		{
 			$_SESSION[ 'order' ] = Order::PlaceOrder( $_SESSION[ 'customer_details' ] );// <-- to be finished!
-			
+
+			$this->assign( 'tax_rate', 100 * Config::GetVat() );
 			$this->assign( 'customer', $_SESSION[ 'customer_details' ] );
 			$this->assign( 'basket', $_SESSION[ 'basket' ] );
 			$this->assign( 'customer_country', Country::Retrieve( $_SESSION[ 'customer_details' ]->country ) );
@@ -107,5 +108,76 @@
 				return $error;
 			}
 			return false;
+		}
+
+		function PaypalproIPN()
+		{
+				error_log( "Paypal IPN notification!" );
+				error_log( var_export( $_SERVER, true ) );
+				error_log( var_export( $_POST, true ) );
+		}
+
+		function PayPalPro()
+		{
+			// paypal sandbox accpunt: dummy_paypalpro_biz@dajnowski.net
+			// API Username 	dummy_paypalpro_biz_api1.dajnowski.net
+			// API Password 	DAAKZU425K24SJC6
+			// Signature		AFcWxV21C7fd0v3bYYYRCpSSRl31A0UyfRVApsgX0FLWdkqUYqsHvLXR
+			// Endpoint			http://shop.sunforum.co.uk/Payment/PaypalproIPN/
+
+			$startdate = $expdate = time();
+			if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
+			{
+				$input_values = array( 'firstname', 'lastname', 'phone', 'email', 'street', 'city', 'country', 'zip', 'creditcardtype', 'acct', 'cvv2' );
+				
+				$input_values = $input_values;
+				$additional_input_values = array( 'expdate_Month', 'expdate_Year', 'startdate_Month', 'startdate_Year' );
+				
+				$input = Common::Inputs( array_merge( $input_values, $additional_input_values ), INPUT_POST );
+
+				$startdate = mktime( 0, 0, 0, $input->startdate_Month, 1, $input->startdate_Year );
+				$expdate = mktime( 0, 0, 0, $input->expdate_Month, 1, $input->expdate_Year );
+				$config = array(
+						'test_mode' => TRUE,
+						'SANDBOX_USER' => 'dummy_paypalpro_biz_api1.dajnowski.net',
+						'SANDBOX_PWD' => 'DAAKZU425K24SJC6',
+						'SANDBOX_SIGNATURE' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31A0UyfRVApsgX0FLWdkqUYqsHvLXR',
+						'SANDBOX_ENDPOINT' => 'https://api-3t.sandbox.paypal.com/nvp',
+						'VERSION' => '3.2',
+						'CURRENCYCODE' => 'USD',
+					'curl_config'  => array
+					(
+						CURLOPT_HEADER         => FALSE,
+						CURLOPT_SSL_VERIFYPEER => FALSE,
+						CURLOPT_SSL_VERIFYHOST => FALSE,
+						CURLOPT_VERBOSE        => TRUE,
+						CURLOPT_RETURNTRANSFER => TRUE,
+						CURLOPT_POST           => TRUE
+					)
+				);
+
+				$payment = new Paypalpro( $config );
+
+				foreach( $input_values as $key )
+				{
+						$fields[ strtoupper( $key ) ] = $input->$key;
+				}
+
+				$fields[ 'STARTDATE' ] = date( "mY", $startdate );
+				$fields[ 'EXPDATE' ] = date( "mY", $expdate );
+
+				$fields[ 'AMT' ] = 10;
+				$fields[ 'METHOD' ] = 'DoDirectPayment';
+				$fields[ 'PAYMENTACTION' ] = 'Sale';
+
+				$payment->set_fields( $fields );
+				var_dump( $payment->process() );
+			}
+			var_dump( $input );
+			$this->assign( 'expdate', $expdate );
+			$this->assign( 'startdate', $startdate );
+			$this->assign( 'payment_input', $input );
+			$this->assign( 'countries', Country::GetAll() );
+			echo $this->fetch( 'payment/paypalpro.tpl' );
 		}
 	}

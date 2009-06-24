@@ -6,6 +6,9 @@
 
         function GetTotals()
         {
+			$vat_display = 'VAT_DISPLAY';
+			$vat_value = 'VAT_VALUE';
+
             if( $this->items ) foreach( $this->items as $item )
             {
                 if( $item ) foreach( $item as $variant )

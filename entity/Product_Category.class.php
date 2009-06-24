@@ -2,16 +2,16 @@
 
 	class Product_Category extends Entity
 	{
-		protected $schema = array( 'product', 'category' );
+		protected $schema = array( 'id', 'product', 'category', 'order' );
 
-		static function Retrieve( $product )
+		static function Retrieve( $product_id, $category_id )
 		{
-            if( !$product )
+            if( !$product_id || !$category_id )
                 return null;
 
-            $query = "SELECT * FROM product_category WHERE product = ?";
+            $query = "SELECT * FROM product_category WHERE product = ? AND category = ?";
             $entity = new Entity();
-            return $entity->GetFirstResult( $query, $product, __CLASS__ );
+            return $entity->GetFirstResult( $query, array( $product_id, $category_id ), __CLASS__ );
 		}
 
 		static function LinkDelete( $product, $category )
@@ -48,26 +48,52 @@
             return $categories;
         }
 
-        static function CategoryProductCollection( $category_id, $sentence )
+        static function CategoryProductCollection( $category_id, $sentence, $limit = null, $offset = null )
         {
             $entity = new Entity();
 
 			if( $sentence )
 			{
-				$query = "SELECT product_category.* FROM product_category JOIN product ON product_category.product = product.id 
+				$query = "SELECT product_category.* 
+							
+							FROM
+									product_category
+								JOIN
+										product
+									ON
+										product_category.product = product.id
 							WHERE
 								category = ?
 									AND
 										product.status = 1
-									AND 
-										( name LIKE ? OR description LIKE ? OR keywords LIKE ? OR upc LIKE ? )";
+									AND
+										product.deleted = 0
+									AND
+										( name LIKE ? OR description LIKE ? OR keywords LIKE ? OR upc LIKE ? )
+							ORDER BY
+									product_category.order";
 				
-				$result = $entity->Collection( $query, array( $category_id, "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%" ) );
+				$result = $entity->Collection( $query, array( $category_id, "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%" ), 'stdClass', $limit, $offset );
 			}
 			else
 			{
-				$query = "SELECT product_category.* FROM product_category JOIN product ON product_category.product = product.id WHERE category = ? AND product.status = 1";
-				$result = $entity->Collection( $query, $category_id );
+				$query = "SELECT product_category.*
+
+							FROM
+									product_category
+								JOIN
+										product
+									ON
+										product_category.product = product.id
+							WHERE
+								category = ?
+									AND
+										product.status = 1
+									AND
+										product.deleted = 0
+							ORDER BY
+									product_category.order";
+				$result = $entity->Collection( $query, array( $category_id ), 'stdClass', $limit, $offset );
 			}
 
             if( $result ) foreach( $result as $item )

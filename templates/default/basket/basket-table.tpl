@@ -42,13 +42,13 @@
 				{/foreach} )
 				{/if}
 				</th>
-				<td class="center">{$smarty.const.CURRENCY_SIGN}{$variant.item_value}</td>
+				<td class="center">{$smarty.const.CURRENCY_SIGN}{$variant.item_value*$vat_multiply|string_format:"%.2f"}</td>
 				<td class="center">
 				{if $basket_editable}
 					<input style="width: 40px; text-align: center;" type="text" name="quantity_{$items}" value="{$variant.quantity}" />
 				{else}{$variant.quantity}{/if}
 				</td>
-				<td class="center"><strong>{$smarty.const.CURRENCY_SIGN}{math equation="x * y" x=$variant.item_value y=$variant.quantity}</strong></td>
+				<td class="center"><strong>{$smarty.const.CURRENCY_SIGN}{math equation="x * y * vat" x=$variant.item_value y=$variant.quantity vat=$vat_multiply}</strong></td>
 			</tr>
 		{/if}
         {/foreach}
@@ -63,7 +63,7 @@
 			</td>
 			<td></td>
 			<td></td>
-			<th class="center">{$smarty.const.CURRENCY_SIGN}{$shipping->Value($basket_totals.value)}</th>
+			<th class="center">{$smarty.const.CURRENCY_SIGN}{$shipping->Value($basket_totals.value)*$vat_multiply|string_format:"%.2f"}</th>
 		</tr>
 	{/if}
 		</tbody>
@@ -90,7 +90,7 @@
                 </th>
 
                 <th>
-                    {$smarty.const.CURRENCY_SIGN}{if $shipping}{$shipping->ValueWithOrder($basket_totals.value)}{else}{$basket_totals.value}{/if}
+                    {$smarty.const.CURRENCY_SIGN}{if $shipping}{$shipping->ValueWithOrder($basket_totals.value)*$vat_multiply|string_format:"%.2f"}{else}{$basket_totals.value*$vat_multiply|string_format:"%.2f"}{/if}
                 </th>
 
             </tr>

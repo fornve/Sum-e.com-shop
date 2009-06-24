@@ -2,7 +2,7 @@
 
 	class CategoryAdminController extends AdminController
 	{
-        public $breadcrumbs = array( array( 'link' => '/CategoryAdmin/', 'name' => 'Category Admin' ) );
+        public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ), array( 'link' => '/CategoryAdmin/', 'name' => 'Category Admin' ) );
 
         function Edit( $id )
         {
@@ -100,9 +100,7 @@
 
 		function Products( $id )
 		{
-			$this->assign( 'category', Category::Retrieve( $id ) );
-			$this->assign( 'products', Product_Category::CategoryProductCollection( $id ) );
-			echo $this->Decorate( 'admin/category/products.tpl' );
+			self::Redirect( "/ProductAdmin/InCategoryList/{$id}" );
 		}
 
 		function Delete( $id )
@@ -140,7 +138,7 @@
 			}
 
 			$_SESSION[ 'user_notification' ][] = array( 'text' => "All products unassigned from {$category->name}.", 'type' => 'notice' );
-			self::Redirect( "/Category/Index/{$id}" );
+			self::Redirect( "/Category/Index/{$id}/1" );
 		}
 
 	}
