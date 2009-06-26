@@ -3,13 +3,6 @@
     class SettingsAdminController extends AdminController
     {
         public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ), array( 'link' => '/SettingsAdmin/', 'name' => 'Settings Admin' ) );
-		
-        function FlushCache()
-        {
-            $_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => 'Cache flushed!' );
-            Config::FlushCache();
-            self::Redirect( $_SERVER[ "HTTP_REFERER" ] );
-        }
 
 		function Index()
 		{
@@ -34,6 +27,7 @@
 				$input = filter_input( INPUT_POST, "config_{$config->id}" );
 				if( $config->value != $input )
 				{
+					Log::Add( "CONFIGURATION_UPDATED", 'CONFIGURATION', $_SESSION[ 'admin' ]->id, "{$config->title}: {$config->value} -&gt; {$input}" );
 					$config->value = $input;
 					$config->Save();
 					$flush_cache = true;

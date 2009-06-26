@@ -16,6 +16,11 @@
 
 		function Index()
 		{
+			if( !$_SESSION[ 'shop_new_version' ] )
+				$_SESSION[ 'shop_new_version' ] = Common::HttpPost( "http://sumsoft.sunforum.co.uk", array( 'shop_name' => SHOP_NAME, 'shop_address' => $_SERVER[ 'SERVER_NAME' ] ) );
+ 
+			var_dump($_SESSION[ 'shop_new_version' ]);
+
 			echo $this->Decorate( 'admin/index.tpl' );
 		}
 		
@@ -29,12 +34,14 @@
 				if( $admin )
 				{
 					$_SESSION['admin'] = $admin;
+					Log::Add( "ADMIN_LOGGED", 'ADMIN', $admin->id );
                     $_SESSION[ 'user_notification' ][] = array( 'text' => "Admin {$admin->username} logged in.", 'type' => 'notice' );
 					header( "Location: /" );
 					exit;
 				}
 				else
 				{
+					Log::Add( "ADMIN_LOGIN_FAILED", 'ADMIN', null, "From: REMOTE_ADDR, Login: '{$input->username}'" );
 					$_SESSION[ 'user_notification' ][] = array( 'text' => "Login failed.", 'type' => 'error' );
 				}
 			}
@@ -71,6 +78,7 @@
 					$admin->username = $input->username;
 					$admin->password = md5( $input->password );
 					$admin->Save();
+					Log::Add( "ADMIN_CREATED", 'ADMIN', $_SESSION[ 'admin' ]->id, $input->username );
 					$_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => 'Administrator created.' );
 				}
 				elseif( strlen( $input->username ) < 3 )
@@ -91,6 +99,7 @@
 			}
 			elseif( $admin )
 			{
+				Log::Add( "ADMIN_DELETED", 'ADMIN', $_SESSION[ 'admin' ]->id, $admin->username );
 				$admin->Delete();
 			}
 			else
