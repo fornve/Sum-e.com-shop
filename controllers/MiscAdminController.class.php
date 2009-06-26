@@ -6,8 +6,7 @@
 		
         function FlushCache()
         {
- 			Log::Add( "CACHE_FLUSH", 'CACHE', $_SESSION[ 'admin' ]->id );
-           	$_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => 'Cache flushed!' );
+            $_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => 'Cache flushed!' );
             Config::FlushCache();
             self::Redirect( $_SERVER[ "HTTP_REFERER" ] );
         }

@@ -20,10 +20,7 @@
 			if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 			{
 				if( !$page )
-				{
-					$page = new Page();
-					$new_page = true;
-				}
+						$page = new Page();
 
 				$input = Common::Inputs( array( 'title', 'text', 'delete_image', 'type' ), INPUT_POST );
 
@@ -42,12 +39,6 @@
 
 				if( $input->type )
 					Page::CleanType( $input->type );
-
-
-				if( $new_page )
-					Log::Add( "PAGE_NEW", 'PAGE', $_SESSION[ 'admin' ]->id, "Page [ {$page->id} ] <a href=\"/Page/View/{$page->id}\">{$page->name}</a>" );
-				else
-					Log::Add( "PAGE_EDIT", 'PAGE', $_SESSION[ 'admin' ]->id, "Page [ {$page->id} ] <a href=\"/Page/View/{$page->id}\">{$page->name}</a>" );
 
 				$page->title = $input->title ? $input->title : 'unnamed';
 				$page->text = $input->text;
@@ -76,7 +67,6 @@
 
 			if( $page->id )
 			{
-				Log::Add( "PAGE_DELETE", 'PAGE', $_SESSION[ 'admin' ]->id, "Page [ {$page->id} ] - {$page->name}" );
 				$page->PreDelete();
 				$page->Delete();
 				$_SESSION[ 'user_notification' ][] = array( "type" => 'notice', 'text' => 'Page deleted.' );

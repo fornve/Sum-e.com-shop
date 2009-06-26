@@ -156,16 +156,6 @@
 					<img src="http://sunforum.co.uk/resources/icons/flavour/presentation.png" ale="User agents" class="admin_image"/>
 					User agents</a>
 			</div>
-
-		<h3 style="clear: both;">Development support</h3>
-
-			<div class="admin_tile">
-				<a href="#" title="">Donate</a>
-			</div>
-
-			<div class="admin_tile">
-				<a href="" title="">Buy me a beer</a>
-			</div>
 	</div>
 
 </div>
