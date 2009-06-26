@@ -33,6 +33,7 @@
                 $shipping->enabled = $input->enabled;
                 $shipping->Save();
 
+				Log::Add( "SHIPPING_UPDATED", 'SHIPPING', $_SESSION[ 'admin' ]->id, "{$shipping->name}" );
 				$_SESSION['user_notification'][] = array( 'text' => "Shipping {$shipping->name} saved.", 'type' => 'notice'  );
 			}
 

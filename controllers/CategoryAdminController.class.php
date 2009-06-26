@@ -12,10 +12,13 @@
 
 			if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 			{
-				if( !$category )
-						$category = new Category();
-
 				$input = Common::Inputs( array( 'name', 'parent', 'description', 'delete_image' ), INPUT_POST );
+
+				if( !$category )
+				{
+					$category = new Category();
+					$new_category = true;
+				}
 
                 $new_image = CategoryAdminController::UploadImage( $id );
 				
@@ -51,6 +54,11 @@
 
 				$_SESSION['user_notification'][] = array( 'text' => "Category saved.", 'type' => 'notice'  );
 			}
+
+			if( $new_category )
+				Log::Add( "CATEGORY_NEW", 'CATEGORY', $_SESSION[ 'admin' ]->id, "Category [ {$category->id} ] <a href=\"/Category/View/{$category->id}\">{$category->name}</a>" );
+			else
+				Log::Add( "CATEGORY_EDIT", 'CATEGORY', $_SESSION[ 'admin' ]->id, "Category [ {$category->id} ] <a href=\"/Category/View/{$category->id}\">{$category->name}</a>" );
 
 			if( $category->name )
 				$this->breadcrumbs[] = array( 'name' => "Category edit: {$category->name}" );
@@ -119,6 +127,7 @@
 			}
 			else
 			{
+				Log::Add( "CATEGORY_DELETE", 'CATEGORY', $_SESSION[ 'admin' ]->id, "Category [ {$category->id} ] - {$category->name}" );
 				$category->Delete();
 				Config::FlushCache();
 				$_SESSION[ 'user_notification' ][] = array( 'text' => "Category deleted.", 'type' => 'notice' );

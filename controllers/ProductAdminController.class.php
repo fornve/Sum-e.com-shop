@@ -52,6 +52,7 @@
                     $product = new Product();
                     $product->vendor = $_SESSION[ 'admin' ]->vendor-id;
                     $product->Save();
+					$new_product = true;
                 }
 
                 ProductAdminController::UpdateProductGeneral( $product );
@@ -61,6 +62,11 @@
 
                 $product = Product::Retrieve( $product->id, true );
 
+				if( $new_product )
+					Log::Add( "PRODUCT_NEW", 'PRODUCT', $_SESSION[ 'admin' ]->id, "PRODUCT [ {$product->id} ] <a href=\"/Product/View/{$product->id}\">{$product->name}</a>" );
+				else
+					Log::Add( "PRODUCT_EDIT", 'PRODUCT', $_SESSION[ 'admin' ]->id, "PRODUCT [ {$product->id} ] <a href=\"/Product/View/{$product->id}\">{$product->name}</a>" );
+					
 				$_SESSION['user_notification'][] = array( 'text' => "Product saved.", 'type' => 'notice' );
 			}
 
@@ -230,6 +236,7 @@
 			}
 			else
 			{
+				Log::Add( "PRODUCT_DELETE", 'PRODUCT', $_SESSION[ 'admin' ]->id, "PRODUCT [ {$product->id} ] - {$product->name}" );
 				$product->deleted = 1;
 				$product->status = 0;
 				$product->Save();
