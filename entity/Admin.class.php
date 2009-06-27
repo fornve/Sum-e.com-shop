@@ -56,4 +56,12 @@
 			$entity = new Entity();
 			return $entity->Collection( $query, null, __CLASS__ );
 		}
+
+		static function CheckIfAny()
+		{
+			if( Admin::GetAll() )
+				return true;
+			else
+				return false;
+		}
     }

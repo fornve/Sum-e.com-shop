@@ -20,7 +20,7 @@ class Controller
 			mkdir( $this->smarty->compile_dir );
 	}
 
-	function dispatch( $default )
+	function dispatch( $default = 'Index' )
 	{
 		$uri = explode( '?', $_SERVER['REQUEST_URI'] );
 		$input = explode( '/', $uri[ 0 ] );

@@ -14,9 +14,9 @@ define( 'MEMCACHE_PREFIX', 'C4DEVELOPMENT' );
 
 define( 'CURRENCY_SIGN', '&pound;' );
 
-define( 'INCLUDE_PATH', '/var/www/include/' )
+define( 'INCLUDE_PATH', '/var/www/include/' );
 define( 'SMARTY_DIR', INCLUDE_PATH .'smarty/' );
-define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/" );
+define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/gray/" );
 define( 'PRODUCTION', false );
 
 if( PRODUCTION )
@@ -53,7 +53,7 @@ if( !file_exists( SMARTY_COMPILE_DIR ) )
 
 function __autoload( $name )
 {
-	$path_array = array( 'classes/', 'entities/', 'controllers/', INCLUDE_PATH .'class/' );
+	$path_array = array( 'class/', 'entity/', 'controllers/', INCLUDE_PATH .'class/' );
 
 	foreach( $path_array as $path )
 	{

@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * @package anadvert
+	 * @package shop
 	 * @subpackage framework
 	 */
 	class Mailer

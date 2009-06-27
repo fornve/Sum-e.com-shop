@@ -1,2 +1,70 @@
 For more informations go to:
 http://sum-e.com/
+
+INSTALLATION
+1. Introduction
+PROJECT_PATH is path where you found this file, for example I use /var/www/shop-demo
+Everything you do below, do in this path (for example):
+	cd /var/www/shop-demo 
+
+2. Apache (httpd) 
+	2.1 Edit .htaccess file to match your /var/www/shop-demo/resources
+	2.2 Sample apache virtualhost config file is in config/httpd.conf
+		- Edit this file to match your paths
+		To configure apache in ubuntu you need to do:
+		sudo ln -s config/httpd.conf /etc/apache2/sites-available/demo-shop
+		sudo a2ensite demo-shop
+		sudo apache2ctl restart
+
+3. General configuration
+Edit config/config.php:
+
+PRODUCTION - set it if your shop is ready to be shown to the public, it will disable error messages (critical will be sent to your email), also configuration is split to use production or development enviroment.
+
+ADMIN_EMAIL - put there your email where you will receive letters from users via contact us form and system errors.
+
+SMARTY_COMPILE_DIR - /tmp/something is great
+
+ASSETS_PATH - path to shop assets (full size images) - must be writeable to web server
+
+PAYPAL_ACCOUNT_EMAIL - your account username (where all money will go)
+
+4. Directories
+PROJECT_PATH 	
+				/assets 
+				/class
+				/config
+				/controllers
+				/entity
+				/resources
+				/templates
+
+Only assets directory should be writeable for http server, other file should be only readable.
+
+In ubuntu linux do:
+
+sudo chown -R www-data:www-data assets
+
+5. Database
+	5.1 Create database for your shop.
+		$ mysql -u root -p 
+		mysql> create database shopdemo;
+
+	5.2 Create user with at least usage privilidges to shop database.
+		mysql> grant all on shopdemo.* to 'shopdemo'@'%' identified by 'shopdemopassword';
+		mysql> quit;
+
+	5.3 Fill config/database.php file with your settings.
+	5.4 Import database.sql file into shop database
+
+		In command line:
+		mysql -u root -p your_shop_database_name_here < database.sql
+
+	You may delete this file
+		rm database.sql
+
+6. First time type in browser:
+	http://your_shop_address/Index/FirstTime
+
+7. For further info refer to http://sum-e.com/
+
