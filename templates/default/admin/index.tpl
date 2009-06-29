@@ -2,6 +2,8 @@
 	<h2 class="title">Shop administration</h2>
 
 	<div class="post_content">
+		<p>Shop version: 20090627 {if $smarty.session.last_release!='20090627'} - <span style="color: red;">Upgrade available, visit <a href="http;//sum-e.com/Upgrade/" title="sum-e.com">http://sum-e.com</a>.</span>{/if}</p>
+
 		<h3 style="clear: both;">Products</h3>
 
 			<div class="admin_tile">

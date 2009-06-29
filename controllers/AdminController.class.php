@@ -6,6 +6,7 @@
 	 */
 	class AdminController extends Controller
 	{
+        public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ) );
 		function __construct()
 		{
             if( $_SERVER[ 'REQUEST_URI' ] != '/Admin/Login' )
@@ -16,11 +17,9 @@
 
 		function Index()
 		{
-			if( !$_SESSION[ 'shop_new_version' ] )
-				$_SESSION[ 'shop_new_version' ] = Common::HttpPost( "http://sumsoft.sunforum.co.uk", array( 'shop_name' => SHOP_NAME, 'shop_address' => $_SERVER[ 'SERVER_NAME' ] ) );
+			$_SESSION[ 'last_release' ] = Common::HttpPost( "http://sumsoft.sunforum.co.uk/Index/GetVersion/", array( 'shop_name' => Vendor::Retrieve( $_SESSION[ 'admin' ]->vendor->id )->name, 'shop_address' => $_SERVER[ 'SERVER_NAME' ] ) );
  
-			var_dump($_SESSION[ 'shop_new_version' ]);
-
+			$this->assign( 'breadcrumbs', $this->breadcrumbs );
 			echo $this->Decorate( 'admin/index.tpl' );
 		}
 		
