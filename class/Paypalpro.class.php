@@ -179,7 +179,6 @@ class Paypalpro implements Payment
 				if (!$field) $fields[] = $key;
 			}
 		}
-		var_dump( $this->fields);
 
 		// Instantiate curl and pass the API post url
 		$ch = curl_init($this->fields['ENDPOINT']);
@@ -214,8 +213,8 @@ class Paypalpro implements Payment
 		$nvp_res_array = array();
 
 		parse_str(urldecode($response),$nvp_res_array);
-var_dump( $nvp_res_array );
-		return ($nvp_res_array['ACK'] == TRUE);
+
+		return $nvp_res_array;
 
 	}
 } // End Payment_Paypalpro_Driver Class

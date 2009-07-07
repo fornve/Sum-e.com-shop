@@ -38,4 +38,20 @@
             return $basket;
 		}
 
+		static function OrderCollectionObjects( $order_id )
+		{
+            $query = "SELECT * FROM order_product WHERE `order` = ?";
+            $entity = new Entity();
+            $result = $entity->Collection( $query, $order_id );
+
+            if( $result )
+			{
+				foreach( $result as $item )
+				{
+					$products[] = Product::Retrieve( $item->product );
+				}
+			}
+
+            return $products;
+		}
 	}

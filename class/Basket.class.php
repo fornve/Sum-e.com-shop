@@ -6,15 +6,12 @@
 
         function GetTotals()
         {
-			$vat_display = 'VAT_DISPLAY';
-			$vat_value = 'VAT_VALUE';
-
             if( $this->items ) foreach( $this->items as $item )
             {
                 if( $item ) foreach( $item as $variant )
                 {
                     $total[ "quantity" ] += $variant[ 'quantity' ];
-                    $total[ "value" ] += $variant[ 'quantity' ] * $variant[ 'item_value' ] * ( 1 + $variant[ 'item_tax' ] );
+                    $total[ "value" ] += $variant[ 'quantity' ] * $variant[ 'item_value' ];
                 }
             }
 

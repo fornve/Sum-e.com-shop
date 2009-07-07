@@ -47,6 +47,7 @@
 			$order->value				= $totals[ 'value' ];
 			$order->purchase_date		= date( "Y-m-d H:i:s" );
 			$order->customer_ip_address = $_SERVER[ 'REMOTE_ADDR' ];
+			$order->currency			= PAYPAL_CURRENCY_CODE;
 			
 			if( $_SESSION[ 'shipping' ] )
 			{
@@ -63,7 +64,7 @@
 					$order_product = Order_Product::Add( $order->id, $product_id, $product[ 'quantity' ], $product[ 'item_value' ], $product[ 'tax' ], $variant );
 			}
 
-			//unset( $_SESSION[ 'basket' ] );
+			unset( $_SESSION[ 'basket' ] );
 
 			return $order->id;
 		}
