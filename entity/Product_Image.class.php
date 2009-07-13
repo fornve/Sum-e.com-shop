@@ -9,19 +9,16 @@
             if( !$id )
                 return null;
 
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
-			if( $nocache || !$object = $memcache->get( "ShopProductImageRetrieve{$id}" ) )
+			if( $nocache || !$object = $cache->get( "ShopProductImageRetrieve{$id}" ) )
 			{
                 $query = "SELECT * FROM product_image WHERE id = ?";
                 $entity = new Entity();
                 $object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
-                $memcache->set( "ShopProductImageRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
+                $cache->set( "ShopProductImageRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
             }
-
-            $memcache->close();
 
             return $object;
 		}
