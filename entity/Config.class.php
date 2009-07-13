@@ -26,10 +26,8 @@
 
         static function FlushCache()
         {
-            $memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
-            $memcache->delete( MEMCACHE_PREFIX ."ShopConfig" );
-			$memcache->close();
+            $cache = new Cache();
+            $cache->delete( MEMCACHE_PREFIX ."ShopConfig" );
         }
 
 		static function GetAll()
@@ -43,9 +41,8 @@
 
 		static function GetCached()
 		{
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
-			$object = $memcache->get( MEMCACHE_PREFIX ."ShopConfig" );
+			$cache = new Cache();
+			$object = $cache->get( MEMCACHE_PREFIX ."ShopConfig" );
 
 			if( !$object )
 			{
@@ -58,10 +55,8 @@
 					$object[ $item->name ] = $item->value;
 				}
 
-				$memcache->set( MEMCACHE_PREFIX ."ShopConfig", $object, false, MEMCACHE_LIFETIME );
+				$cache->set( MEMCACHE_PREFIX ."ShopConfig", $object, false, MEMCACHE_LIFETIME );
 			}
-
-			$memcache->close();
 
 			return $object;
 		}

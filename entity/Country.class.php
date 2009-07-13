@@ -18,13 +18,12 @@
 
         static function GetAll( $entity = null )
         {
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
             if( $nocache )
-                $memcache->delete( MEMCACHE_PREFIX ."Countries" );
+                $cache->delete( MEMCACHE_PREFIX ."Countries" );
 
-			if( $nocache || !$object = $memcache->get( MEMCACHE_PREFIX ."Countries" ) )
+			if( $nocache || !$object = $cache->get( MEMCACHE_PREFIX ."Countries" ) )
 			{
 				$query = "SELECT * FROM country ORDER BY name";
 
@@ -33,7 +32,7 @@
 
 				$object = $entity->Collection( $query, null, __CLASS__ );
 
-				$memcache->set( MEMCACHE_PREFIX ."Countries", $object, false, MEMCACHE_LIFETIME * 100 );
+				$cache->set( MEMCACHE_PREFIX ."Countries", $object, false, MEMCACHE_LIFETIME * 100 );
 			}
 
 			return $object;

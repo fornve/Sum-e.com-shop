@@ -9,13 +9,12 @@
             if( !$id )
                 return null;
 
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
             if( $nocache )
-                $memcache->delete( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
+                $cache->delete( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
 
-			$object = $memcache->get( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
+			$object = $cache->get( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
 
 			if( $nocache || !$object )
 			{
@@ -34,10 +33,8 @@
 
     	        $object->description = Category_Description::Retrieve( $object->id );
 
-				$memcache->set( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
+				$cache->set( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
 			}
-
-			$memcache->close();
 
             return $object;
         }
@@ -49,14 +46,11 @@
 
 		function FlushCache()
 		{
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
-			$memcache->delete( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$this->id}" );
-			$memcache->close();
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
-			$memcache->delete( MEMCACHE_PREFIX ."ShopCategoryTree" );
-			$memcache->close();
+			$cache = new Cache();
+			$cache->delete( MEMCACHE_PREFIX ."ShopCategoryRetrieve{$this->id}" );
+
+			$cache = new Cache();
+			$cache->delete( MEMCACHE_PREFIX ."ShopCategoryTree" );
 		}
 
 		function ImageBasename()
@@ -66,20 +60,19 @@
 
         static function LevelCollection( $parent = 0, $nocache = false, $entity = null )
 		{
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
 			$prefix ? $parent : 'root';
 
             if( $nocache )
-                $memcache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+                $cache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
 
-			$objects = $memcache->get( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+			$objects = $cache->get( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
 
 			// avoid overwritting object with garbage
 			if( get_class( $objects[ 0 ] ) != 'Category' )
 			{
-				$memcache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+				$cache->delete( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
 				unset( $objects );
 			}
 
@@ -95,10 +88,8 @@
                     $objects[] = $object;
                 }
 
-				$memcache->set( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$parent}", $objects, false, MEMCACHE_LIFETIME * 10 );
+				$cache->set( MEMCACHE_PREFIX ."ShopCategoryLevelCollection{$parent}", $objects, false, MEMCACHE_LIFETIME * 10 );
 			}
-
-			$memcache->close();
 
 			return $objects;
         }
@@ -112,13 +103,12 @@
 
         static function GetTree( $nocache = false )
         {
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
             if( $nocache )
-                $memcache->delete( MEMCACHE_PREFIX ."ShopCategoryTree" );
+                $cache->delete( MEMCACHE_PREFIX ."ShopCategoryTree" );
 
-			if( $nocache || !$root = $memcache->get( MEMCACHE_PREFIX ."ShopCategoryTree" ) )
+			if( $nocache || !$root = $cache->get( MEMCACHE_PREFIX ."ShopCategoryTree" ) )
 			{
                 $first_level = Category::LevelCollection( 0, $nocache );
 
@@ -127,10 +117,8 @@
                     $parent->kids = Category::LevelCollection( $parent->id );
                     $root[] = $parent;
                 }
-				$memcache->set( MEMCACHE_PREFIX ."ShopCategoryTree", $root, false, MEMCACHE_LIFETIME );
+				$cache->set( MEMCACHE_PREFIX ."ShopCategoryTree", $root, false, MEMCACHE_LIFETIME );
 			}
-
-			$memcache->close();
 
             return $root;
         }

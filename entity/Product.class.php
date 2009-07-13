@@ -8,13 +8,12 @@
             if( !$id )
                 return null;
 
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
             if( $nocache )
-                $memcache->delete( MEMCACHE_PREFIX ."ShopProductRetrieve{$id}" );
+                $cache->delete( MEMCACHE_PREFIX ."ShopProductRetrieve{$id}" );
 
-			if( $nocache || !$object = $memcache->get( MEMCACHE_PREFIX ."ShopProductRetrieve{$id}" ) )
+			if( $nocache || !$object = $cache->get( MEMCACHE_PREFIX ."ShopProductRetrieve{$id}" ) )
 			{
 				$query = "SELECT * FROM product WHERE id = ?";
 				$entity = new Entity();
@@ -31,19 +30,16 @@
     	        $object->tax = Tax::Retrieve( $object->tax );
 	            $object->vendor = Vendor::Retrieve( $object->vendor );
 
-				$memcache->set( MEMCACHE_PREFIX ."ShopProductRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
+				$cache->set( MEMCACHE_PREFIX ."ShopProductRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
 			}
-                
-			$memcache->close();
 
 			return $object;
 		}
 
 		function FlushCache()
 		{
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
-			$memcache->delete( MEMCACHE_PREFIX ."ShopProductRetrieve{$this->id}" );
+			$cache = new Cache();
+			$cache->delete( MEMCACHE_PREFIX ."ShopProductRetrieve{$this->id}" );
 		}
 
         static function AdminCollection( $limit, $offset )

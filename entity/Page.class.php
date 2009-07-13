@@ -9,13 +9,12 @@
             if( !$id )
                 return null;
 
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
+			$cache = new Cache();
 
             if( $nocache )
-                $memcache->delete( "Page{$id}" );
+                $cache->delete( "Page{$id}" );
 
-			if( $nocache || !$object = $memcache->get( "Page{$id}" ) )
+			if( $nocache || !$object = $cache->get( "Page{$id}" ) )
 			{
 				$query = "SELECT * FROM page WHERE id = ?";
             	$entity = new Entity();
@@ -24,10 +23,8 @@
                 if( !$object )
                     return null;
 
-				$memcache->set( "Page{$id}", $object, false, 100 * MEMCACHE_LIFETIME );
+				$cache->set( "Page{$id}", $object, false, 100 * MEMCACHE_LIFETIME );
 			}
-
-			$memcache->close();
 
             return $object;
         }
@@ -41,9 +38,8 @@
 
 		function FlushCache()
 		{
-			$memcache = new Memcache();
-			$memcache->connect( MEMCACHE_HOST, MEMCACHE_PORT );
-			$memcache->delete( "Page{$this->id}" );
+			$cache = new Cache();
+			$cache->delete( "Page{$this->id}" );
 		}
 
 		public static function GetAll()

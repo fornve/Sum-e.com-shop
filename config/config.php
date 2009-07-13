@@ -8,6 +8,7 @@ define( 'PROJECT_PATH', substr( __file__, 0, strlen( __file__ ) - 18 ) );
 
 define( 'PROJECT_NAME', 'shop' );
 
+define( 'CACHE_TYPE', 'memcache' );
 define( 'MEMCACHE_HOST', '127.0.0.1' );
 define( 'MEMCACHE_PORT', 11211 );
 define( 'MEMCACHE_LIFETIME', 12000 ); // in seconds
