@@ -69,7 +69,6 @@
 		static function DefineAll()
 		{
 			$object = Config::GetCached();
-			
 			if( $object ) foreach( $object as $key => $value )
 			{
 				$key = strtoupper( $key );

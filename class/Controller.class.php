@@ -10,12 +10,11 @@ class Controller
 	{
 		Controller::Startup();
 		Controller::VisitHandle();
-
 		//$this->entity = new Entity;
 		$this->smarty = new Smarty;
 		$this->smarty->compile_dir = SMARTY_COMPILE_DIR;
 		$this->smarty->template_dir = SMARTY_TEMPLATES_DIR;
-
+		
 		if( !file_exists( $this->smarty->compile_dir ) )
 			mkdir( $this->smarty->compile_dir );
 	}

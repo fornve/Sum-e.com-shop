@@ -1,5 +1,6 @@
 <?php
-error_reporting( E_ALL ^E_WARNING ^E_NOTICE );
+#error_reporting( E_ALL ^E_WARNING ^E_NOTICE );
+error_reporting( E_ALL );
 define( 'TIMER', microtime( true ) );
 define( 'PROJECT_PATH', substr( __file__, 0, strlen( __file__ ) - 18 ) );
 
@@ -15,7 +16,7 @@ define( 'MEMCACHE_PREFIX', 'C4DEVELOPMENT' );
 define( 'CURRENCY_SIGN', '&pound;' );
 
 define( 'INCLUDE_PATH', '/var/www/include/' );
-#define( 'SMARTY_DIR', INCLUDE_PATH .'smarty/' );
+define( 'SMARTY_DIR', INCLUDE_PATH .'smarty/' );
 define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/gray/" );
 define( 'PRODUCTION', false );
 
@@ -46,10 +47,11 @@ if( !file_exists( INCLUDE_PATH .'/class/Entity.class.php' ) )
 #	die('Smarty not found, please follow <a href="http://www.sum-e.com/Page/Installation/#Smarty">instructions</a> to install it.');
 #}
 
-require_once( 'Smarty.class.php' );
 
 if( !file_exists( SMARTY_COMPILE_DIR ) )
 	mkdir( SMARTY_COMPILE_DIR );
+
+require_once( SMARTY_DIR .'Smarty.class.php' );
 
 function __autoload( $name )
 {
