@@ -9,10 +9,10 @@ define( 'PROJECT_PATH', substr( __file__, 0, strlen( __file__ ) - 18 ) );
 define( 'PROJECT_NAME', 'shop' );
 
 define( 'CACHE_TYPE', 'memcache' );
-define( 'MEMCACHE_HOST', '127.0.0.1' );
-define( 'MEMCACHE_PORT', 11211 );
-define( 'MEMCACHE_LIFETIME', 12000 ); // in seconds
-define( 'MEMCACHE_PREFIX', 'C4DEVELOPMENT' );
+define( 'CACHE_HOST', '127.0.0.1' );
+define( 'CACHE_PORT', 11211 );
+define( 'CACHE_LIFETIME', 12000 ); // in seconds
+define( 'CACHE_PREFIX', 'C4DEVELOPMENT' );
 
 define( 'PAGE_CACHE_DIR', '/tmp/shop/page_cache' ); // compiled pages cache
 

@@ -21,7 +21,7 @@
                 return null;
 
 			$cache = new Cache();
-			$object = $cache->Get( MEMCACHE_PREFIX ."PageCacheConfig{$id}" );
+			$object = $cache->Get( CACHE_PREFIX ."PageCacheConfig{$id}" );
 
 			if( !$object )
 			{
@@ -29,7 +29,7 @@
             	$entity = new Entity();
             	$object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
-				$cache->Set( ,MEMCACHE_PREFIX ."PageCacheConfig{$id}"  $object ,  null, CACHE_EXPIRE );
+				$cache->Set( ,CACHE_PREFIX ."PageCacheConfig{$id}"  $object ,  null, CACHE_EXPIRE );
 			}
 
             return $object;
