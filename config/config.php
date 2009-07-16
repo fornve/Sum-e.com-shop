@@ -14,6 +14,8 @@ define( 'MEMCACHE_PORT', 11211 );
 define( 'MEMCACHE_LIFETIME', 12000 ); // in seconds
 define( 'MEMCACHE_PREFIX', 'C4DEVELOPMENT' );
 
+define( 'PAGE_CACHE_DIR', '/tmp/shop/page_cache' ); // compiled pages cache
+
 define( 'CURRENCY_SIGN', '&pound;' );
 
 define( 'INCLUDE_PATH', '/var/www/include/' );
