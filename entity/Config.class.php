@@ -84,4 +84,11 @@
 
 			return $vat;
 		}
+
+		static function PageCache()
+		{
+			$config = self::GetCached();
+
+			return $config[ 'page_cache' ];	
+		}
     }
