@@ -19,9 +19,12 @@ class Controller
 			mkdir( $this->smarty->compile_dir );
 	}
 
-	function dispatch( $default = 'Index' )
+	function dispatch( $default = 'Index', $second_chance = false, $uri = null )
 	{
-		$uri = explode( '?', $_SERVER['REQUEST_URI'] );
+		if( !$second_chance )
+			$uri = $_SERVER['REQUEST_URI'];
+
+		$uri = explode( '?', $uri );
 		$input = explode( '/', $uri[ 0 ] );
 
 		// rewrite rule for numeric ads
@@ -59,16 +62,21 @@ class Controller
 			if( method_exists( get_class( $controller ), $method ) ) // check if property exists
 			{
 				$controller->$method( $input[ 3 ], $input[ 4 ] );
-			}
-			else
-			{
-				$this->NotFound();
+				exit;
 			}
 		}
-		else
+		elseif( !$second_chance )
 		{
-			$this->NotFound();
+			$uri = Url::Decode( $_SERVER['REQUEST_URI'] );
+
+			if( $uri )
+			{
+				$this->Dispatch( 'Index', true, $uri );
+				exit;
+			}
 		}
+			
+		$this->NotFound();
 	}
 
 	function assign( $variable, $value )

@@ -9,6 +9,13 @@
             echo $this->Decorate( 'page/index.tpl' );
         }
 
+		function View( $id )
+		{
+			$page = Page::Retrieve( $id );
+			$this->Assign( 'page', $page );
+			echo $this->Decorate( 'page/view.tpl' );
+		}
+
         function Image( $size, $id )
         {
             $page = Page::Retrieve( $id );
