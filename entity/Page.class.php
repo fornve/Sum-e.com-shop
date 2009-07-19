@@ -23,7 +23,7 @@
                 if( !$object )
                     return null;
 
-				$cache->set( "Page{$id}", $object, false, 100 * MEMCACHE_LIFETIME );
+				$cache->set( "Page{$id}", $object, false, 100 * CACHE_LIFETIME );
 			}
 
             return $object;

@@ -10,19 +10,23 @@ class Controller
 	{
 		Controller::Startup();
 		Controller::VisitHandle();
-
 		//$this->entity = new Entity;
 		$this->smarty = new Smarty;
 		$this->smarty->compile_dir = SMARTY_COMPILE_DIR;
 		$this->smarty->template_dir = SMARTY_TEMPLATES_DIR;
-
+		
 		if( !file_exists( $this->smarty->compile_dir ) )
 			mkdir( $this->smarty->compile_dir );
 	}
 
-	function dispatch( $default = 'Index' )
+	function Dispatch( $default = 'Index', $second_chance = false, $uri = null )
 	{
-		$uri = explode( '?', $_SERVER['REQUEST_URI'] );
+		if( !$second_chance )
+			$uri = $_SERVER['REQUEST_URI'];
+
+		$this->uri = $uri;
+
+		$uri = explode( '?', $uri );
 		$input = explode( '/', $uri[ 0 ] );
 
 		// rewrite rule for numeric ads
@@ -44,9 +48,8 @@ class Controller
 		if( strlen( $input[ 2 ] ) < 1 ) // default function
 			$input[ 2 ] = 'Index';
 
-		$this->controller = $input[ 1 ];
 		$this->action = $input[ 2 ];
-		$controller_name = "{$input[1]}Controller";
+		$this->controller = "{$input[1]}Controller";
 
 		if( class_exists( $controller_name ) )
 		{
@@ -59,17 +62,24 @@ class Controller
 
 			if( method_exists( get_class( $controller ), $method ) ) // check if property exists
 			{
-				$controller->$method( $input[ 3 ], $input[ 4 ] );
-			}
-			else
-			{
-				$this->NotFound();
+				if( !$this->PageCached( $this->controller, $this->method, $this->uri ) )
+					$controller->$method( $input[ 3 ], $input[ 4 ] );
+				
+				exit;
 			}
 		}
-		else
+		elseif( !$second_chance )
 		{
-			$this->NotFound();
+			$uri = Url::Decode( $_SERVER['REQUEST_URI'] );
+
+			if( $uri )
+			{
+				$this->Dispatch( 'Index', true, $uri );
+				exit;
+			}
 		}
+			
+		$this->NotFound();
 	}
 
 	function assign( $variable, $value )
@@ -100,6 +110,8 @@ class Controller
 			$content = $this->smarty->fetch( $dir .'decoration.tpl' );
 			$this->PostDecorate();
 		}
+
+		$this->PageCacheSet( $content );
 
 		return $content;
 	}
@@ -169,6 +181,22 @@ class Controller
 			$user_agent->Save();
 			$_SESSION['visitor'] = true; // to be finished with something more sensible
 		}
+	}
+
+	private function PageCacheGet( $controller, $method, $uri )
+	{
+		if( Config::PageCache() && Page_Cache_Config::Get( $controller, $method )	
+		{
+			return PageCache::Get( $uri );
+		}
+	}
+
+	private function PageCacheSet( $content )
+	{
+        if( Config::PageCache() && $expires = Page_Cache_Config::Get( $this->controller, $this->method )
+        {
+            return PageCache::Set( $this->uri, $content, $expires );
+        }
 	}
 }
   

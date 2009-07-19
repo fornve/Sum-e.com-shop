@@ -10,9 +10,10 @@
         function View( $id )
         {
             Product::IncrementVisited( $id );
+
             $product = Product::Retrieve( $id );
 
-            if( !$product )
+            if( !$product || !$product->visible )
                 self::Redirect( "/Product/NotFound/" );
             
             if( $product->keywords )

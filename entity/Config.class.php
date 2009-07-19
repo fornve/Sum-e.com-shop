@@ -27,7 +27,7 @@
         static function FlushCache()
         {
             $cache = new Cache();
-            $cache->delete( MEMCACHE_PREFIX ."ShopConfig" );
+            $cache->delete( CACHE_PREFIX ."ShopConfig" );
         }
 
 		static function GetAll()
@@ -42,7 +42,7 @@
 		static function GetCached()
 		{
 			$cache = new Cache();
-			$object = $cache->get( MEMCACHE_PREFIX ."ShopConfig" );
+			$object = $cache->get( CACHE_PREFIX ."ShopConfig" );
 
 			if( !$object )
 			{
@@ -55,7 +55,7 @@
 					$object[ $item->name ] = $item->value;
 				}
 
-				$cache->set( MEMCACHE_PREFIX ."ShopConfig", $object, false, MEMCACHE_LIFETIME );
+				$cache->set( CACHE_PREFIX ."ShopConfig", $object, false, CACHE_LIFETIME );
 			}
 
 			return $object;
@@ -64,7 +64,6 @@
 		static function DefineAll()
 		{
 			$object = Config::GetCached();
-			
 			if( $object ) foreach( $object as $key => $value )
 			{
 				$key = strtoupper( $key );
@@ -84,5 +83,12 @@
 				$vat = 0;
 
 			return $vat;
+		}
+
+		static function PageCache()
+		{
+			$config = self::GetCached();
+
+			return $config[ 'page_cache' ];	
 		}
     }

@@ -16,7 +16,7 @@
             return $object;
         }
 
-		function GetOrganic( $url )
+		function Decode( $urli, $nocache = false )
 		{
 			$cache = new Cache();
 
@@ -32,7 +32,7 @@
                 if( !$object )
                     return null;
 
-				$cache->set( "Page". sha1( $url ), $object, false, 100 * MEMCACHE_LIFETIME );
+				$cache->set( "Page". sha1( $url ), $object, false, 100 * CACHE_LIFETIME );
 			}
 
             return $object->organic;
@@ -43,5 +43,38 @@
 			$query = "SELECT * FROM url ORDER BY organic";
 			$entity = new Entity();
 			return $entity->Collection( $query, null, __CLASS__ );
+		}
+
+		public static function Encode( $organic )
+		{
+			$entity = new Entity();
+			$query = "SELECT * FROM url WHERE organic = ?";
+			$url = $entity->GetFirstResult( $query, $organic, __CLASS__ );
+			
+			if( $url )
+				return $url->artificial;
+			else
+				return $organic;
+		}
+
+		public function TinyUrl( $organic )
+		{
+			$artificial = self::Encode( $organic );
+
+			if( $artificial )
+				return $artificial;
+
+			do
+			{
+				$artificial = substr( sha1( $organic ) 0, 3 + $i++ );
+			{
+			while( !self::Decode( $artificial )
+
+			$url = new Url();
+			$url->organic = $organic;
+			$url->artificial = $artificial;
+			$url->Save();
+
+			return $artificial;
 		}
 	}

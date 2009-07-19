@@ -21,9 +21,9 @@
 			$cache = new Cache();
 
             if( $nocache )
-                $cache->delete( MEMCACHE_PREFIX ."Countries" );
+                $cache->delete( CACHE_PREFIX ."Countries" );
 
-			if( $nocache || !$object = $cache->get( MEMCACHE_PREFIX ."Countries" ) )
+			if( $nocache || !$object = $cache->get( CACHE_PREFIX ."Countries" ) )
 			{
 				$query = "SELECT * FROM country ORDER BY name";
 
@@ -32,7 +32,7 @@
 
 				$object = $entity->Collection( $query, null, __CLASS__ );
 
-				$cache->set( MEMCACHE_PREFIX ."Countries", $object, false, MEMCACHE_LIFETIME * 100 );
+				$cache->set( CACHE_PREFIX ."Countries", $object, false, CACHE_LIFETIME * 100 );
 			}
 
 			return $object;

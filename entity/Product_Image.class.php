@@ -17,7 +17,7 @@
                 $entity = new Entity();
                 $object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
-                $cache->set( "ShopProductImageRetrieve{$id}", $object, false, MEMCACHE_LIFETIME );
+                $cache->set( "ShopProductImageRetrieve{$id}", $object, false, CACHE_LIFETIME );
             }
 
             return $object;
