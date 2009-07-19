@@ -27,7 +27,7 @@
 			{
 				$query = "SELECT * FROM url WHERE artificial = ?";
 				$entity = new Entity();
-				$object = $entity->GetFirstResult( $query, $type );
+				$object = $entity->GetFirstResult( $query, $url );
 
                 if( !$object )
                     return null;
