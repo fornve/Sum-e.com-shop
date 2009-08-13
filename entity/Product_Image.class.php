@@ -4,12 +4,15 @@
 	{
 		protected $schema = array( 'id', 'product', 'image', 'title', 'main' );
 
-		static function Retrieve( $id )
+		static function Retrieve( $id, $nocache = false )
 		{
             if( !$id )
                 return null;
 
 			$cache = new Cache();
+
+            if( $nocache )
+                $cache->delete( CACHE_PREFIX ."ShopProductImageRetrieve{$id}" );
 
 			if( $nocache || !$object = $cache->get( "ShopProductImageRetrieve{$id}" ) )
 			{
@@ -23,11 +26,23 @@
             return $object;
 		}
 
-        static function ProductCollection( $product )
+        static function ProductCollection( $product, $nocache = false )
         {
-            $query = "SELECT * FROM product_image WHERE product = ? ORDER BY main DESC";
-            $entity = new Entity();
-            return $entity->Collection( $query, $product, __CLASS__ );
+			$cache = new Cache();
+
+            if( $nocache )
+                $cache->delete( CACHE_PREFIX ."ProductMainImage{$product}" );
+
+			if( $nocache || !$object = $cache->get( "ProductMainImage{$product}" ) )
+			{
+				$query = "SELECT * FROM product_image WHERE product = ? ORDER BY main DESC";
+				$entity = new Entity();
+				$object = $entity->Collection( $query, $product, __CLASS__ );
+				
+				$cache->set( "ProductMainImage{$product}", $object, false, CACHE_LIFETIME );
+			}
+
+			return $object;
         }
 
         static function NewImage( $product, $file )

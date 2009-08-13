@@ -50,6 +50,34 @@
 
         static function CategoryProductCollection( $category_id, $sentence, $limit = null, $offset = null )
         {
+			// get categories
+			$category = Category::Retrieve( $category_id );
+
+			$products = self::CategoryProductCollectionItem( $category_id, $sentence, $limit, $offset );
+
+			$kids = Category::LevelCollection( $category_id );
+
+			// get and connect product arrays
+			if( $kids ) foreach( $kids as $kid )
+			{
+				$kid_products = self::CategoryProductCollectionItem( $kid->id, $sentence, $limit, $offset );
+
+				if( $kid_products ) foreach( $kid_products as $product )
+				{
+					$products[] = $product;
+				}
+			}
+
+			if( $products ) foreach( $products as $product )
+			{
+				$collection[ $product->id ] = $product;
+			}
+
+			return $collection;
+        }
+		
+		private function CategoryProductCollectionItem( $category_id, $sentence, $limit = null, $offset = null )
+		{
             $entity = new Entity();
 
 			if( $sentence )
@@ -102,5 +130,5 @@
             }
 
             return $products;
-        }
+		}
 	}

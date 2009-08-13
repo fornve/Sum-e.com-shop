@@ -16,7 +16,7 @@
             return $object;
         }
 
-		function Decode( $urli, $nocache = false )
+		function Decode( $url, $nocache = false )
 		{
 			$cache = new Cache();
 
@@ -66,9 +66,9 @@
 
 			do
 			{
-				$artificial = substr( sha1( $organic ) 0, 3 + $i++ );
-			{
-			while( !self::Decode( $artificial )
+				$artificial = substr( sha1( $organic ), 0, 3 + $i++ );
+			}
+			while( !self::Decode( $artificial ) );
 
 			$url = new Url();
 			$url->organic = $organic;
