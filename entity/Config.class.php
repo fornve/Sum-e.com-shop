@@ -24,7 +24,14 @@
 			return $object->value;
 		}
 
-        static function FlushCache()
+		static function SetValue( $name, $value )
+		{
+            $query = "Update config SET value = ? WHERE name = ?";
+            $entity = new Entity();
+            $entity->Query( $query, array( $value, $name ) );
+		}
+
+        function FlushCache()
         {
             $cache = new Cache();
             $cache->delete( CACHE_PREFIX ."ShopConfig" );
