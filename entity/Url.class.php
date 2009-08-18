@@ -1,8 +1,17 @@
 <?php
+/*
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <marek@dajnowski.net> wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy me a beer in return Marek Dajnowski
+ * ----------------------------------------------------------------------------
+ */
 
     class Url extends Entity
     {
         protected $schema = array( 'id', 'organic', 'artificial' );
+		public static tiny_url_hash_length = 3;
 
         static function Retrieve( $id, $nocache = false )
         {
@@ -20,8 +29,8 @@
 		{
 			$cache = new Cache();
 
-            if( $nocache )
-                $cache->delete( "Page". sha1( $url ) );
+        	if( $nocache )
+        		$cache->delete( "Page". sha1( $url ) );
 
 			if( $nocache || !$object = $cache->get( "Page". sha1( $url ) ) )
 			{
@@ -66,7 +75,7 @@
 
 			do
 			{
-				$artificial = substr( sha1( $organic ), 0, 3 + $i++ );
+				$artificial = substr( sha1( $organic ), 0, self::tiny_url_hash_length + $i++ );
 			}
 			while( !self::Decode( $artificial ) );
 

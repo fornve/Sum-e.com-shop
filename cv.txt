@@ -20,64 +20,63 @@ Profile
 			Person with passion in programming. Very confident with PHP, MySQL, HTML, CSS and more. Always directed to code and my first big project was driver to oscilloscope (which I developed as well based on ADC 10664 and ISA transfer bus) written in 386 assembler and Delphi. Since January 2007 every spare moment has been spent on learning PHP & MySQL and get on track with programming. Learning comes me easy from documentation, sources and debugger ;-)
 
 Links
-				Most recent links:					http://sum-e.com/wiki/index.php5/User:Fornve
-				First project, free ads platform:	www.anadvert.co.uk // revritten to use my OO/CMV framework
-              	E-commerce solution:				www.sum-e.com (payment forms, invoice management)
-				eshop demo:							www.sum-e.com/demo/ (complete ecommerce solution)
-				Personal customer:					www.parkersjewellers.co.uk
-				Social spends						www.dajnowski.net/social/
-				Tax estimation form					http://sheffield.pl/modules.php?name=Tax (written during 30 minute brake, I am sorry, it is in polish)
+			Most recent links:					http://sum-e.com/wiki/index.php5/User:Fornve
+			First project, free ads platform:			www.anadvert.co.uk // revritten to use my OO/CMV framework
+			E-commerce solution					www.sum-e.com (payment forms, invoice management)
+			eshop demo:						www.sum-e.com/demo/ (complete ecommerce solution)
+			Personal customer:					www.parkersjewellers.co.uk
+			Social spends						www.dajnowski.net/social/
+			Tax estimation form					http://sheffield.pl/modules.php?name=Tax (written during 30 minute brake, I am sorry, it is in polish)
 
 Education              
-				1999 - 2004 University of  Technology in Poznan (5 years). Graduation exam 25.06.2004  Master of Science - Electrical Engineering, specialization: Industrial Heat And Power Generation
-				1994 - 1999 Secondary Technical School of  Electronics and Telecommunication, specialization: Computer Systems (5 years after 8 years primary school)
-		        - Final exam based on self developed project Oscilloscope, PC ISA device, passed with best mark (knocked out other colleagues)
-				- Matriculation exam 1999
+			1999 - 2004 University of  Technology in Poznan (5 years). Graduation exam 25.06.2004  Master of Science - Electrical Engineering, specialization: Industrial Heat And Power Generation
+			1994 - 1999 Secondary Technical School of  Electronics and Telecommunication, specialization: Computer Systems (5 years after 8 years primary school)
+			- Final exam based on self developed project Oscilloscope, PC ISA device, passed with best mark (knocked out other colleagues)
+			- Matriculation exam 1999
 
 Courses
-				2006 till PHP exists - self made & motivated php programming course
-				Sep 2004 - Feb 2005 Initial Organization Course (6 weeks in classroom - English language, other - study in workshop)
-				Feb 2005 (1 week) - MOST (MTM like tool - activity time obtaining tool and making rapid improvements)             
-				1-2.03.2005 DORE (method of solving problems)                           
+			2006 till PHP exists - self made & motivated php programming course
+			Sep 2004 - Feb 2005 Initial Organization Course (6 weeks in classroom - English language, other - study in workshop)
+			Feb 2005 (1 week) - MOST (MTM like tool - activity time obtaining tool and making rapid improvements)             
+			1-2.03.2005 DORE (method of solving problems)                           
 
 Work experience
-				06.04.2008 till now: PHP developer at Jack Brand Marketing Ltd www.jackbrand.co.uk
-				01.08.2007 till now (maintaining old procjects) self employed PHP & MySQL developer.
-				26.09.2005 05.04.2008 Multi User Warehouse System Clerk - permanent position, NDC Supervisor (for busy period) Christian Salvesen Unit 3, Brookdale Road, Chapeltown, Sheffield S35 2PW, +44 (0) 1142 457457
-				01.09.2004 28.04.2005 Industrial Engineer Assistant at Michelin-Polska S.A., ul. Leonharda 9, 10-454 Olsztyn, +48 89 5394987 (AG/I/OL/O), www.michelin.pl
-				02.08.2004 - 31.08.2004, Project Manager at DAMIR Electronic Company, ul. Metalowa 3, 10-437 Olsztyn, +48 89 5345970, www.damir.pl {1999, 2000, 2001, 2002} July September, Electronic Technician at DAMIR Electronic Company
-				2004 February - May, as Phone Customer Adviser in (callcenter) Telekomunikacja Polska S.A.  www.tp.pl
+			06.04.2008 till now: PHP developer at Jack Brand Marketing Ltd www.jackbrand.co.uk
+			01.08.2007 till now (maintaining old procjects) self employed PHP & MySQL developer.
+			26.09.2005 05.04.2008 Multi User Warehouse System Clerk - permanent position, NDC Supervisor (for busy period) Christian Salvesen Unit 3, Brookdale Road, Chapeltown, Sheffield S35 2PW, +44 (0) 1142 457457
+			01.09.2004 28.04.2005 Industrial Engineer Assistant at Michelin-Polska S.A., ul. Leonharda 9, 10-454 Olsztyn, +48 89 5394987 (AG/I/OL/O), www.michelin.pl
+			02.08.2004 - 31.08.2004, Project Manager at DAMIR Electronic Company, ul. Metalowa 3, 10-437 Olsztyn, +48 89 5345970, www.damir.pl {1999, 2000, 2001, 2002} July September, Electronic Technician at DAMIR Electronic Company
+			2004 February - May, as Phone Customer Adviser in (callcenter) Telekomunikacja Polska S.A.  www.tp.pl
 
 
 Knowledge
-				- Programming: oo PHP5, MySQL,XHTML, Javascript, jQuery, XML, CSS, HTML, Ajax, Smarty, Web services,
-				- PHP frameworks: JackBrand framework (similar to Codeignifier/Kohana) & my own lightweight framework, Joomla (several modules & components written for )
-				- Version control - svn/svk & git (used everyday), cvs,
-				- Process methodology, estimating costs, solving difficult problems and finding solutions,                           
-				- Electronics, electrics, heat and power generation,
-				- Systems: FreeBSD, Linux, Windows,
-				- Programs: MS Office, OpenOffice, PCB, MathCAD, AutoCAD,
-				- Vintage programming: C64 Basic, TurboPascal, Delphi, assembler (x86, *C51), PLC (FESTO)
+			- Programming: oo PHP5, MySQL,XHTML, Javascript, jQuery, XML, CSS, HTML, Ajax, Smarty, Web services,
+			- PHP frameworks: JackBrand framework (similar to Codeignifier/Kohana) & my own lightweight framework, Joomla (several modules & components written for )
+			- Version control - svn/svk & git (used everyday), cvs,
+			- Process methodology, estimating costs, solving difficult problems and finding solutions,                           
+			- Electronics, electrics, heat and power generation,
+			- Systems: FreeBSD, Linux, Windows,
+			- Programs: MS Office, OpenOffice, PCB, MathCAD, AutoCAD,
+			- Vintage programming: C64 Basic, TurboPascal, Delphi, assembler (x86, *C51), PLC (FESTO)
 
 Favourities
-				OS:	Linux (desktop) / FreeBSD (server)
-				Editor:	Netbeans, vim
-				Car: Volvo, Volksvagen
-				Beer: lager
-				Sports: Non extensive, non boring activities such cycling, country walking
-				Shopping: never! (exluding ebay)
-				Addiction: coffeine in the past, now managed to one cup of coffee a day
-				Nicks: fornve, tigi, whih, whihajste						   
+			OS:	Linux (desktop) / FreeBSD (server)
+			Editor:	Netbeans, vim
+			Car: Volvo, Volksvagen
+			Beer: lager
+			Sports: Non extensive, non boring activities such cycling, country walking
+			Shopping: never! (exluding ebay)
+			Addiction: coffeine in the past, now managed to one cup of coffee a day
+			Nicks: fornve, tigi, whih, whihajste						   
 
 Interestis
-				Computers, electronics, tourism, sailing, aquarium, fishing.
+			Computers, electronics, tourism, sailing, aquarium, fishing.
 
 I don't like
-				IE6
+			IE6
 
 Fuel
-				Organic food (excluding wheat and caged eggs), ethanol (up to 6 units a day).
+			Organic food (excluding wheat and caged eggs), ethanol (up to 6 units a day).
  
 
-Marek Dajnowski,  2008/05/23 
 Internet is my World, Unix is my home.
