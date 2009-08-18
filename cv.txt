@@ -7,7 +7,7 @@ Name			Dajnowski Marek
 Born			1979/07/21 (301436100 unix timestamp) Poland
 Address			33 Tooker Road, Rotherham, South Yorkshire, UK
 Mobile			+44 770616 3515
-E-mail			marek@dajnowski.net
+E-mail			fornve@yahoo.co.uk	
 YahooIM			fornve@yahoo.co.uk
 Web			www.sum-e.com, dajnowski.net
 Nationality		(World citizen) - Polish (EU Citizen) - UK Resident since May 2005
@@ -20,13 +20,13 @@ Profile
 			Person with passion in programming. Very confident with PHP, MySQL, HTML, CSS and more. Always directed to code and my first big project was driver to oscilloscope (which I developed as well based on ADC 10664 and ISA transfer bus) written in 386 assembler and Delphi. Since January 2007 every spare moment has been spent on learning PHP & MySQL and get on track with programming. Learning comes me easy from documentation, sources and debugger ;-)
 
 Links
-			Most recent links:					http://sum-e.com/wiki/index.php5/User:Fornve
-			First project, free ads platform:			www.anadvert.co.uk // revritten to use my OO/CMV framework
-			E-commerce solution					www.sum-e.com (payment forms, invoice management)
-			eshop demo:						www.sum-e.com/demo/ (complete ecommerce solution)
-			Personal customer:					www.parkersjewellers.co.uk
-			Social spends						www.dajnowski.net/social/
-			Tax estimation form					http://sheffield.pl/modules.php?name=Tax (written during 30 minute brake, I am sorry, it is in polish)
+			Most recent links:			http://dajnowski.net/wiki/index.php5/User:Fornve
+			First project, free ads platform:	http://www.anadvert.co.uk // revritten to use my OO/MVC framework
+			E-commerce solution			http://www.sum-e.com (payment forms, invoice management)
+			eshop demo:				http://sunforum.co.uk/ (complete ecommerce solution demo - testing version)
+			Personal customer:			http://www.parkersjewellers.co.uk
+			Social spends				http://www.dajnowski.net/social/
+			Tax estimation form			http://sheffield.pl/modules.php?name=Tax (written during 30 minute brake, I am sorry, it is in polish)
 
 Education              
 			1999 - 2004 University of  Technology in Poznan (5 years). Graduation exam 25.06.2004  Master of Science - Electrical Engineering, specialization: Industrial Heat And Power Generation
