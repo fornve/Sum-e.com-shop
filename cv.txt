@@ -35,13 +35,14 @@ Education
 				- Matriculation exam 1999
 
 Courses
-				2006 till PHP exists - self made & motivated php programming course
+				2006 till now - self made & motivated php programming course
+
 				Sep 2004 - Feb 2005 Initial Organization Course (6 weeks in classroom - English language, other - study in workshop)
 				Feb 2005 (1 week) - MOST (MTM like tool - activity time obtaining tool and making rapid improvements)             
 				1-2.03.2005 DORE (method of solving problems)                           
 
 Work experience
-				06.04.2008 till now: PHP developer at Jack Brand Marketing Ltd www.jackbrand.co.uk
+				06.04.2008 till now: Web developer at Jack Brand Marketing Ltd www.jackbrand.co.uk
 				01.08.2007 till now (maintaining old procjects) self employed PHP & MySQL developer.
 				26.09.2005 05.04.2008 Multi User Warehouse System Clerk - permanent position, NDC Supervisor (for busy period) Christian Salvesen Unit 3, Brookdale Road, Chapeltown, Sheffield S35 2PW, +44 (0) 1142 457457
 				01.09.2004 28.04.2005 Industrial Engineer Assistant at Michelin-Polska S.A., ul. Leonharda 9, 10-454 Olsztyn, +48 89 5394987 (AG/I/OL/O), www.michelin.pl
@@ -56,7 +57,6 @@ Knowledge
 				- Process methodology, estimating costs, solving difficult problems and finding solutions,                           
 				- Electronics, electrics, heat and power generation,
 				- Systems: FreeBSD, Linux, Windows,
-				- Programs: MS Office, OpenOffice, PCB, MathCAD, AutoCAD,
 				- Vintage programming: C64 Basic, TurboPascal, Delphi, assembler (x86, *C51), PLC (FESTO)
 
 Favourities
@@ -65,7 +65,7 @@ Favourities
 				Car: Volvo, Volksvagen
 				Beer: lager
 				Sports: Non extensive, non boring activities such cycling, country walking
-				Shopping: never! (exluding ebay)
+				Shopping: never! (excluding ebay)
 				Addiction: coffeine in the past, now managed to one cup of coffee a day
 				Nicks: fornve, tigi, whih, whihajste						   
 
