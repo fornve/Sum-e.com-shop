@@ -12,7 +12,7 @@ YahooIM			fornve@yahoo.co.uk
 Web			www.sum-e.com, dajnowski.net
 Nationality		(World citizen) - Polish (EU Citizen) - UK Resident since May 2005
 Other			Full UK Driving License since 1996 (B, B1, f k p), own transport (car). [Volvo driver, never got ticket, speeding either parking]
-Salary			Current sallary preferences: 30k p.a. (40 hrs per week)
+Salary			Current salary preferences: 30k p.a. (40 hrs per week)
 Status			Almost married (Wedding on 2009-08-01)
 
 
@@ -21,7 +21,7 @@ Profile
 
 Links
 				Most recent links:					http://sum-e.com/wiki/index.php5/User:Fornve
-				First project, free ads platform:	www.anadvert.co.uk // revritten to use my OO/CMV framework
+				First project, free ads platform:	www.anadvert.co.uk // rewritten to use my OO/CMV framework
               	E-commerce solution:				www.sum-e.com (payment forms, invoice management)
 				eshop demo:							www.sum-e.com/demo/ (complete ecommerce solution)
 				Personal customer:					www.parkersjewellers.co.uk
@@ -43,11 +43,11 @@ Courses
 
 Work experience
 				06.04.2008 till now: Web developer at Jack Brand Marketing Ltd www.jackbrand.co.uk
-				01.08.2007 till now (maintaining old procjects) self employed PHP & MySQL developer.
+				01.08.2007 till now (maintaining old projects) self employed PHP & MySQL developer.
 				26.09.2005 05.04.2008 Multi User Warehouse System Clerk - permanent position, NDC Supervisor (for busy period) Christian Salvesen Unit 3, Brookdale Road, Chapeltown, Sheffield S35 2PW, +44 (0) 1142 457457
 				01.09.2004 28.04.2005 Industrial Engineer Assistant at Michelin-Polska S.A., ul. Leonharda 9, 10-454 Olsztyn, +48 89 5394987 (AG/I/OL/O), www.michelin.pl
 				02.08.2004 - 31.08.2004, Project Manager at DAMIR Electronic Company, ul. Metalowa 3, 10-437 Olsztyn, +48 89 5345970, www.damir.pl {1999, 2000, 2001, 2002} July September, Electronic Technician at DAMIR Electronic Company
-				2004 February - May, as Phone Customer Adviser in (callcenter) Telekomunikacja Polska S.A.  www.tp.pl
+				2004 February - May, as Phone Customer Adviser in (call center) Telekomunikacja Polska S.A.  www.tp.pl
 
 
 Knowledge
@@ -62,14 +62,14 @@ Knowledge
 Favourities
 				OS:	Linux (desktop) / FreeBSD (server)
 				Editor:	Netbeans, vim
-				Car: Volvo, Volksvagen
+				Car: Volvo, Volkswagen
 				Beer: lager
 				Sports: Non extensive, non boring activities such cycling, country walking
 				Shopping: never! (excluding ebay)
-				Addiction: coffeine in the past, now managed to one cup of coffee a day
+				Addiction: caffeine in the past, now managed to one cup of coffee a day
 				Nicks: fornve, tigi, whih, whihajste						   
 
-Interestis
+Interests
 				Computers, electronics, tourism, sailing, aquarium, fishing.
 
 I don't like
