@@ -1,14 +1,33 @@
 For more informations go to:
 http://sum-e.com/
 
-INSTALLATION
 1. Introduction
-PROJECT_PATH is path where you found this file, for example I use /var/www/shop-demo
-Everything you do below, do in this path (for example):
-	cd /var/www/shop-demo 
+
+	Sum-e.com ecommerce is open source web based shopping basket with
+	integrated PayPal payments (as a module).
+	It is uses LiteEntity framework (developed by sum-e.com Team as well)i.
+
+	Requirements (example):
+	- Linux or FreeBSD,
+	- PHP >= 5.2.0,
+	- Apache,
+	- MySQL or SQLite,
+	- Memcached, php5-memcache,
+	- php5-gd,
+	- Smarty
 
 2. Apache (httpd) 
 	2.1 Edit .htaccess file to match your /var/www/shop-demo/resources
+	
+	Example of .htaccess file:
+	
+	<IfModule mod_rewrite.c>
+    	RewriteEngine on
+    	RewriteRule    ^resources/(.*)$  /var/www/shop-demo/resources/$1 [L]
+    	RewriteRule    .*       index.php
+	</IfModule>
+
+
 	2.2 Sample apache virtualhost config file is in config/httpd.conf
 		- Edit this file to match your paths
 		To configure apache in ubuntu you need to do:
@@ -18,6 +37,11 @@ Everything you do below, do in this path (for example):
 
 3. General configuration
 Edit config/config.php:
+
+PROJECT_PATH - path where you found this file, for example:
+	 /var/www/shop-demo
+	Everything you do below, do in this path (for example):
+		cd /var/www/shop-demo 
 
 PRODUCTION - set it if your shop is ready to be shown to the public, it will disable error messages (critical will be sent to your email), also configuration is split to use production or development enviroment.
 
@@ -63,9 +87,26 @@ sudo chown -R www-data:www-data assets
 	You may delete this file
 		rm database.sql
 
-6. First time type in browser:
+6. Memcache
+	You will need memcache for object cacheing
+
+	To install:
+		
+		sudo apt-get install memcached
+
+	and php module for memcache
+	
+		sudo apt-get install php5-memcache	
+
+	In your config file (config/config.php) change CACHE_PREFIX to anything for
+	each shop you have on that server. You can leave default if it is only one
+	installation. 
+
+		
+
+7. First time type in browser:
 	http://your_shop_address/Index/FirstTime
 
-7. For further info refer to http://sum-e.com/
+8. For further info refer to http://sum-e.com/
 
-8. Good luck
+9. Good luck

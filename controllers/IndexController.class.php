@@ -25,7 +25,7 @@ class IndexController extends Controller
 
 		$size = explode( 'x', $size );
 
-        $image = new ImageHandler( ASSETS_PATH . $file, $size[ 0 ], $size[ 1 ] );
+        $image = new ImageHandler( ASSETS_PATH . basename( $file ), $size[ 0 ], $size[ 1 ] );
 		$image->add_borders = true;
 		$image->Output();
 
@@ -34,6 +34,6 @@ class IndexController extends Controller
 	function OriginalImage( $file )
 	{
 		header( "Content-Type: image/jpeg" );
-		readfile( ASSETS_PATH . $file );
+		readfile( ASSETS_PATH . basename( $file ) );
 	}
 }
