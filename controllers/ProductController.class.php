@@ -13,7 +13,7 @@
 
             $product = Product::Retrieve( $id );
 
-            if( !$product || !$product->visible )
+            if( !$product || !$product->status || $product->deleted )
                 self::Redirect( "/Product/NotFound/" );
             
             if( $product->keywords )

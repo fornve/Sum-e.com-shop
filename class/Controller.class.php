@@ -48,21 +48,19 @@ class Controller
 		if( strlen( $input[ 2 ] ) < 1 ) // default function
 			$input[ 2 ] = 'Index';
 
-		$this->action = $input[ 2 ];
-		$this->controller = "{$input[1]}Controller";
+		$method = $input[ 2 ];
+		$controller_name = "{$input[1]}Controller";
 
 		if( class_exists( $controller_name ) )
 		{
 			$controller = new $controller_name;
-
-			$method = $input[ 2 ];
 			
 			if( strlen( $method ) == 0 )
 				$method = 'Index';
 
 			if( method_exists( get_class( $controller ), $method ) ) // check if property exists
 			{
-				if( !$this->PageCached( $this->controller, $this->method, $this->uri ) )
+			//	if( !$this->PageCached( $this->controller, $this->method, $this->uri ) )
 					$controller->$method( $input[ 3 ], $input[ 4 ] );
 				
 				exit;
@@ -78,7 +76,7 @@ class Controller
 				exit;
 			}
 		}
-			
+		
 		$this->NotFound();
 	}
 

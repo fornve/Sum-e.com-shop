@@ -17,7 +17,11 @@ Status			Almost married (Wedding on 2009-08-01)
 
 
 Profile
-			Person with passion in programming. Very confident with PHP, MySQL, HTML, CSS and more. Always directed to code and my first big project was driver to oscilloscope (which I developed as well based on ADC 10664 and ISA transfer bus) written in 386 assembler and Delphi. Since January 2007 every spare moment has been spent on learning PHP & MySQL and get on track with programming. Learning comes me easy from documentation, sources and debugger ;-)
+			Person with passion in programming. Very confident with PHP, MySQL, HTML, CSS and more. Always 
+			directed to code and my first big project was driver to oscilloscope (which I developed as well 
+			based on ADC 10664 and ISA transfer bus) written in 386 assembler and Delphi. Since January 2007 
+			every spare moment has been spent on learning PHP & MySQL and get on track with programming. 
+			Learning comes me easy from documentation, sources and debugger ;-)
 
 Links
 			Most recent links:			http://dajnowski.net/wiki/index.php5/User:Fornve
@@ -52,6 +56,7 @@ Work experience
 Knowledge
 			- Programming: oo PHP5, MySQL,XHTML, Javascript, jQuery, XML, CSS, HTML, Ajax, Smarty, Web services,
 			- PHP frameworks: JackBrand framework (similar to Codeignifier/Kohana) & my own lightweight framework, Joomla (several modules & components written for )
+			- FreeBSD / Linux Debian administrator (BAMP or LAMP),
 			- Version control - svn/svk & git (used everyday), cvs,
 			- Process methodology, estimating costs, solving difficult problems and finding solutions,                           
 			- Electronics, electrics, heat and power generation,

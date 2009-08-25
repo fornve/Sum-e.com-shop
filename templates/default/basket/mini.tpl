@@ -1,5 +1,6 @@
-	{if !$smarty.session.basket}Your basket is empty.
-	{else}
+	{if !$smarty.session.basket}
+		Your basket is empty.
+	{else}Your
 		{assign var=basket value=$smarty.session.basket}
 		{assign var=total value=$basket->GetTotals()}
 		<a href="/Basket/View" title="View basket">You have {$total.quantity} item{if $total.quantity>1}s{/if}. 

@@ -11,7 +11,7 @@
     class Url extends Entity
     {
         protected $schema = array( 'id', 'organic', 'artificial' );
-		public static tiny_url_hash_length = 3;
+		public static $tiny_url_hash_length = 3;
 
         static function Retrieve( $id, $nocache = false )
         {
