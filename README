@@ -17,13 +17,13 @@ http://sum-e.com/
 	- Smarty
 
 2. Apache (httpd) 
-	2.1 Edit .htaccess file to match your /var/www/shop-demo/resources
+	2.1 Create .htaccess if does not exist 
 	
 	Example of .htaccess file:
 	
 	<IfModule mod_rewrite.c>
     	RewriteEngine on
-    	RewriteRule    ^resources/(.*)$  /var/www/shop-demo/resources/$1 [L]
+    	RewriteRule    ^resources/(.*)$  resources/$1 [L]
     	RewriteRule    .*       index.php
 	</IfModule>
 
