@@ -21,6 +21,7 @@ define( 'CURRENCY_SIGN', '&pound;' );
 define( 'INCLUDE_PATH', '/var/www/include/' );
 define( 'SMARTY_DIR', INCLUDE_PATH .'smarty/' );
 define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/gray/" );
+define( 'SMARTY_DEFAULT_TEMPLATES_DIR', PROJECT_PATH ."/templates/default/" );
 define( 'PRODUCTION', false );
 
 if( PRODUCTION )

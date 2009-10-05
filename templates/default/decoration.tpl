@@ -8,8 +8,6 @@
         <meta {if $meta.name} name="{$meta.name}"{/if} {if $meta.content}content="{$meta.content|truncate:250:''}"{/if} />
     {/foreach}
     {/if}
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
     <link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/resources/css/default.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -31,7 +29,6 @@
 
 	</script>
     {/if}
-{* literal}IE6 killer<style>*{position:relative}</style><table><input></table></style>{/literal*}
 </head>
 <body>
 

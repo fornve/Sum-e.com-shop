@@ -98,7 +98,10 @@ class Controller
 
 		$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
 
-		$content = $this->smarty->fetch( $dir . $template );
+		if( file_exists( $dir . $templste ) )
+			$content = $this->smarty->fetch( $dir . $template );
+		else
+			$content = $this->smarty->fetch( SMARTY_DEFAULT_TEMPLATES_DIR . $template );
 
 		if( !filter_input( INPUT_GET, 'ajax' ) )
 		{

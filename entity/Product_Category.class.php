@@ -4,7 +4,7 @@
 	{
 		protected $schema = array( 'id', 'product', 'category', 'order' );
 
-		static function Retrieve( $product_id, $category_id )
+		static function Retrieve( $product_id, $category_id, $nocache = false )
 		{
             if( !$product_id || !$category_id )
                 return null;
@@ -34,7 +34,7 @@
 			$entity->Query( $query, $product->id );
 		}
 
-        static function ProductCollection( $product_id )
+        static function ProductCollection( $product_id, $nocache = false )
         {
             $query = "SELECT * FROM product_category WHERE product = ?";
             $entity = new Entity();
