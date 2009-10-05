@@ -57,7 +57,7 @@
 		<div style="clear: both;"></div>
 
 		<div>
-			{include file='misc/pager.tpl'}
+			{include file='/var/www/include/templates/pager.tpl'}
 		</div>
 	</div>
 </div>
