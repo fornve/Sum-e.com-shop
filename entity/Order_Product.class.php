@@ -3,11 +3,13 @@
 	{
 		protected $schema = array( 'id', 'order', 'product', 'quantity', 'item_value', 'tax', 'variant' );
 
-		static function Retrieve( $id )
+		static function Retrieve( $id, $nocache = false )
 		{
 			$query = "SELECT * FROM order_product WHERE id = ?";
 			$entity = new Entity();
 			$object = $entity->GetFirstResult( $query, $id, __CLASS__ );
+
+			$object->product = Product::Retrieve( $object->product, $nocache );
 
 			return $object;
 		}

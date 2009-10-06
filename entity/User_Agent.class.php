@@ -16,8 +16,11 @@
             return $object;
 		}
 
-		static function GetByName( $name )
+		static function GetByName( $name ) 
 		{
+			if( strlen( $name ) < 1 )
+				$name = 'unknown';
+
 			$query = "SELECT * FROM user_agent WHERE name = ?";
 			$entity = new Entity();
 			return $entity->GetFirstResult( $query, $name, __CLASS__ );
