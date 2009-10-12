@@ -2,7 +2,7 @@
 
     class Category extends Entity
     {
-        protected $schema = array( 'id', 'name', 'parent', 'image', 'sort_order', 'visible' );
+        protected $schema = array( 'id', 'name', 'parent', 'image', 'sort_order' );
 
         static function Retrieve( $id, $nocache = false, $entity = null )
         {
@@ -78,7 +78,7 @@
 
 			if( $nocache || !$objects )
 			{
-            	$query = "SELECT id FROM category WHERE parent = ? ORDER BY name AND visible = 1";
+            	$query = "SELECT id FROM category WHERE parent = ? ORDER BY name";
             	$entity = new Entity();
 				$collection = $entity->Collection( $query, $parent, __CLASS__ );
 
@@ -135,8 +135,7 @@
 							product_category ON category.id = product_category.category
 						WHERE
 							( category_description.description LIKE ? OR category.name LIKE ? )
-						AND
-							category.visible = 1";
+							";
 			
 			$attributes = array( "%{$sentence}%", "%{$sentence}%" );
 
