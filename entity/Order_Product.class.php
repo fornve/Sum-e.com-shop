@@ -56,4 +56,9 @@
 
             return $products;
 		}
+
+		function UpdateStock( $action )
+		{
+			$this->UpdateStock( $this->variant, $this->quantity, $action );
+		}
 	}
