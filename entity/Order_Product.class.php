@@ -50,7 +50,7 @@
 			{
 				foreach( $result as $item )
 				{
-					$products[] = Product::Retrieve( $item->product );
+					$products[] = Order_Product::Retrieve( $item->id );
 				}
 			}
 
