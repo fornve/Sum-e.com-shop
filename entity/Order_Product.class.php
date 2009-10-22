@@ -56,4 +56,9 @@
 
             return $products;
 		}
+
+		function UpdateStock( $action )
+		{
+			$this->product->UpdateStock( unserialize( $this->variant ), $this->quantity, $action );
+		}
 	}
