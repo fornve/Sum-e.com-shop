@@ -26,6 +26,7 @@ class Imageserver extends Entity
 
 	function Put( $file, $filename = null )
 	{
+
 		if( !file_exists( $file ) )
 			return false;
 
@@ -81,7 +82,7 @@ class Imageserver extends Entity
 			}
 
 			$data = @file_get_contents( PROJECT_URL . urldecode( $original_url ) );
-			$filename = tempnam( '/tmp/', 'emarket' ); 
+			$filename = tempnam( '/tmp/', PROJECT_NAME ); 
 			file_put_contents( $filename, $data );
 
 			error_log( "Fileserver upload: {$filename} [". filesize( $filename ) ."]" );
