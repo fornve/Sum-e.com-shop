@@ -9,8 +9,8 @@ class Imageserver extends Entity
 		$cache = new Cache();
 		$hash = md5( $file );
 
-        if( $nocache )
-            $cache->delete( CACHE_PREFIX ."ImageserverFile{$hash}" );
+		if( $nocache )
+			$cache->delete( CACHE_PREFIX ."ImageserverFile{$hash}" );
 
 		if( $nocache || !$object = $cache->get( CACHE_PREFIX ."ImageserverFile{$hash}" ) )
 		{
@@ -19,7 +19,6 @@ class Imageserver extends Entity
 			$object = $entity->GetFirstResult( $query, $file, __CLASS__ );
 			$cache->set( CACHE_PREFIX ."ImageserverFile{$hash}", $object, false, CACHE_LIFETIME );
 		}
-
 
 		return $object;
 	}
@@ -66,8 +65,8 @@ class Imageserver extends Entity
 		$cache = new Cache();
 		$hash = md5( $original_url );
 
-        if( $nocache )
-            $cache->delete( CACHE_PREFIX ."ImageserverUrl{$hash}" );
+		if( $nocache )
+			$cache->delete( CACHE_PREFIX ."ImageserverUrl{$hash}" );
 
 		if( $nocache || !$object = $cache->get( CACHE_PREFIX ."ImageserverUrl{$hash}" ) )
 		{
@@ -111,6 +110,5 @@ class Imageserver extends Entity
 
 		return $original_url;
 	}
-
 
 }

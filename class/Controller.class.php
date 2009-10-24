@@ -140,8 +140,8 @@ class Controller
 			unset( $_SESSION[ 'basket' ] );
 	}
 
-    function PreDecorate()
-    {
+	function PreDecorate()
+	{
 		$generated = floor ( 10000 * ( microtime( true ) - TIMER ) ) / 10000;
 		$this->smarty->assign( 'generated', $generated );
 		$this->smarty->assign( 'entity_query', $_SESSION[ 'entity_query' ] );
@@ -149,17 +149,17 @@ class Controller
 
 		$categories = Category::LevelCollection( 0, false, $this->entity );
 		$this->assign( 'categories', $categories );
-    }
+	}
 
-    function PostDecorate()
-    {
+	function PostDecorate()
+	{
 		unset( $_SESSION[ 'user_notification' ] );
-    }
+	}
 
-    static function Redirect( $url )
-    {
-        header( "Location: $url" );
-        exit;
+	static function Redirect( $url )
+	{
+		header( "Location: $url" );
+		exit;
 	}
 
 	static function RedirectReferer()
@@ -194,10 +194,10 @@ class Controller
 
 	private function PageCacheSet( $content )
 	{
-        if( Config::PageCache() && $expires = Page_Cache_Config::Get( $this->controller, $this->method ) )
-        {
-            return PageCache::Set( $this->uri, $content, $expires );
-        }
+		if( Config::PageCache() && $expires = Page_Cache_Config::Get( $this->controller, $this->method ) )
+		{
+			return PageCache::Set( $this->uri, $content, $expires );
+		}
 	}
 }
   
