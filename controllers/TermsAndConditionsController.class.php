@@ -1,10 +1,10 @@
 <?php
 
-	class TermsAndConditionsController extends Controller
+class TermsAndConditionsController extends Controller
+{
+	function Index()
 	{
-		function Index()
-		{
-			$this->assign( 'page', Page::RetrieveByType( 'tnc' ) );
-			echo $this->Decorate( 'page/tnc.tpl' );
-		}
+		$this->assign( 'page', Page::RetrieveByType( 'tnc' ) );
+		echo $this->Decorate( 'page/tnc.tpl' );
 	}
+}

@@ -1,75 +1,75 @@
 <?php
 
-    class ProductController extends Controller
-    {
-        function Index( $id )
-        {
-            ProductController::View( $id );
-        }
+class ProductController extends Controller
+{
+	function Index( $id )
+	{
+		ProductController::View( $id );
+	}
 
-        function View( $id )
-        {
-            Product::IncrementVisited( $id );
+	function View( $id )
+	{
+		Product::IncrementVisited( $id );
 
-            $product = Product::Retrieve( $id );
+		$product = Product::Retrieve( $id );
 
-            if( !$product || !$product->status || $product->deleted )
-                self::Redirect( "/Product/NotFound/" );
-            
-            if( $product->keywords )
-               $metas[] = array( 'name' => 'keywords', 'content' => $product->keywords );
-
-            $metas[] = array( 'name' => 'description', 'content' => strip_tags( $product->description ) );
-
-			$category = Category::Retrieve( $product->categories[ 0 ] );
-
-			if( $category->parent )
-				$breadcrumbs[] =  array( 'link' => "/Category/index/{$category->parent->id}/{$category->parent->name}", 'name' => $category->parent->name );
+		if( !$product || !$product->status || $product->deleted )
+			self::Redirect( "/Product/NotFound/" );
 		
-			$breadcrumbs[] =  array( 'link' => "/Category/index/{$category->id}/{$category->name}", 'name' => $category->name );
-			$breadcrumbs[] = array( 'name' => $product->name );
+		if( $product->keywords )
+		   $metas[] = array( 'name' => 'keywords', 'content' => $product->keywords );
 
-			$this->assign( 'breadcrumbs', $breadcrumbs );
-			$this->assign( 'category', $category );
-            $this->assign( 'metas', $metas );
-			$this->assign( 'title', "{$product->name} - {$category->name}" );
-            $this->assign( 'product', $product );
-			$this->assign( 'related_products', $product->RelatedCollection() );
-			$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
-			echo $this->Decorate( 'product/view.tpl' );
-        }
+		$metas[] = array( 'name' => 'description', 'content' => strip_tags( $product->description ) );
 
-        function Image( $size, $id )
-        {
-            $image = Product_Image::Retrieve( $id );
+		$category = Category::Retrieve( $product->categories[ 0 ] );
 
-            if( !$image )
-            {
-                $image = new stdClass();
-                $image->image = "";
-            }
+		if( $category->parent )
+			$breadcrumbs[] =  array( 'link' => "/Category/index/{$category->parent->id}/{$category->parent->name}", 'name' => $category->parent->name );
+	
+		$breadcrumbs[] =  array( 'link' => "/Category/index/{$category->id}/{$category->name}", 'name' => $category->name );
+		$breadcrumbs[] = array( 'name' => $product->name );
 
-            if( !$size )
-            {
-                $this->OriginalImage( $image->image );
-            }
+		$this->assign( 'breadcrumbs', $breadcrumbs );
+		$this->assign( 'category', $category );
+		$this->assign( 'metas', $metas );
+		$this->assign( 'title', "{$product->name} - {$category->name}" );
+		$this->assign( 'product', $product );
+		$this->assign( 'related_products', $product->RelatedCollection() );
+		$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
+		echo $this->Decorate( 'product/view.tpl' );
+	}
 
-            $size = explode( 'x', $size );
+	function Image( $size, $id )
+	{
+		$image = Product_Image::Retrieve( $id );
 
-            $image = new ImageHandler( $image->image, $size[ 0 ], $size[ 1 ] );
-            $image->add_borders = true;
-            $image->Output();
-
-        }
-
-		function OriginalImage( $file )
+		if( !$image )
 		{
-			header( "Content-Type: image/jpeg" );
-			readfile( $file );
+			$image = new stdClass();
+			$image->image = "";
 		}
 
-        function NotFound()
-        {
-            echo "product not found... needs own page with search and related";
-        }
-    }
+		if( !$size )
+		{
+			$this->OriginalImage( $image->image );
+		}
+
+		$size = explode( 'x', $size );
+
+		$image = new ImageHandler( $image->image, $size[ 0 ], $size[ 1 ] );
+		$image->add_borders = true;
+		$image->Output();
+
+	}
+
+	function OriginalImage( $file )
+	{
+		header( "Content-Type: image/jpeg" );
+		readfile( $file );
+	}
+
+	function NotFound()
+	{
+		echo "product not found... needs own page with search and related";
+	}
+}

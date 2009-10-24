@@ -1,4 +1,5 @@
 <?php
+
 class IndexController extends Controller
 {
 	function Index()
@@ -9,7 +10,7 @@ class IndexController extends Controller
 
 	function NotFound()
 	{
-        header( "HTTP/1.0 404 Not Found" );
+		header( "HTTP/1.0 404 Not Found" );
 		if( PRODUCTION )
 			echo $this->Decorate( "404.tpl" );
 		else
@@ -25,7 +26,7 @@ class IndexController extends Controller
 
 		$size = explode( 'x', $size );
 
-        $image = new ImageHandler( ASSETS_PATH . basename( $file ), $size[ 0 ], $size[ 1 ] );
+		$image = new ImageHandler( ASSETS_PATH . basename( $file ), $size[ 0 ], $size[ 1 ] );
 		$image->add_borders = true;
 		$image->Output();
 
