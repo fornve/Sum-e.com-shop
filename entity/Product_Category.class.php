@@ -48,7 +48,7 @@ class Product_Category extends Entity
 		return $categories;
 	}
 
-	static function CategoryProductCollection( $category_id, $sentence, $limit = null, $offset = null )
+	static function CategoryProductCollection( $category_id, $sentence = null, $limit = null, $offset = null )
 	{
 		// get categories
 		$category = Category::Retrieve( $category_id );
