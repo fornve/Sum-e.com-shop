@@ -43,7 +43,7 @@ class Imageserver extends Entity
 		if( file_exists( "/tmp/{$filename}" ) )
 		{
 			$uploader = new ImageserverUploader( PROJECT_NAME, md5( IMAGESERVER_TOKEN . date( "Y-m-d" ) ) );
-			$uploader->upload( "/tmp/{$filename}" );
+			$uploader->upload( "/tmp/{$filename}", PROJECT_NAME );
 			$command = "rm '/tmp/{$filename}'";
 			`{$command}`;
 
