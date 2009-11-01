@@ -11,7 +11,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/css/{$smarty.const.TEMPLATE_NAME}.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/resources/css/gray.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
     <link href="/resources/css/thickbox.css" rel="stylesheet" type="text/css" media="screen" />
 
@@ -76,7 +76,7 @@
 
 	<!-- end #content -->
 	<div id="sidebar">
-        <div id="basket">
+        <div id="basket">&nbsp;
 			{include file="basket/mini.tpl"}
         </div>
 

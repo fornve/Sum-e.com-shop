@@ -8,7 +8,7 @@ class PaymentController extends Controller
 {
 	function Index()
 	{
-		$_SESSION[ 'order' ] = Order::PlaceOrder( $_SESSION[ 'customer_details' ] );// <-- to be finished!
+		//$order_id = Order::PlaceOrder( $_SESSION[ 'customer_details' ] );// <-- to be finished!
 
 		$this->assign( 'tax_rate', 100 * Config::GetVat() );
 		$this->assign( 'customer', $_SESSION[ 'customer_details' ] );
@@ -16,6 +16,12 @@ class PaymentController extends Controller
 		$this->assign( 'customer_country', Country::Retrieve( $_SESSION[ 'customer_details' ]->country ) );
 		$this->assign( 'shipping', Shipping::Retrieve( $_SESSION[ 'shipping' ] ) );
 		echo $this->Decorate( "payment/choose_payment_method.tpl" );
+	}
+
+	function Cancelled()
+	{
+		unset( $_SESSION[ "basket" ] );
+		echo $this->Decorate( "payment/cancelled.tpl" );
 	}
 
 	function PostalOrder()

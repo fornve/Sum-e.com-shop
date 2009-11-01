@@ -12,9 +12,9 @@ class Category extends Entity
 		$cache = new Cache();
 
 		if( $nocache )
-			$cache->delete( CACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
+			$cache->delete( CACHE_PREFIX ."CategoryRetrieve{$id}" );
 
-		$object = $cache->get( CACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
+		$object = $cache->get( CACHE_PREFIX ."CategoryRetrieve{$id}" );
 
 		if( $nocache || !$object )
 		{
@@ -33,7 +33,7 @@ class Category extends Entity
 
 			$object->description = Category_Description::Retrieve( $object->id );
 
-			$cache->set( CACHE_PREFIX ."ShopCategoryRetrieve{$id}", $object, false, CACHE_LIFETIME );
+			$cache->set( CACHE_PREFIX ."CategoryRetrieve{$id}", $object, false, CACHE_LIFETIME );
 		}
 
 		return $object;
@@ -62,17 +62,15 @@ class Category extends Entity
 	{
 		$cache = new Cache();
 
-		$prefix ? $parent : 'root';
-
 		if( $nocache )
-			$cache->delete( CACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+			$cache->delete( CACHE_PREFIX ."CategoryLevel{$parent}" );
 
-		$objects = $cache->get( CACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+		$objects = $cache->get( CACHE_PREFIX ."CategoryLevel{$parent}" );
 
 		// avoid overwritting object with garbage
 		if( get_class( $objects[ 0 ] ) != 'Category' )
 		{
-			$cache->delete( CACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+			$cache->delete( CACHE_PREFIX ."CategoryLevel{$parent}" );
 			unset( $objects );
 		}
 
@@ -88,7 +86,7 @@ class Category extends Entity
 				$objects[] = $object;
 			}
 
-			$cache->set( CACHE_PREFIX ."ShopCategoryLevelCollection{$parent}", $objects, false, CACHE_LIFETIME * 10 );
+			$cache->set( CACHE_PREFIX ."CategoryLevel{$parent}", $objects, false, CACHE_LIFETIME * 10 );
 		}
 
 		return $objects;
@@ -106,9 +104,9 @@ class Category extends Entity
 		$cache = new Cache();
 
 		if( $nocache )
-			$cache->delete( CACHE_PREFIX ."ShopCategoryTree" );
+			$cache->delete( CACHE_PREFIX ."CategoryTree" );
 
-		if( $nocache || !$root = $cache->get( CACHE_PREFIX ."ShopCategoryTree" ) )
+		if( $nocache || !$root = $cache->get( CACHE_PREFIX ."CategoryTree" ) )
 		{
 			$first_level = Category::LevelCollection( 0, $nocache );
 
@@ -117,7 +115,7 @@ class Category extends Entity
 				$parent->kids = Category::LevelCollection( $parent->id );
 				$root[] = $parent;
 			}
-			$cache->set( CACHE_PREFIX ."ShopCategoryTree", $root, false, CACHE_LIFETIME );
+			$cache->set( CACHE_PREFIX ."CategoryTree", $root, false, CACHE_LIFETIME );
 		}
 
 		return $root;

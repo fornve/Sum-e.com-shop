@@ -26,12 +26,12 @@ class CategoryController extends Controller
 			if( $max < 1 )
 				$max = 1;
 				
-			$pager = array(
+			/*$pager = array(
 				'offset' => $page,
 				'max' => $max,
 				'self' => "/Category/Index/{$category->id}",
 				'option' => "{$category->name}"
-			);
+			);*/
 			$this->Assign( 'pager', $pager );
 		}
 

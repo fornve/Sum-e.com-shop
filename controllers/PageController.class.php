@@ -12,6 +12,7 @@ class PageController extends Controller
 	function View( $id )
 	{
 		$page = Page::Retrieve( $id );
+		$this->assign( 'breadcrumbs', array( array( 'name' => $page->title ) ) );
 		$this->Assign( 'page', $page );
 		echo $this->Decorate( 'page/view.tpl' );
 	}

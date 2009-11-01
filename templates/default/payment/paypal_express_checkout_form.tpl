@@ -6,7 +6,7 @@
 				<input name="upload" value="1" type="hidden" />
 				<input name="business" value="{$smarty.const.PAYPAL_ACCOUNT_EMAIL}" type="hidden" />
 				<input name="currency_code" value="GBP" type="hidden" />
-				<input name="cancel_return" value="http://{$smarty.server.SERVER_NAME}/Payment/Cancelled/{$smarty.session.order}" type="hidden" />
+				<input name="cancel_return" value="http://{$smarty.server.SERVER_NAME}/Basket/" type="hidden" />
 				<input name="cbt" value="Continue" type="hidden" />
 				<input name="notify_url" value="http://{$smarty.server.SERVER_NAME}/Payment/PaypalIPN/{$smarty.session.order}" type="hidden" />
 				<input name="return" value="http://{$smarty.server.SERVER_NAME}/Checkout/Success/{$smarty.session.order}" type="hidden" />
