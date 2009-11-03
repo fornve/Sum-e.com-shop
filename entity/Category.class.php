@@ -70,8 +70,6 @@ class Category extends Entity
 		// avoid overwritting object with garbage
 		/*if( get_class( $objects[ 0 ] ) != 'Category' )
 		{
-			error_log( 'Delete '. CACHE_PREFIX ."CategoryLevel{$parent}" );
-			error_log( var_export( $objects[ 0 ], true ) );
 			$cache->delete( CACHE_PREFIX ."CategoryLevel{$parent}" );
 			unset( $objects );
 		}*/
@@ -107,9 +105,9 @@ class Category extends Entity
 		$cache = new Cache();
 
 		if( $nocache )
-			$cache->delete( CACHE_PREFIX ."ShopCategoryTree" );
+			$cache->delete( CACHE_PREFIX ."CategoryTree" );
 
-		if( $nocache || !$root = $cache->get( CACHE_PREFIX ."ShopCategoryTree" ) )
+		if( $nocache || !$root = $cache->get( CACHE_PREFIX ."CategoryTree" ) )
 		{
 			$first_level = Category::LevelCollection( 0, $nocache );
 
@@ -118,7 +116,7 @@ class Category extends Entity
 				$parent->kids = Category::LevelCollection( $parent->id );
 				$root[] = $parent;
 			}
-			$cache->set( CACHE_PREFIX ."ShopCategoryTree", $root, false, CACHE_LIFETIME );
+			$cache->set( CACHE_PREFIX ."CategoryTree", $root, false, CACHE_LIFETIME );
 		}
 
 		return $root;

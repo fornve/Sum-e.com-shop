@@ -9,7 +9,7 @@ class ProductController extends Controller
 
 	function View( $id )
 	{
-		Product::IncrementVisited( $id );
+		ProductController::IncrementVisited( $id );
 
 		$product = Product::Retrieve( $id );
 
@@ -34,7 +34,7 @@ class ProductController extends Controller
 		$this->assign( 'metas', $metas );
 		$this->assign( 'title', "{$product->name} - {$category->name}" );
 		$this->assign( 'product', $product );
-		$this->assign( 'related_products', $product->RelatedCollection() );
+		//$this->assign( 'related_products', $product->RelatedCollection() );
 		$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
 		echo $this->Decorate( 'product/view.tpl' );
 	}
@@ -71,5 +71,14 @@ class ProductController extends Controller
 	function NotFound()
 	{
 		echo "product not found... needs own page with search and related";
+	}
+	
+	private static function IncrementVisited( $id )
+	{
+		if( $_SESSION[ 'visited_product' ][ $id ] )
+			return false;
+		
+		$_SESSION[ 'visited_product' ][ $id ] = true;
+		Product::IncrementVisited( $id );
 	}
 }

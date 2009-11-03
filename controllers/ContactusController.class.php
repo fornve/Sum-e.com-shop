@@ -13,6 +13,7 @@ class ContactusController extends Controller
 	function Send()
 	{
 		$input = Common::Inputs( array( 'from', 'subject', 'message' ), INPUT_POST );
+		$this->assign( 'breadcrumbs', array( array( 'name' => "Contact us" ) ) );
 
 		if( ContactusController::ValidateSend( $input ) )
 		{
@@ -25,11 +26,10 @@ class ContactusController extends Controller
 			$email->message = $input->message;
 			$email->Send();
 
-			echo $this->decorate( 'contactus/success.tpl' );	
+			echo $this->decorate( 'contactus/success.tpl' );
 		}
 		else
 			echo $this->decorate( 'contactus/form.tpl' );
-
 	}
 
 	function ValidateSend($input  )

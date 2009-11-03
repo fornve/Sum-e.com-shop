@@ -1,6 +1,6 @@
 <?php
 #error_reporting( E_ALL ^E_WARNING ^E_NOTICE );
-error_reporting( E_ALL );
+error_reporting( E_ALL ^E_NOTICE );
 define( 'TIMER', microtime( true ) );
 define( 'PROJECT_PATH', substr( __file__, 0, strlen( __file__ ) - 18 ) );
 

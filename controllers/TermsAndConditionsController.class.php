@@ -4,7 +4,9 @@ class TermsAndConditionsController extends Controller
 {
 	function Index()
 	{
-		$this->assign( 'page', Page::RetrieveByType( 'tnc' ) );
+		$page = Page::RetrieveByType( 'tnc' );
+		$this->assign( 'page', $page );
+		$this->assign( 'breadcrumbs', array( array( 'name' => $page->title ) ) );
 		echo $this->Decorate( 'page/tnc.tpl' );
 	}
 }

@@ -29,11 +29,29 @@ class Page extends Entity
 		return $object;
 	}
 
-	function RetrieveByType( $type )
+	function RetrieveByType( $type, $nocache = false )
 	{
-		$query = "SELECT * FROM page WHERE type = ?";
-		$entity = new Entity();
-		return $entity->GetFirstResult( $query, $type );
+		if( strlen( $type ) < 1 )
+			return null;
+
+		$cache = new Cache();
+
+		if( $nocache )
+			$cache->delete( "Page{$type}" );
+
+		if( $nocache || !$object = $cache->get( "Page{$type}" ) )
+		{
+			$query = "SELECT * FROM page WHERE type = ?";
+			$entity = new Entity();
+			$object = $entity->GetFirstResult( $query, $type, __CLASS__ );
+			
+			if( !$object )
+				return null;
+
+			$cache->set( "Page{$type}", $object, false, 100 * CACHE_LIFETIME );
+		}
+		
+		return $object;
 	}
 
 	function FlushCache()

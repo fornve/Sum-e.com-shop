@@ -128,15 +128,15 @@ class Controller
 
 	static function Startup()
 	{
-		$template = 'gray';
+		//$template = 'gray';
 		//$template = 'default';
-		define( 'TEMPLATE_NAME', $template );
-		define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/{$template}/" );
+		//define( 'TEMPLATE_NAME', $template );
+		//define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/{$template}/" );
 
 		Config::DefineAll();
 
 		// clean basket if empty
-		if( count( $_SESSION[ 'basket' ]->items ) < 1 )
+		if( isset( $_SESSION[ 'basket' ]->items ) && count( $_SESSION[ 'basket' ]->items ) < 1 )
 			unset( $_SESSION[ 'basket' ] );
 	}
 
