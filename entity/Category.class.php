@@ -12,9 +12,9 @@ class Category extends Entity
 		$cache = new Cache();
 
 		if( $nocache )
-			$cache->delete( CACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
+			$cache->delete( CACHE_PREFIX ."Category{$id}" );
 
-		$object = $cache->get( CACHE_PREFIX ."ShopCategoryRetrieve{$id}" );
+		$object = $cache->get( CACHE_PREFIX ."Category{$id}" );
 
 		if( $nocache || !$object )
 		{
@@ -33,7 +33,7 @@ class Category extends Entity
 
 			$object->description = Category_Description::Retrieve( $object->id );
 
-			$cache->set( CACHE_PREFIX ."ShopCategoryRetrieve{$id}", $object, false, CACHE_LIFETIME );
+			$cache->set( CACHE_PREFIX ."Category{$id}", $object, false, CACHE_LIFETIME );
 		}
 
 		return $object;
@@ -47,10 +47,11 @@ class Category extends Entity
 	function FlushCache()
 	{
 		$cache = new Cache();
-		$cache->delete( CACHE_PREFIX ."ShopCategoryRetrieve{$this->id}" );
-
-		$cache = new Cache();
-		$cache->delete( CACHE_PREFIX ."ShopCategoryTree" );
+		$cache->delete( CACHE_PREFIX ."Category{$this->id}" );
+		$cache->delete( CACHE_PREFIX ."CategoryTree{$this->id}" );
+		$cache->delete( CACHE_PREFIX ."CategoryTree{$this->parent}" );
+		$cache->delete( CACHE_PREFIX ."CategoryLevel{$this->id}" );
+		$cache->delete( CACHE_PREFIX ."CategoryLevel{$this->parent}" );
 	}
 
 	function ImageBasename()
@@ -62,22 +63,22 @@ class Category extends Entity
 	{
 		$cache = new Cache();
 
-		$prefix ? $parent : 'root';
-
 		if( $nocache )
-			$cache->delete( CACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+			$cache->delete( CACHE_PREFIX ."CategoryLevel{$parent}" );
 
-		$objects = $cache->get( CACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
-
+		$objects = $cache->get( CACHE_PREFIX ."CategoryLevel{$parent}" );
 		// avoid overwritting object with garbage
-		if( get_class( $objects[ 0 ] ) != 'Category' )
+		/*if( get_class( $objects[ 0 ] ) != 'Category' )
 		{
-			$cache->delete( CACHE_PREFIX ."ShopCategoryLevelCollection{$prefix}" );
+			error_log( 'Delete '. CACHE_PREFIX ."CategoryLevel{$parent}" );
+			error_log( var_export( $objects[ 0 ], true ) );
+			$cache->delete( CACHE_PREFIX ."CategoryLevel{$parent}" );
 			unset( $objects );
-		}
+		}*/
 
-		if( $nocache || !$objects )
+		if( $nocache || $objects === false )
 		{
+			$objects = array();
 			$query = "SELECT id FROM category WHERE parent = ? ORDER BY name";
 			$entity = new Entity();
 			$collection = $entity->Collection( $query, $parent, __CLASS__ );
@@ -88,7 +89,7 @@ class Category extends Entity
 				$objects[] = $object;
 			}
 
-			$cache->set( CACHE_PREFIX ."ShopCategoryLevelCollection{$parent}", $objects, false, CACHE_LIFETIME * 10 );
+			$cache->set( CACHE_PREFIX ."CategoryLevel{$parent}", $objects, false, CACHE_LIFETIME * 10 );
 		}
 
 		return $objects;

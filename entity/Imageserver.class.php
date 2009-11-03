@@ -60,15 +60,17 @@ class Imageserver extends Entity
 		return Imageserver::GetUrl( $params[ 'url' ] );
 	}
 
-	function GetUrl( $original_url, $nocache = true )
+	function GetUrl( $original_url, $nocache = false )
 	{
 		$cache = new Cache();
 		$hash = md5( $original_url );
 
 		if( $nocache )
 			$cache->delete( CACHE_PREFIX ."ImageserverUrl{$hash}" );
+		
+		$object = $cache->get( CACHE_PREFIX ."ImageserverUrl{$hash}" ); 
 
-		if( $nocache || !$object = $cache->get( CACHE_PREFIX ."ImageserverUrl{$hash}" ) )
+		if( $nocache || !$object )
 		{
 			$query = "SELECT * FROM imageserver WHERE original_url = ?";
 			$entity = new Entity();
