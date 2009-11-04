@@ -2,12 +2,13 @@
 
 class CategoryController extends Controller
 {
-	public $breadcrumbs = array( array( 'link' => '/CategoryAdmin/', 'name' => 'Category Admin' ) );
+	public $breadcrumbs = array( array( 'link' => '/Category/', 'name' => 'Categories' ) );
 
 	function Index( $id, $page = 1 )
 	{
 		$category = Category::Retrieve( $id, false, $this->entity );
-		$this->assign( 'breadcrumbs', CategoryController::BuildBreadcrumbs( $category ) );
+		CategoryController::BuildBreadcrumbs( $category );
+		$this->assign( 'breadcrumbs', $this->breadcrumbs );
 		$this->assign( 'category', $category );
 
 		$sentence =  SearchController::GetSearchedSentence();
@@ -46,17 +47,17 @@ class CategoryController extends Controller
 	function BuildBreadcrumbs( $category )
 	{
 		if( $category->parent )
-			$breadcrumbs[] = array(
+			$this->breadcrumbs[] = array(
 								'link' => "/Category/Index/{$category->parent->id}/{$category->parent->name}",
 								'name' => $category->parent->name
 								);
 
-		$breadcrumbs[] = array(
+		$this->breadcrumbs[] = array(
 							'link' => "/Category/Index/{$category->id}/{$category->name}",
 							'name' => $category->name
 							);
 
-		return $breadcrumbs;
+		return $this->breadcrumbs;
 	}
 
 	function GetMenu( $id )

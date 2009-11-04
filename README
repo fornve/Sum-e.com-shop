@@ -1,11 +1,21 @@
 For more informations go to:
 http://sum-e.com/
 
+	CONTENTS
+1. Introduction
+2. Apache
+3. General Configuration
+4. Directory stucture
+5. Database
+6. Memcache
+7. First time run
+
 1. Introduction
 
 	Sum-e.com ecommerce is open source web based shopping basket with
 	integrated PayPal payments (as a module).
-	It is uses LiteEntity framework (developed by sum-e.com Team as well)i.
+
+	It is uses LiteEntity framework (developed by sum-e.com Team as well) and Smarty.
 
 	Requirements (example):
 	- Linux or FreeBSD,
@@ -15,6 +25,20 @@ http://sum-e.com/
 	- Memcached, php5-memcache,
 	- php5-gd,
 	- Smarty
+
+	This shop is easy to use for administrator and shoppers. But we highly recommend to leave instalation
+	and setup for experienced developers. We try to keep clean php code so it could be easy to extend/customize
+	shop to meet sellers/customers needs.
+
+	Our goals are:
+	- easy to use,
+	- security,
+	- speed.
+
+	Developer keywords:
+	- object orientated,
+	- MVC - model view controller,
+	- DAO - database access object.
 
 2. Apache (httpd) 
 	2.1 Create .htaccess if does not exist 
@@ -53,13 +77,13 @@ ASSETS_PATH - path to shop assets (full size images) - must be writeable to web 
 
 PAYPAL_ACCOUNT_EMAIL - your account username (where all money will go)
 
-4. Directories
+4. Directory structure
 PROJECT_PATH 	
 				/assets 
-				/class
+				/class			// other models/class
 				/config
 				/controllers
-				/entity
+				/entity 		// DAO objects - models
 				/resources
 				/templates
 
@@ -94,6 +118,9 @@ sudo chown -R www-data:www-data assets
 		
 		sudo apt-get install memcached
 
+	To run:
+		sudo memcached -u nobody start &
+
 	and php module for memcache
 	
 		sudo apt-get install php5-memcache	
@@ -107,6 +134,7 @@ sudo chown -R www-data:www-data assets
 7. First time type in browser:
 	http://your_shop_address/Index/FirstTime
 
-8. For further info refer to http://sum-e.com/
+8. For further info refer to http://sum-e.com/ , use our forum http://sum-e.com/ or contact one of our developers:
+	- yahoo im: fornve@yahoo.co.uk
 
 9. Good luck
