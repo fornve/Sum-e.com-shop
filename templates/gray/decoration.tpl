@@ -114,7 +114,7 @@
 <div id="footer">
 	<p>Copyright (c) 2009 Sum-e.com. All rights reserved. Developed by <a href="http://sum-e.com" title="Smashing e-commerce">sum-e.com</a> template design by <a href="http://sum-e.com" title="Sum-e.com">Sum-e.com</a><br />
     {if $smarty.session.admin}<a href="/Admin/Logout">Admin logout</a>{else}<a href="/Admin/Login">Admin login</a>{/if}
-    [ Generated in: {$generated}s, db queries: <span onclick="$('#query_debug').show('fast');">{$entity_query|@count}] </span> | <span onclick="$('#basket_debug').show('fast');">Basket dump</span></div></p>
+    [ Generated in: {$generated}s, db queries: <span onclick="$('#query_debug').show('fast');">{$entity_query|@count}] </span> | cache queries: <span onclick="$('#cache_debug').show('fast');">{$cache_query|@count}] </span> | <span onclick="$('#basket_debug').show('fast');">Basket dump</span></div></p>
 </div>
 <!-- end #footer -->
 </div>
@@ -130,6 +130,18 @@
             <span onclick="$('#query_debug').hide('fast')">Close</span>
     </div>
     {/if}
+
+	{if $cache_query}
+	<div id="cache_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver; overflow: scroll;">
+			<span onclick="$('#cache_debug').hide('fast')">{$lang->CLOSE}</span>
+			<ol style="">
+					{foreach from=$cache_query item=query}
+					<li style="font-size: 11px;background-color: mistyrose; margin: 2px 0; padding: 2px;">{$query|escape:'html'}</li>
+					{/foreach}
+			</ol>
+			<span onclick="$('#cache_debug').hide('fast')">{$lang->CLOSE}</span>
+	</div>
+	{/if}
 
     {if $smarty.session.basket}
     <div id="basket_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver;">
@@ -151,4 +163,4 @@ pageTracker._trackPageview();
 } catch(err) {}</script>
 	{/literal}
 </body>
-</html>
+</html>{php}unset($_SESSION['user_notification']);unset($_SESSION['force_login']);unset($_SESSION['referer']);{/php}

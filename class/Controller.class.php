@@ -145,6 +145,7 @@ class Controller
 		$generated = floor ( 10000 * ( microtime( true ) - TIMER ) ) / 10000;
 		$this->smarty->assign( 'generated', $generated );
 		$this->smarty->assign( 'entity_query', $_SESSION[ 'entity_query' ] );
+		$this->smarty->Assign( 'cache_query', $_SESSION[ 'cache_query' ] );
 		unset( $_SESSION[ 'entity_query' ] );
 
 		$categories = Category::LevelCollection( 0, false, $this->entity );

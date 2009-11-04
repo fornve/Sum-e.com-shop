@@ -2,7 +2,6 @@
 
 class BasketController  extends Controller
 {
-	public $breadcrumbs = array( array( 'link' => '/Basket/', 'name' => 'Basket' ) );
 	function Index()
 	{
 		$this->View();
@@ -11,7 +10,6 @@ class BasketController  extends Controller
 	function View()
 	{
 		$this->assign( 'basket', $_SESSION[ 'basket' ] );
-		$this->assign( 'breadcrumbs', $this->breadcrumbs );
 		echo $this->Decorate( 'basket/view.tpl' );
 	}
 
