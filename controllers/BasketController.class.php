@@ -63,7 +63,10 @@ class BasketController  extends Controller
 		}
 		else
 		{
-			echo $this->Decorate( 'basket/mini.tpl' );
+			$basket_html = $this->Decorate( 'basket/mini.tpl' );
+			$notification = $_SESSION[ 'user_notification' ];
+			echo json_encode( array( 'basket_html' => $basket_html, 'user_notification' => $notification ) );
+			unset( $_SESSION[ 'user_notification' ] );
 		}
 	}
 

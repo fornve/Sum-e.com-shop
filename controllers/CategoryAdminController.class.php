@@ -4,6 +4,12 @@ class CategoryAdminController extends AdminController
 {
 	public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ), array( 'link' => '/CategoryAdmin/', 'name' => 'Category Admin' ) );
 
+	function Index()
+	{
+		$this->Assign( 'breadcrumbs', $this->breadcrumbs );
+		echo $this->Decorate( "admin/category/index.tpl" );
+	}
+
 	function Edit( $id )
 	{
 

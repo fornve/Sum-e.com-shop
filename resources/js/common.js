@@ -16,7 +16,18 @@ function addProductToBasket(id)
 			{ 'quantity': quantity },
 			function(data) 
 			{
-				$('#basket').html(data);
+				object = eval("("+data+")");
+				if(object.user_notification)
+				{
+					for( var i in object.user_notification)
+						userNotification(object.user_notification[i]['text'],object.user_notification[i]['type']);
+				}
+				else
+				{
+					userNotification('Product added to basket.','notice');
+				}
+				
+				jQuery('#basket').html(object['basket_html']);
 			}, 
 			'html' 
 		);
@@ -35,4 +46,12 @@ function showCategory(id)
 	} );
 
 	return false;
+}
+
+function var_dump(obj) {
+   if(typeof obj == "object") {
+      return "Type: "+typeof(obj)+((obj.constructor) ? "\nConstructor: "+obj.constructor : "")+"\nValue: " + obj;
+   } else {
+      return "Type: "+typeof(obj)+"\nValue: "+obj;
+   }
 }

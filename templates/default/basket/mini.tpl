@@ -1,4 +1,4 @@
-{if !$smarty.session.basket}
+<span>&nbsp;{if !$smarty.session.basket}
 	Your basket is empty.
 {else}
 	{assign var=basket value=$smarty.session.basket}
@@ -7,3 +7,4 @@
 	{$smarty.const.CURRENCY_SIGN}{$total.value*$vat_multiply|string_format:"%.2f"}
 	</a>
 {/if}
+</span>

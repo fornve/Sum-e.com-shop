@@ -76,7 +76,7 @@
 
 	<!-- end #content -->
 	<div id="sidebar">
-        <div id="basket">&nbsp;
+        <div id="basket">
 			{include file="basket/mini.tpl"}
         </div>
 
