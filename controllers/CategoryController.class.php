@@ -87,6 +87,5 @@ class CategoryController extends Controller
 		$image = new ImageHandler( $category->image, $size[ 0 ], $size[ 1 ] );
 		$image->add_borders = true;
 		$image->Output();
-
 	}
 }
