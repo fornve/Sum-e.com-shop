@@ -92,7 +92,7 @@ class Controller
 		return $output;
 	}
 
-	function decorate( $template, $dir = null )
+	function Decorate( $template, $dir = null )
 	{
 		if( !$dir ) $dir = SMARTY_TEMPLATES_DIR;
 
@@ -115,6 +115,24 @@ class Controller
 		$this->PageCacheSet( $content );
 
 		return $content;
+	}
+	
+	function DecorateModule( $template, $module_name )
+	{
+		$content = $this->smarty->fetch( PROJECT_PATH ."/modules/{$module_name}/templates/" . $template );
+		
+		if( !filter_input( INPUT_GET, 'ajax' ) )
+		{
+			$this->assign( 'content', $content );
+
+			$this->PreDecorate();
+			$content = $this->smarty->fetch( SMARTY_TEMPLATES_DIR .'decoration.tpl' );
+			$this->PostDecorate();
+		}
+
+		$this->PageCacheSet( $content );
+
+		return $content;		
 	}
 
 	static function GetInput( $input_name, $input_type = INPUT_GET )
