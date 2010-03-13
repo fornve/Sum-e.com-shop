@@ -1,5 +1,5 @@
 
-<a href="/Forum/NewPost/{$forum->id}" title="New post">New Post</a>
+<a href="/Forum/Post/{$forum->id}" title="New post">New Post</a>
 
 <table class="forumtable">
 	<tr>
@@ -38,4 +38,4 @@
 
 </table>
 
-<a href="/Forum/NewPost/{$forum->id}" title="New post">New Post</a>
+<a href="/Forum/Post/{$forum->id}" title="New post">New Post</a>

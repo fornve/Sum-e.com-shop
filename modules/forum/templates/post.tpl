@@ -8,16 +8,16 @@
 		<th>Message</th>
 	</tr>
 
-	{foreach from=$subject->posts item=post}
+	{foreach from=$posts item=post_item}
 	<tr>
-		<td><a href="#">{$post->user->username}</a></td>
+		<td><a href="#">{$post_item->user->username}</a></td>
 		<td>
 			<div class="quiet">
-				Posted on {$post->posted|date_format:'%Y-%m-%d %H:%m'}
-				{if $user && ( $user->id==$post->user->id || $user->HasRole('admin'))}<a href="/Forum/DeletePost/{$post->id}">Delete post</a>{/if}
+				Posted on {$post_item->created|date_format:'%Y-%m-%d %H:%m'}
+				{if $user && ( $user->id==$post_item->user->id || $user->HasRole('admin'))}<a href="/Forum/DeletePost/{$post_item->id}">Delete post</a>{/if}
 			</div>
 			<hr />
-			{$post->content}
+			{$post_item->text|nl2br}
 		</td>
 	</tr>
 	{/foreach}
@@ -29,7 +29,7 @@
 		</td>
 		<td>
 			{if $user}
-			<form action="/Forum/NewPost/{$forum->id}/{$subject->id}/{$subject->subject}" method="post">
+			<form action="/Forum/Post/{$forum->id}/{$post->id}/{$post->subject}" method="post">
 				<div>
 					{if !$post->id}
 						<label for="subject">Post subject:</label>&nbsp;

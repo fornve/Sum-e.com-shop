@@ -21,14 +21,14 @@
 			echo $this->DecorateModule( 'forum.tpl', 'forum' );
 		}
 
-		function NewPost( $forum_id, $id = null )
+		function Post( $forum_id, $id = null )
 		{
 			$forum = Forum::Retrieve( $forum_id );
 
 			if( !$forum )
 				self::Redirect( '/Error/NotFound' );
 
-			if( $id )	
+			if( $id )
 			{
 				$post = Forum_Post::Retrieve( $id );
 				if( !$_SESSION[ 'visited_posts' ][ $post->id ] )
@@ -55,22 +55,23 @@
 				$post_reply->subject = strip_tags( $input->post_subject );
 				$post_reply->forum = $forum_id;
 				$post_reply->Save();
-				
+
 				if( !$post )
 					$post = & $post_reply;
 				
-				$link = "/Forum/NewPost/{$forum->id}/{$post->id}/{$post->subject}";
+				$link = "/Forum/Post/{$forum->id}/{$post->id}/{$post->subject}";
 				//self::AdminMail( "New post on sum-e.com", $link );
 				self::Redirect( $link );
 			}
 
 			$this->breadcrumbs[] = array( 'link' => '/Forum', 'name' => 'Forum' );
 			$this->breadcrumbs[] = array( 'link' => "/Forum/View/{$forum->id}/{$forum->name}", 'name' => $forum->name );
-			$this->breadcrumbs[] = array( 'link' => null, 'name' => $subject->subject );
+			$this->breadcrumbs[] = array( 'link' => null, 'name' => $post->subject );
 			$this->assign( 'breadcrumbs', $this->breadcrumbs );
 			$this->assign( 'user', $_SESSION[ 'logged_user' ] );
 			$this->assign( 'forum', $forum );
-			$this->assign( 'subject', $subject );
+			$this->assign( 'posts', Forum_Post::ConversationCollection( $id ) );
+			$this->assign( 'post', $post );
 			echo $this->DecorateModule( 'post.tpl', 'forum' );
 		}
 
@@ -81,15 +82,15 @@
 
 			if( $post && $user && ( $user->id == $post->user->id || $user->HasRole('admin') ) )
 			{
-				$subject_id = $post->forum_subject;
+				$parent = $post->parent;
+				
 				$post->Delete();
+				
+				$conversation = Forum_Post::ConversationCollection( $parent );
 
-				$subject = Forum_Subject::Retrieve( $subject_id );
-
-				if( count( $subject->posts ) < 1 )
+				if( !$conversation )
 				{
-					$subject->Delete();
-					$_SESSION[ 'user_notification' ][] = array( 'text' => "Thread deleted.", 'type' => 'notice' );
+					$_SESSION[ 'user_notification' ][] = array( 'text' => "Conversation deleted.", 'type' => 'notice' );
 					self::Redirect( "/Forum/View/{$subject->forum}" );
 				}
 				else
@@ -102,18 +103,18 @@
 			self::RedirectReferer();
 		}
 
-		function DeletePost( $subject_id )
+		function DeletePost( $post_id )
 		{
-			$subject = Forum_Subject::Retrieve( $subject_id );
+			$post = Forum_Post::Retrieve( $post_id );
 			$user = User::Retrieve( $_SESSION[ 'logged_user' ] );
 
-			if( $subject && $user && $user->HasRole('admin') )
+			if( $post && $user && $user->HasRole('admin') )
 			{
-				$subject->Delete();
-				$_SESSION[ 'user_notification' ][] = array( 'text' => "Thread deleted.", 'type' => 'notice' );
+				$post->DeleteConversation();
+				$_SESSION[ 'user_notification' ][] = array( 'text' => "Conversation deleted.", 'type' => 'notice' );
 			}
 			else
-				$_SESSION[ 'user_notification' ][] = array( 'text' => "Thread not deleted.", 'type' => 'error' );
+				$_SESSION[ 'user_notification' ][] = array( 'text' => "Conversation not deleted.", 'type' => 'error' );
 
 			self::RedirectReferer();
 		}

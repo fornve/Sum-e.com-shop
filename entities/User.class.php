@@ -6,20 +6,7 @@
 
         static function Retrieve( $id )
         {
-            if( !$id )
-                return null;
-
-			$query = "SELECT * FROM user WHERE id = ?";
-			$entity = new Entity();
-			$object = $entity->GetFirstResult( $query, $id, __CLASS__ );
-
-			if( !$object )
-				return null;
-
-			if( $object->HasRole( 'vendor' ) )
-				$object->vendor = Vendor::Retrieve( $object->vendor );
-
-            return $object;
+            return parent::Retrieve( $id, __CLASS__ );
         }
 
 		function RetrieveForComments( $id )
