@@ -3,7 +3,7 @@
 	<div class="post_content">
 
 		<div style="position: relative;" class="toolbar noprint" class="noprint" onmouseout="jQuery('#search_help').hide();" onmouseover="jQuery('#search_help').show();">
-			<img  onclick="javascript:window.print(); return false;" src="http://sunforum.co.uk/resources/icons/silk/printer.png" alt="Print invoice" title="Print invoice" />
+			<img  onclick="javascript:window.print(); return false;" src="/resources/icons/silk/printer.png" alt="Print invoice" title="Print invoice" />
 
 			<div id="search_help" class="popup noprint" onmouseout="jQuery('#search_help').hide();" style="width: 300px; position: absolute; top: 20px; left: 0;">
 				{include file='admin/help/printing.tpl'}
@@ -17,7 +17,7 @@
 			<div>{$order->customer_name}</div>
 			<div>{$order->customer_address}</div>
 			<div>{$order->customer_postcode}, {$order->customer_city}</div>
-			<div><img src="http://sunforum.co.uk/resources/icons/flag/{$order->customer_country|lower}.png" alt="{$order->customer_country}" /> <span>{$customer_country->name}</span></div>
+			<div><img src="/resources/icons/flag/{$order->customer_country|lower}.png" alt="{$order->customer_country}" /> <span>{$customer_country->name}</span></div>
 			<div>{$customer->email}</div>
 			{if $order->customer_phone}<div>{$order->customer_phone}</div>{/if}
 			{if $order->customer_note}<div>{$order->customer_note}</div>{/if}

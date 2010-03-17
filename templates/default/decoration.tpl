@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>{if $title}{$title} | {/if}Shop - Carp 4 </title>
-    {if $metas|@count}
- 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   {foreach from=$metas item=meta}
-        <meta {if $meta.name} name="{$meta.name}"{/if} {if $meta.content}content="{$meta.content|truncate:250:''}"{/if} />
-    {/foreach}
-    {/if}
-    <link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/css/default.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
-    <link href="/resources/css/thickbox.css" rel="stylesheet" type="text/css" media="screen" />
-    <script type="text/javascript" src="/resources/js/jquery.js"></script>
+	<title>{if $title}{$title} | {/if}Shop - Carp 4 </title>
+	{if $metas|@count}
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	{foreach from=$metas item=meta}
+		<meta {if $meta.name} name="{$meta.name}"{/if} {if $meta.content}content="{$meta.content|truncate:250:''}"{/if} />
+	{/foreach}
+	{/if}
+	<link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/resources/css/default.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
+	<link href="/resources/css/thickbox.css" rel="stylesheet" type="text/css" media="screen" />
+	<script type="text/javascript" src="/resources/js/jquery.js"></script>
 		<script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
 	{if $smarty.session.admin}
 		<link href="/resources/themes/ui-darkness/ui.all.css" rel="stylesheet" type="text/css" media="screen" />
@@ -20,15 +20,14 @@
 	{if $smarty.session.admin && $smarty.const.TINY_MCE}
 		<script type="text/javascript" src="/resources/js/tiny_mce/tiny_mce.js"></script>
 	{/if}
-    <script type="text/javascript" src="/resources/js/thickbox.js"></script>
-    <script type="text/javascript" src="/resources/js/common.js"></script>
+	<script type="text/javascript" src="/resources/js/thickbox.js"></script>
+	<script type="text/javascript" src="/resources/js/common.js"></script>
 
-    {if $smarty.session.user_notification}
-    <script type="text/javascript">
-            $(document).ready(function(){ldelim}userNotification('{foreach from=$smarty.session.user_notification item=message}{assign var=notification_type value=$message.type}<p>{$message.text}</p>{/foreach}','{$notification_type}');{rdelim});
-
+	{if $smarty.session.user_notification}
+	<script type="text/javascript">
+			$(document).ready(function(){ldelim}userNotification('{foreach from=$smarty.session.user_notification item=message}{assign var=notification_type value=$message.type}<p>{$message.text}</p>{/foreach}','{$notification_type}');{rdelim});
 	</script>
-    {/if}
+	{/if}
 </head>
 <body>
 
@@ -50,7 +49,7 @@
 			<form method="get" action="/Search/Results/">
 				<fieldset>
 				<input type="text" name="q" id="search-text" size="15" />
-				<input type="image" src="http://sunforum.co.uk/resources/icons/mint/search.png" id="search-submit" alt="Search" value="Search" />
+				<input type="image" src="/resources/icons/mint/search.png" id="search-submit" alt="Search" value="Search" />
 				</fieldset>
 			</form>
 		</div>
@@ -187,9 +186,9 @@
 <!-- end #page -->
 
 <div id="footer">
-	<p>Copyright (c) 2009 Sum-e.com. All rights reserved. Developed by <a href="http://sum-e.com" title="Smashing e-commerce">sum-e.com</a> Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.<br />
-    {if $smarty.session.admin}<a href="/Admin/Logout">Admin logout</a>{else}<a href="/Admin/Login">Admin login</a>{/if}
-    [ Generated in: {$generated}s, db queries: <span onclick="$('#query_debug').show('fast');">{$entity_query|@count}] </span> | <span onclick="$('#basket_debug').show('fast');">Basket dump</span></div></p>
+	<p>Copyright (c) Copyright 2010 GIST Silversmiths</p>
+	<p title="All these is only for development purpose">{if $smarty.session.admin}<a href="/Admin/Logout">Admin logout</a>{else}<a href="/Admin/Login">Admin login</a>{/if}
+	[ Generated in: {$generated}s, db queries: <span onclick="$('#query_debug').show('fast');">{$entity_query|@count}] </span> | <span onclick="$('#basket_debug').show('fast');">Basket dump</span></div></p>
 </div>
 <!-- end #footer -->
 </div>
@@ -215,7 +214,7 @@
     {/if}
 
 	{literal}
-	<script type="text/javascript">
+	{* <script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 	</script>
@@ -224,7 +223,7 @@
 			var pageTracker = _gat._getTracker("UA-1892634-15");
 			pageTracker._trackPageview();
 		} catch(err) {}
-	</script>
+	</script>*}
 	{/literal}
 </body>
 </html>

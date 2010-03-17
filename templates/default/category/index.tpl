@@ -3,15 +3,15 @@
         {if $smarty.session.admin->vendor->id}
             <span style="float: right; margin-right: 10px;  font-size: 9px; text-align: center; font-weight: normal;">
 				<a href="/CategoryAdmin/Edit/{$category->id}" title="Edit category">
-					<img src="http://sunforum.co.uk/resources/icons/silk/application_edit.png" alt="Edit" style="padding: 0; margin: 0;" />
+					<img src="/resources/icons/silk/application_edit.png" alt="Edit" style="padding: 0; margin: 0;" />
 					Edit
 				</a>
 				<a href="/ProductAdmin/InCategoryList/{$category->id}" title="Sort products in this category">
-					<img src="http://sunforum.co.uk/resources/icons/silk/arrow_switch.png" alt="Sort products" />
+					<img src="/resources/icons/silk/arrow_switch.png" alt="Sort products" />
 					Sort
 				</a>
 				<a href="/CategoryAdmin/Delete/{$category->id}" onclick="return confirm('Do you really want to delete this category?')" title="Delete category">
-					<img src="http://sunforum.co.uk/resources/icons/silk/bomb.png" alt="Delete" />
+					<img src="/resources/icons/silk/bomb.png" alt="Delete" />
 					Delete
 				</a>
 			</span>

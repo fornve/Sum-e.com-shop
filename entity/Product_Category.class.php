@@ -121,7 +121,8 @@ class Product_Category extends Entity
 									product.deleted = 0
 						ORDER BY
 								product_category.order";
-			$result = $entity->Collection( $query, array( $category_id ), 'stdClass', $limit, $offset );
+
+			$result = $entity->Collection( $query, array( $category_id ), __CLASS__, $limit, $offset );
 		}
 
 		if( $result ) foreach( $result as $item )

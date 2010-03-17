@@ -24,14 +24,14 @@
 
 					<td>
 						<a href="/Admin/ChangePassword/{$admin->id}" title="Change password">
-							<img src="http://sunforum.co.uk/resources/icons/silk/application_edit.png" alt="Change password" />
+							<img src="/resources/icons/silk/application_edit.png" alt="Change password" />
 						</a>
 						<a href="/Admin/Delete/{$admin->id}" onclick="return confirm('Do you really want to delete admin: {$admin->username}?')" alt="Delete">
-							<img src="http://sunforum.co.uk/resources/icons/silk/application_delete.png" title="Delete" />
+							<img src="/resources/icons/silk/application_delete.png" title="Delete" />
 						</a>
 						{*
 						<a href="/Admin/Edit/{$admin->id}" title="Edit admin">
-							<img src="http://sunforum.co.uk/resources/icons/silk/user_edit.png" alt="Edit admin">
+							<img src="/resources/icons/silk/user_edit.png" alt="Edit admin">
 						</a>
 						*}
 					</td>

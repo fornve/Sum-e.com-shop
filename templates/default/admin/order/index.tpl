@@ -39,7 +39,7 @@
 					<td><a href="mailto:{$order->customer_email}">{$order->customer_name}</a> {if $order->customer_phone}( {$order->customer_phone} ){/if}</td>
 					<td>{$smarty.const.CURRENCY_SIGN}{$order->value|string_format:"%.2f"}</td>
 					<td>{$status}</td>
-					<td class="noprint"><a href="/OrderAdmin/View/{$order->id}" title="View"><img src="http://sunforum.co.uk/resources/icons/silk/application.png" alt="View" /></a></td>
+					<td class="noprint"><a href="/OrderAdmin/View/{$order->id}" title="View"><img src="/resources/icons/silk/application.png" alt="View" /></a></td>
 				</tr>
 			{/if}
 			{/foreach}

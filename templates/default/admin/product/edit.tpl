@@ -204,9 +204,9 @@
 					<input type="checkbox" name="category_{$category->id}" value="{$category->id}" {if $product}{if $product->InCategory($category->id)}checked="checked"{/if}{/if} />
 					<span onclick="$('#kid_{$category->id}').toggle('fast')">
 						{if $category->kids}
-							<img src="http://sunforum.co.uk/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+							<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
 						{else}
-							<img src="http://sunforum.co.uk/resources/icons/silk/bullet_white.png" />
+							<img src="/resources/icons/silk/bullet_white.png" />
 						{/if}
 						{$category->name}
 					</span>
@@ -217,7 +217,7 @@
 					{foreach from=$category->kids item=kid}
 						<li>
 							<input type="checkbox" name="category_{$kid->id}" value="{$kid->id}" {if $product}{if $product->InCategory($kid->id)}checked="checked"{/if}{/if} />
-								<img src="http://sunforum.co.uk/resources/icons/silk/bullet_white.png" />
+								<img src="/resources/icons/silk/bullet_white.png" />
 							<span>{$kid->name}</span>
 						</li>
 					{/foreach}

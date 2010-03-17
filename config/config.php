@@ -35,7 +35,7 @@ else
 {
 	define( 'ADMIN_EMAIL', 'tigi@sunforum.co.uk' );
 	define( 'SMARTY_COMPILE_DIR', '/tmp/shop' );
-	define( 'ASSETS_PATH', '/var/assets/shop' );
+	define( 'ASSETS_PATH', '/home/tigi/media/assets/shop' );
 	define( 'PAYPAL_ACCOUNT_EMAIL', 'dummy_1244752696_biz@dajnowski.net' );
 }
 require_once( 'database.php' );
@@ -57,47 +57,9 @@ if( !file_exists( SMARTY_COMPILE_DIR ) )
 
 require_once( SMARTY_DIR .'Smarty.class.php' );
 
-class Loader
-{
-	public static $paths = array();
-
-	public function __construct()
-	{
-		self::$paths = self::Instance();
-		echo 'tag';
-	}
-	
-	public static function &Instance()
-	{
-		return self::$paths;
-	}
-
-	public static function AddPath( $path )
-	{
-		if( is_array( $path ) ) foreach( $path as $item )
-		{
-			self::$paths[] = $item .'/';
-		}
-		else
-		{
-			self::$paths[] = $path .'/';		
-		}
-	}
-
-	public static function AddModule( $name )
-	{
-		self::AddPath( 'modules/'. $name .'/controllers' );
-		self::AddPath( 'modules/'. $name .'/models' );
-		self::AddPath( 'modules/'. $name .'/entities' );
-	}	
-}
-
-Loader::AddPath( array( 'classes', 'entities', 'controllers', INCLUDE_PATH .'class' ) );
-Loader::AddModule( 'forum' );
-
 function __autoload( $name )
 {
-	$path_array = Loader::$paths;
+	$path_array = array( 'class/', 'entity/', 'controllers/', INCLUDE_PATH .'class/' );
 
 	foreach( $path_array as $path )
 	{

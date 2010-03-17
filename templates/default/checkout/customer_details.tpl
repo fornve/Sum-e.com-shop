@@ -84,11 +84,11 @@
 							<span>Country</span>
 							<span style="color: red;">*</span>
 						</td>
-						<td>{if $customer_details->country}<img src="http://sunforum.co.uk/resources/icons/flag/{$customer_details->country|lower}.png" alt="{$customer_details->country}" />{/if}
+						<td>{if $customer_details->country}<img src="/resources/icons/flag/{$customer_details->country|lower}.png" alt="{$customer_details->country}" />{/if}
 							<select name="country">
 								<option value="">-- Please select --</option>
 								{foreach from=$countries item=country}
-									<option value="{$country->code}"{if $country->code==$customer_details->country} selected="selected"{/if} style="background: #fff url('http://sunforum.co.uk/resources/icons/flag/{$country->code|lower}.png') left center no-repeat; padding-left: 20px;">{$country->name}</option>
+									<option value="{$country->code}"{if $country->code==$customer_details->country} selected="selected"{/if} style="background: #fff url('/resources/icons/flag/{$country->code|lower}.png') left center no-repeat; padding-left: 20px;">{$country->name}</option>
 								{/foreach}
 							</select>
 						</td>

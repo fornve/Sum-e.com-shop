@@ -8,7 +8,7 @@
 
 			<div class="admin_tile">
 				<a href="/ProductAdmin/Edit" title="New product">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/database_add.png" class="admin_image" />
+					<img src="/resources/icons/flavour/database_add.png" class="admin_image" />
 					<br />
 					New
 				</a>
@@ -16,7 +16,7 @@
 
 			<div class="admin_tile">
 				<a href="/ProductAdmin/" title="Product list">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/database.png" class="admin_image" />
+					<img src="/resources/icons/flavour/database.png" class="admin_image" />
 					<br />
 					List
 				</a>
@@ -26,7 +26,7 @@
 
 			<div class="admin_tile">
 				<a href="/CategoryAdmin/Edit/" title="New category">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/google_add.png" class="admin_image" />
+					<img src="/resources/icons/flavour/google_add.png" class="admin_image" />
 					<br />
 					New
 				</a>
@@ -34,7 +34,7 @@
 
 			<div class="admin_tile">
 				<a href="/CategoryAdmin/" title="Category list">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/google.png" class="admin_image" />
+					<img src="/resources/icons/flavour/google.png" class="admin_image" />
 					<br />
 					List</a>
 			</div>
@@ -43,7 +43,7 @@
 
 			<div class="admin_tile">
 				<a href="/OrderAdmin/" title="Order list">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/money_1dollar_coins.png" class="admin_image" />
+					<img src="/resources/icons/flavour/money_1dollar_coins.png" class="admin_image" />
 					<br />
 					List
 				</a>
@@ -51,7 +51,7 @@
 
 			<div class="admin_tile">
 				<a href="/OrderAdmin/Dailyreport/" title="Daily report">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/chart.png" class="admin_image" />
+					<img src="/resources/icons/flavour/chart.png" class="admin_image" />
 					<br />
 					Daily report
 				</a>
@@ -59,7 +59,7 @@
 
 			<div class="admin_tile">
 				<a href="/OrderAdmin/FullReport/" title="Full report">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/presentation.png" class="admin_image" />
+					<img src="/resources/icons/flavour/presentation.png" class="admin_image" />
 					<br />
 					Full report</a>
 			</div>
@@ -68,7 +68,7 @@
 
 			<div class="admin_tile">
 				<a href="/Admin/Edit/" alt="New">
-					<img src="http://sunforum.co.uk/resources/icons/other/120px-Crystal_Clear_app_Login_Manager.png" class="admin_image" />
+					<img src="/resources/icons/other/120px-Crystal_Clear_app_Login_Manager.png" class="admin_image" />
 					<br />
 					New
 				</a>
@@ -76,7 +76,7 @@
 
 			<div class="admin_tile">
 				<a href="/Admin/ListAdmins/" alt="New">
-					<img src="http://sunforum.co.uk/resources/icons/other/120px-Crystal_Clear_app_Login_Manager.png" class="admin_image" />
+					<img src="/resources/icons/other/120px-Crystal_Clear_app_Login_Manager.png" class="admin_image" />
 					<br />
 					List
 				</a>
@@ -86,7 +86,7 @@
 
 			<div class="admin_tile">
 				<a href="/ShippingAdmin/Edit/" title="New shipping">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/box_address_add.png" class="admin_image" />
+					<img src="/resources/icons/flavour/box_address_add.png" class="admin_image" />
 					<br />
 					New
 				</a>
@@ -94,7 +94,7 @@
 
 			<div class="admin_tile">
 				<a href="/ShippingAdmin/" title="List shippings">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/box_address.png" class="admin_image" />
+					<img src="/resources/icons/flavour/box_address.png" class="admin_image" />
 					<br />
 					List
 				</a>
@@ -104,7 +104,7 @@
 
 			<div class="admin_tile">
 				<a href="/PageAdmin/Edit/" alt="New">
-					<img src="http://sunforum.co.uk/resources/icons/other/Crystal_Clear_app_korganizer.png" class="admin_image" />
+					<img src="/resources/icons/other/Crystal_Clear_app_korganizer.png" class="admin_image" />
 					<br />
 					New
 				</a>
@@ -112,7 +112,7 @@
 
 			<div class="admin_tile">
 				<a href="/PageAdmin/" alt="Pages list">
-					<img src="http://sunforum.co.uk/resources/icons/other/Crystal_Clear_app_korganizer.png" class="admin_image" />
+					<img src="/resources/icons/other/Crystal_Clear_app_korganizer.png" class="admin_image" />
 					<br />
 					List
 				</a>
@@ -139,7 +139,7 @@
 
 			<div class="admin_tile">
 				<a href="/SettingsAdmin/" title="Settings">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/to-do-list_checked2.png" alt="Settings" class="admin_image" />
+					<img src="/resources/icons/flavour/to-do-list_checked2.png" alt="Settings" class="admin_image" />
 					<br />
 					Settings
 				</a>
@@ -147,7 +147,7 @@
 
 			<div class="admin_tile">
 				<a href="/SettingsAdmin/FlushCache/" title="Flush cache">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/universal_binary.png" ale="Flush cache" class="admin_image" />
+					<img src="/resources/icons/flavour/universal_binary.png" ale="Flush cache" class="admin_image" />
 					<br />
 					Flush cache
 				</a>
@@ -155,7 +155,7 @@
 
 			<div class="admin_tile">
 				<a href="/MiscAdmin/UserAgents/" title="User agents - browsers">
-					<img src="http://sunforum.co.uk/resources/icons/flavour/presentation.png" ale="User agents" class="admin_image"/>
+					<img src="/resources/icons/flavour/presentation.png" ale="User agents" class="admin_image"/>
 					User agents</a>
 			</div>
 

@@ -213,7 +213,7 @@ div#wrapper {
 	border: 1px solid #fff;
 	-moz-border-radius: 5px;
 	margin-bottom: 10px;
-	background: transparent url('http://sunforum.co.uk/resources/icons/silk/bullet_right.png') 5px 5px no-repeat;
+	background: transparent url('http://img.sum-e.com/resources/icons/silk/bullet_right.png') 5px 5px no-repeat;
 }
 
 #breadcrumbs ul
@@ -398,7 +398,7 @@ div#user_notification
 
 #user_notification .error
 {
-	background-image: url('http://sunforum.co.uk/resources/icons/silk/cancel.png');
+	background-image: url('http://img.sum-e.com/resources/icons/silk/cancel.png');
 	background-position: 303px 3px;
 	background-repeat: no-repeat;
 }
@@ -444,7 +444,7 @@ ul.tabs
 ul.category_tree_parent     { list-style: none; }
 ul.category_tree_kid        { list-style: none; padding-left: 20px; display: none; }
 
-ul.collapsable strong       { padding-left: 24px; background: transparent url('http://sunforum.co.uk/resources/icons/silk/bullet_toggle_plus.png') center left no-repeat; }
+ul.collapsable strong       { padding-left: 24px; background: transparent url('http://img.sum-e.com/resources/icons/silk/bullet_toggle_plus.png') center left no-repeat; }
 .collapsable li ul          { display: none; }
 .collapsable li li          { display: block; line-height: 150%; padding-left: 50px;}
 
@@ -456,7 +456,7 @@ ul.collapsable strong       { padding-left: 24px; background: transparent url('h
 	border: 1px solid #fff;
 	-moz-border-radius: 5px;
 	margin-bottom: 10px;
-	background: transparent url('http://sunforum.co.uk/resources/icons/silk/cart.png') 5px 5px no-repeat;
+	background: transparent url('http://img.sum-e.com/resources/icons/silk/cart.png') 5px 5px no-repeat;
 }
 
 #basket h4

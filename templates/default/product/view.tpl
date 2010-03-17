@@ -4,7 +4,7 @@
 		{if $smarty.session.admin->vendor->id==$product->vendor->id}
              <span style="float: right; margin-right: 10px;  font-size: 9px; text-align: center; font-weight: normal;">
 				<a href="/ProductAdmin/Edit/{$product->id}" title="Edit category">
-					<img src="http://sunforum.co.uk/resources/icons/silk/application_edit.png" alt="Edit" style="padding: 0; margin: 0;" />
+					<img src="/resources/icons/silk/application_edit.png" alt="Edit" style="padding: 0; margin: 0;" />
 					Edit
 				</a>
 			</span>
@@ -21,7 +21,7 @@
 				<img style="padding: 0;" src="/Product/Image/240x240/{$image->id}/{$image->GetFilename()}" title="{$image->title}" class="thickbox" />
 
 				<a href="/Product/Image/0/{$image->id}/{$image->GetFilename()}" class="thickbox" style="display: block; position: absolute; bottom: 0; left: 0;" alt="Zoom">
-					<img src="http://sunforum.co.uk/resources/icons/silk/magnifier.png" alt="Zoom" />
+					<img src="/resources/icons/silk/magnifier.png" alt="Zoom" />
 				</a>
 			</div>
 		{/if}

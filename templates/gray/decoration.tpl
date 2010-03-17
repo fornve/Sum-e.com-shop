@@ -54,7 +54,7 @@
 			<form method="get" action="/Search/Results/">
 				<fieldset>
 				<input type="text" name="q" id="search-text" size="15" />
-				<input type="image" src="http://sunforum.co.uk/resources/icons/mint/search.png" id="search-submit" alt="Search" value="Search" />
+				<input type="image" src="http://img.sum-e.com/resources/icons/mint/search.png" id="search-submit" alt="Search" value="Search" />
 				</fieldset>
 			</form>
 		</div>

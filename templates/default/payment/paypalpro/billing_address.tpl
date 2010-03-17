@@ -19,11 +19,11 @@
 	<tr {if $error.country} class="error"{/if}>
 		<th>Country</th>
 		<td>
-			{if $payment_input->country}<img src="http://sunforum.co.uk/resources/icons/flag/{$payment_input->country|lower}.png" alt="{$payment_input->country}" />{/if}
+			{if $payment_input->country}<img src="/resources/icons/flag/{$payment_input->country|lower}.png" alt="{$payment_input->country}" />{/if}
 			<select name="country" class="countries">
 				<option value="">-- Please select --</option>
 				{foreach from=$countries item=country}
-					<option value="{$country->code}"{if $country->code==$payment_input->country} selected="selected"{/if} style="background: #fff url('http://sunforum.co.uk/resources/icons/flag/{$country->code|lower}.png') center left no-repeat; padding-left: 20px;">{$country->name}</option>
+					<option value="{$country->code}"{if $country->code==$payment_input->country} selected="selected"{/if} style="background: #fff url('/resources/icons/flag/{$country->code|lower}.png') center left no-repeat; padding-left: 20px;">{$country->name}</option>
 				{/foreach}
 			</select>
 			{if $error.country}<div style="error_form_message">{$error.country}</div>{/if}

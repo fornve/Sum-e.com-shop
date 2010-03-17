@@ -1,4 +1,4 @@
-<table>
+<table class="admin_table">
 
 	<thead>
 		<tr class="header">
@@ -36,7 +36,7 @@
 					{/foreach}]
 					{/strip}
 				{else}
-					<img src="http://sunforum.co.uk/resources/icons/silk/error.png" alt="Warning">
+					<img src="/resources/icons/silk/error.png" alt="Warning">
 					<span style="font-size: smaller;">Product is not assigned to any category.</span>
 				{/if}
 			</td>
@@ -46,9 +46,9 @@
 			<td>{$smarty.const.CURRENCY_SIGN}{$product->price|string_format:"%.2f"}</td>
 			<td style="text-align: center;">
 				{if $product->status}
-					<a href="/ProductAdmin/ProductList/?disable={$product->id}" title="Enabled{if $product->quantity<1} - but stock quantity &lt; 1{/if}"><img src="http://sunforum.co.uk/resources/icons/mini/flag_{if $product->quantity}green{else}orange{/if}.gif" alt="Available" /></a>
+					<a href="/ProductAdmin/ProductList/?disable={$product->id}" title="Enabled{if $product->quantity<1} - but stock quantity &lt; 1{/if}"><img src="/resources/icons/mini/flag_{if $product->quantity}green{else}orange{/if}.gif" alt="Available" /></a>
 				{else}
-					<a href="/ProductAdmin/ProductList/?enable={$product->id}" title="Disabled"><img src="http://sunforum.co.uk/resources/icons/mini/flag_red.gif" alt="Not available" /></a>
+					<a href="/ProductAdmin/ProductList/?enable={$product->id}" title="Disabled"><img src="/resources/icons/mini/flag_red.gif" alt="Not available" /></a>
 				{/if}
 			</td>
 
@@ -56,20 +56,20 @@
 			<td style="text-align: center;">
 
 				<a href="/ProductAdmin/ListOrderUp/{$product->id}/{$category->id}" title="Move product up in this category">
-					<img src="http://sunforum.co.uk/resources/icons/silk/arrow_up.png" alt="Up">
+					<img src="/resources/icons/silk/arrow_up.png" alt="Up">
 				</a>
 
 				<a href="/ProductAdmin/ListOrderDown/{$product->id}/{$category->id}" title="Move product down in this category">
-					<img src="http://sunforum.co.uk/resources/icons/silk/arrow_down.png" alt="Down">
+					<img src="/resources/icons/silk/arrow_down.png" alt="Down">
 				</a>
 
 			</td>
 			{/if}
 
 			<td>
-				<a href="/ProductAdmin/Edit/{$product->id}" title="Edit"><img src="http://sunforum.co.uk/resources/icons/silk/application_edit.png" alt="Edit" /></a>
-				<a href="/Product/View/{$product->id}" title="View"><img src="http://sunforum.co.uk/resources/icons/silk/application_go.png" alt="View" /></a>
-				<a href="/ProductAdmin/Delete/{$product->id}" onclick="return confirm('Do you really want to delete product: {$product->name}?')" alt="Delete"><img src="http://sunforum.co.uk/resources/icons/silk/application_delete.png" title="Delete" /></a>
+				<a href="/ProductAdmin/Edit/{$product->id}" title="Edit"><img src="/resources/icons/silk/application_edit.png" alt="Edit" /></a>
+				<a href="/Product/View/{$product->id}" title="View"><img src="/resources/icons/silk/application_go.png" alt="View" /></a>
+				<a href="/ProductAdmin/Delete/{$product->id}" onclick="return confirm('Do you really want to delete product: {$product->name}?')" title="Delete"><img src="/resources/icons/silk/application_delete.png" alt="Delete" /></a>
 			</td>
 		</tr>
 		{assign var=shop_products_quantity value=$shop_products_quantity+1}

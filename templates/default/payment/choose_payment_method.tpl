@@ -13,7 +13,7 @@
 				<div>{$customer->address1}</div>
 				{if $customer->address2}<div>{$customer->address2}</div>{/if}
 				<div>{$customer->postcode}, {$customer->city}</div>
-				<div><img src="http://sunforum.co.uk/resources/icons/flag/{$customer->country|lower}.png" alt="{$customer->country}" /> <span>{$customer_country->name}</span></div>
+				<div><img src="/resources/icons/flag/{$customer->country|lower}.png" alt="{$customer->country}" /> <span>{$customer_country->name}</span></div>
 				<div>{$customer->email}</div>
 				{if $customer->phone}<div>{$customer->phone}</div>{/if}
 				{if $customer->note}<div>{$customer->note}</div>{/if}

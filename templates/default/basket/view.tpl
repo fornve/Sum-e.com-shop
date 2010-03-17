@@ -16,12 +16,12 @@
 
 					<div class="button" style="float: left;">
 						<a href="/Basket/Wipe" onclick="return confirm('Do you really want to wipe your basket?');">
-							<button style="background: transparent url('http://sunforum.co.uk/resources/icons/silk/cart_delete.png') center left no-repeat;	padding-left: 20px;">Wipe basket</button>
+							<button style="background: transparent url('/resources/icons/silk/cart_delete.png') center left no-repeat;	padding-left: 20px;">Wipe basket</button>
 						</a>
 					</div>
 
 					<div class="button" style="float: left; margin-left: 10px;">
-						<input type="submit" value="Update basket" style="background: transparent url('http://sunforum.co.uk/resources/icons/silk/arrow_rotate_clockwise.png') center left no-repeat; padding-left: 20px;" />
+						<input type="submit" value="Update basket" style="background: transparent url('/resources/icons/silk/arrow_rotate_clockwise.png') center left no-repeat; padding-left: 20px;" />
 					</div>
 
 					<div style="width: 150px; float: right;">

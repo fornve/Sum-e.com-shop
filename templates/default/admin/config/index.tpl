@@ -22,7 +22,7 @@
 					<td>
 						{if $config->description}
 							<div style="position: relative;">
-								<img style="z-index: 0;" src="http://sunforum.co.uk/resources/icons/silk/lightbulb_off.png" alt="help" onmouseover="jQuery('#config_description_{$config->id}').show();" onmouseout="jQuery('#config_description_{$config->id}').hide();" />
+								<img style="z-index: 0;" src="/resources/icons/silk/lightbulb_off.png" alt="help" onmouseover="jQuery('#config_description_{$config->id}').show();" onmouseout="jQuery('#config_description_{$config->id}').hide();" />
 								<div id="config_description_{$config->id}" style="z-index: 1; display: none; width: 150px; position: absolute; top: 14px; left: 0; background-color: #F0E68C; border: 1px solid #FFD700; padding: 5px; color: #800000;" onmouseover="jQuery('#config_description_{$config->id}').show();" onmouseout="jQuery('#config_description_{$config->id}').hide();">
 									{$config->description}
 								</div>
@@ -44,7 +44,7 @@
 							{else}
 								<select name="country">
 									{foreach from=$countries item=country}
-										<option value="{$country->code}" {if $country->code==$vendor_setting}selected="selected"{/if} style="background: #fff url('http://sunforum.co.uk/resources/icons/flag/{$country->code|lower}.png') left center no-repeat; padding-left: 20px;">{$country->name}</option>
+										<option value="{$country->code}" {if $country->code==$vendor_setting}selected="selected"{/if} style="background: #fff url('/resources/icons/flag/{$country->code|lower}.png') left center no-repeat; padding-left: 20px;">{$country->name}</option>
 									{/foreach}
 								</select>
 							{/if}

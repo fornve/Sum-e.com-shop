@@ -28,9 +28,9 @@
 					<td style="text-align: center;">{$smarty.const.CURRENCY_SIGN}{$shipping->limit_price}</td>
 					<td style="text-align: center;">
 						{if $shipping->enabled}
-							<a href="/ShippingAdmin/Index/?disable={$shipping->id}"><img src="http://sunforum.co.uk/resources/icons/mini/flag_green.gif" alt="Enabled" /></a>
+							<a href="/ShippingAdmin/Index/?disable={$shipping->id}"><img src="/resources/icons/mini/flag_green.gif" alt="Enabled" /></a>
 						{else}
-							<a href="/ShippingAdmin/Index/?enable={$shipping->id}"><img src="http://sunforum.co.uk/resources/icons/mini/flag_red.gif" alt="Disabled" /></a>
+							<a href="/ShippingAdmin/Index/?enable={$shipping->id}"><img src="/resources/icons/mini/flag_red.gif" alt="Disabled" /></a>
 						{/if}
 					</td>
 					<td>

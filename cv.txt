@@ -25,12 +25,11 @@ Profile
 
 Links
 			Most recent links:			http://dajnowski.net/wiki/index.php5/User:Fornve
+			Music selling platform		http://filibrary.com/ (still in development)
 			First project, free ads platform:	http://www.anadvert.co.uk // revritten to use my OO/MVC framework
-			E-commerce solution			http://www.sum-e.com (payment forms, invoice management)
-			eshop demo:				http://sunforum.co.uk/ (complete ecommerce solution demo - testing version)
-			Personal customer:			http://www.parkersjewellers.co.uk
+			E-commerce solutions		http://www.sum-e.com/ (simple CMS written in 2 days using my MVC framework)
+			eshop demo:				http://shop.sunforum.co.uk/ (complete ecommerce solution demo - testing version)
 			Social spends				http://www.dajnowski.net/social/
-			Tax estimation form			http://sheffield.pl/modules.php?name=Tax (written during 30 minute brake, I am sorry, it is in polish)
 
 Education              
 			1999 - 2004 University of  Technology in Poznan (5 years). Graduation exam 25.06.2004  Master of Science - Electrical Engineering, specialization: Industrial Heat And Power Generation
