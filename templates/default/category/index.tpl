@@ -1,4 +1,5 @@
 <div class="post">
+	{if $category}
     <h2 class="title">
         {if $smarty.session.admin->vendor->id}
             <span style="float: right; margin-right: 10px;  font-size: 9px; text-align: center; font-weight: normal;">
@@ -43,16 +44,17 @@
 	{/if}
 
 	<div class="post_content" style="padding: 10px 15px;">
-		{assign var=kids value=$category->LevelCollection($category->id)}
-		{foreach from=$kids item=kid_category}
-			{include file='category/tile_view.tpl'}
-		{/foreach}
+		
+			{assign var=kids value=$category->LevelCollection($category->id)}
+			{foreach from=$kids item=kid_category}
+				{include file='category/tile_view.tpl'}
+			{/foreach}
 
-		{if $products}
-		{foreach from=$products item=product_mini}
-			{include file="product/in_category_view.tpl"}
-		{/foreach}
-		{/if}
+			{if $products}
+			{foreach from=$products item=product_mini}
+				{include file="product/in_category_view.tpl"}
+			{/foreach}
+			{/if}
 		
 		<div style="clear: both;"></div>
 
@@ -60,5 +62,8 @@
 			{include file='/var/www/include/templates/pager.tpl'}
 		</div>
 	</div>
+	{else}
+		Category not found.
+	{/if}
 </div>
 

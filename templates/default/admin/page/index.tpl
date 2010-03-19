@@ -1,8 +1,10 @@
 <div class="post basket">
-    <h2 class="title">Shop pages</h2>
+	<h2 class="title">Shop pages</h2>
+
+	<p><a href="/PageAdmin/Edit/" class="ui-state-default ui-corner-all"><img src="/resources/icons/mini/icon_wand.gif" alt="New page" />New page</a></p>
 
 	<div class="post_content">
-		<table>
+		<table class="admin_table">
 
 			<thead>
 				<tr class="header">
@@ -15,7 +17,7 @@
 
 			<tbody>
 			{foreach from=$pages item=page}
-				<tr>
+				<tr class="item">
 					<td class="center">{$page->id}</td>
 					<td>{$page->title}</td>
 					<td>{$page->type}</td>
@@ -31,7 +33,10 @@
 			</tbody>
 		</table>
 
-		<p><a href="/PageAdmin/Edit/">New</a></p>
+		<span>Add new product</span>
+	</a>
+
+		
 		<p><sup>*)</sup><span>To refresh <a href="/SettingsAdmin/FlushCache/">flush cache</a></span></p>
 	</div>
 </div>

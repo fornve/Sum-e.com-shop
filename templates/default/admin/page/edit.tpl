@@ -1,13 +1,13 @@
 <div class="post">
-    <h2 class="title">{if $product}Page: '{$page->name}' editing{else}New Page{/if}</h2>
-	
+	<h2 class="title">{if $page}Page: '{$page->title}' editing{else}New Page{/if}</h2>
+
 	<div class="post_content">
 		<form action="/PageAdmin/Edit/{$page->id}" method="post" enctype="multipart/form-data">
 
 			<br />
 			<label>Title</label>
 			<br />
-			<input class="title" type="text" name="title" value="{$page->title}" maxlength="255" />
+			<input class="textinput" type="text" name="title" value="{$page->title}" maxlength="255" />
 
 			<br />
 			<label>Type</label>
@@ -19,7 +19,7 @@
 			</select>
 
 			<br />
-			<label>Description:</label>
+			<label>Content:</label>
 			<br />
 			<textarea cols="80" rows="10" name="text">{$page->text}</textarea>
 

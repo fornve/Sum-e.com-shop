@@ -48,7 +48,7 @@
 					<input style="width: 40px; text-align: center;" type="text" name="quantity_{$items}" value="{$variant.quantity}" />
 				{else}{$variant.quantity}{/if}
 				</td>
-				<td class="center"><strong>{$smarty.const.CURRENCY_SIGN}{math equation="x * y * vat" x=$variant.item_value y=$variant.quantity vat=$vat_multiply}</strong></td>
+				<td class="center"><strong>{$smarty.const.CURRENCY_SIGN}{math equation="x * y * vat" x=$variant.item_value y=$variant.quantity vat=$vat_multiply format="%.2f"}</strong></td>
 			</tr>
 		{/if}
         {/foreach}
