@@ -53,22 +53,6 @@
 					<br />
 					<textarea cols="80" rows="10" name="description">{$product->description}</textarea>
 
-					{if $smarty.const.TINY_MCE}
-						{include file="admin/tiny_mce.tpl"}
-					{/if}
-
-		{*
-					<br />
-					<label>Manufacturer:</label>
-					<br />
-					<select name="manufacturer">
-						<option>Not specified</option>
-						{foreach from=$taxes item=tax}
-						<option value="{$tax->id}" {if $product->tax->id==$tax->id}selected="selected"{/if}>{$tax->name}</option>
-						{/foreach}
-					</select>
-		*}
-
 					<br />
 					<label>Keywords:</label>
 					<div type="hint">Separated with commas</div>
@@ -87,6 +71,10 @@
 						<option value="0" {if $product->status==0}selected="selected"{/if}>Not Available</option>
 						<option value="1" {if $product->status==1}selected="selected"{/if}>Available</option>
 					</select>
+
+					{if $smarty.const.TINY_MCE}
+						{include file="admin/tiny_mce.tpl"}
+					{/if}
 
 				</div>
 
@@ -156,6 +144,7 @@
 
 				</div>
 
+				{*
 				<div id="variants" class="tab"{if $smarty.post.active_tab=='variants'} style="display: block;"{/if}>
 
 					<table>
@@ -203,7 +192,8 @@
 							</tr>
 						</tfooter>
 					</table>
-
+					*}
+					
 				</div>
 
 				<div id="categories" class="tab"{if $smarty.post.active_tab=='categories'} style="display: block;"{/if}>
