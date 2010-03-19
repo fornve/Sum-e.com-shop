@@ -78,7 +78,8 @@
 </table>
 
 <div>
-	{include file='/var/www/include/templates/pager.tpl'}
+	{assign var=basedir value=$smarty.const.INCLUDE_PATH}
+	{include file="$basedir/templates/pager.tpl"}
 </div>
 
 <div>
