@@ -3,6 +3,7 @@
 	tinyMCE.init({
 		// General options
 		mode : "textareas",
+		editor_deselector : "mceNoEditor",
 		theme : "advanced",
 		plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
 

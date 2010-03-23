@@ -77,7 +77,8 @@
 	<!-- end #content -->
 	<div id="sidebar">
         <div id="basket">
-			{include file="basket/mini.tpl"}
+			{assign var=basedir value=$smarty.const.SMARTY_TEMPLATES_DIR}
+			{include file="$basedir/basket/mini.tpl"}
         </div>
 
 		<ul>
