@@ -25,7 +25,7 @@
 							<br />
 							<label>Meta description:</label>
 							<br />
-							<textarea cols="80" rows="2" name="meta_description" class="mceNoEditor">{$page->meta_description}</textarea>
+							<textarea cols="80" rows="10" name="meta_description" class="mceNoEditor">{$page->meta_description}</textarea>
 							
 							<br />
 							<label>Meta keywords:</label>

@@ -3,7 +3,25 @@
 
 	<div class="post_content">
 		<form action="/CategoryAdmin/Edit/{$category->id}" method="post" enctype="multipart/form-data">
-
+{*
+			<table>
+			
+				<tr >
+					<td>
+					</td>
+					<td>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+					
+					</td>
+				</tr>
+				
+			</table>
+			*}
+			
 			<br />
 			<label>Name:</label>
 			<br />

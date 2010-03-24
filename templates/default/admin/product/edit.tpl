@@ -1,20 +1,19 @@
 <div class="post product_edit">
 
 <script type="text/javascript">{literal}
-
-		jQuery(function() {
-			jQuery("#tabs").tabs();
-		});
-		
-    function toogleTabs(id)
-    {
-        jQuery('.tab').hide();
-        jQuery('.tabs li').removeClass('selected');
-        jQuery('#'+id).show();
-        jQuery('#tab_'+id).addClass('selected');
-        jQuery('#active_tab').attr('value',id);
-    }
-    {/literal}
+	jQuery(function() {
+		jQuery("#tabs").tabs();
+	});
+	
+	function toogleTabs(id)
+	{
+		jQuery('.tab').hide();
+		jQuery('.tabs li').removeClass('selected');
+		jQuery('#'+id).show();
+		jQuery('#tab_'+id).addClass('selected');
+		jQuery('#active_tab').attr('value',id);
+	}
+	{/literal}
 </script>
 
 
@@ -55,9 +54,15 @@
 
 					<br />
 					<label>Keywords:</label>
-					<div type="hint">Separated with commas</div>
+					<br />
+					<span class="quiet">Separated with commas</span>
 					<br />
 					<input class="textinput" type="text" name="keywords" value="{$product->keywords}" maxlength="255" />
+
+					<br />
+					<label>Meta description:</label>
+					<br />
+					<textarea cols="80" rows="2" class="mceNoEditor" name="meta_description">{$product->meta_description}</textarea>
 
 					<br />
 					<label>Condition:</label>
@@ -211,18 +216,73 @@
 							{$category->name}
 						</span>
 
+						{if $category->kids > 0}
+							<ul id="kid_{$category->id}" class="category_tree_kid" {if $product}{if $product->InBranch($category->id)}style="display: block;"{/if}{/if}>
+							{foreach from=$category->kids item=kid}
+								<li>
+									<input type="checkbox" name="category_{$kid->id}" value="{$kid->id}" {if $product}{if $product->InCategory($kid->id)}checked="checked"{/if}{/if} />
+									
+									{assign var=kids2 value=$kid->LevelCollection($kid->id)}
+									
+									<span onclick="$('#kid2_{$kid->id}').toggle('fast')">
+										{if $kids2}
+											<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+										{else}
+											<img src="/resources/icons/silk/bullet_white.png" />
+										{/if}
+										{$kid->name} [{$kid->id} - {$kids2|@count}]
+									</span>
 
-					{if $category->kids > 0}
-						<ul id="kid_{$category->id}" class="category_tree_kid" {if $product}{if $product->InBranch($category->id)}style="display: block;"{/if}{/if}>
-						{foreach from=$category->kids item=kid}
-							<li>
-								<input type="checkbox" name="category_{$kid->id}" value="{$kid->id}" {if $product}{if $product->InCategory($kid->id)}checked="checked"{/if}{/if} />
-									<img src="/resources/icons/silk/bullet_white.png" />
-								<span>{$kid->name}</span>
-							</li>
-						{/foreach}
-						</ul>
-					{/if}
+									{if $kids2}
+										<ul id="kid2_{$kid->id}" class="category_tree_kid" {if $product}{if $product->InBranch($kid->id)}style="display: block;"{/if}{/if}>
+										
+										{foreach from=$kids2 item=kid2}
+											{assign var=kids3 value=$kid2->LevelCollection($kid2->id)}
+											<li>
+												<input type="checkbox" name="category_{$kid2->id}" value="{$kid2->id}" {if $product}{if $product->InCategory($kid2->id)}checked="checked"{/if}{/if} />
+												
+												<span onclick="$('#kid3_{$kid2->id}').toggle('fast')">
+													{if $kids3}
+														<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+													{else}
+														<img src="/resources/icons/silk/bullet_white.png" />
+													{/if}
+													{$kid2->name}
+												</span>
+												
+												{if $kids3}
+													<ul id="kid3_{$kid2->id}" class="category_tree_kid" {if $product}{if $product->InBranch($kid2->id)}style="display: block;"{/if}{/if}>
+													{foreach from=$kids3 item=kid3}
+														{assign var=kids4 value=$kid3->LevelCollection($kid3->id)}
+														<li>
+															<input type="checkbox" name="category_{$kid3->id}" value="{$kid3->id}" {if $product}{if $product->InCategory($kid3->id)}checked="checked"{/if}{/if} />
+															
+															<span onclick="$('#kid4_{$kid3->id}').toggle('fast')">
+																{if $kids4}
+																	<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+																{else}
+																	<img src="/resources/icons/silk/bullet_white.png" />
+																{/if}
+																{$kid3->name}
+															</span>
+															
+															
+														</li>
+													{/foreach}
+													</ul>
+												{/if}
+												
+											</li>
+										{/foreach}
+										</ul>
+									{/if}
+									
+								</li>
+							{/foreach}
+							</ul>
+						{/if}
+
+					
 					</li>
 				{/foreach}
 				</ul>
