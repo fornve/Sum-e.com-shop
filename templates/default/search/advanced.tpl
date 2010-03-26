@@ -61,7 +61,7 @@
 							<ul style="list-style-type: none; madding-left: 0; margin-left: 0;">
 							  {foreach from=$category_tree item=category}
 								<li>
-									<input type="checkbox" name="category_{$category->id}" value="{$category->id}" {if $product}{if $product->InCategory($category->id)}checked="checked"{/if}{else}checked="checked"{/if} />
+									<input type="checkbox" name="category_{$category->id}" value="{$category->id}" checked="checked" />
 									<span onclick="$('#kid_{$category->id}').toggle('fast')">
 										{if $category->kids}
 											<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
@@ -73,12 +73,66 @@
 
 
 								{if $category->kids > 0}
-									<ul style="list-style-type: none;" id="kid_{$category->id}" class="category_tree_kid" {if $product}{if $product->InBranch($category->id)}style="display: block;"{/if}{/if}>
+									<ul id="kid_{$category->id}" class="category_tree_kid" {if $product}{if $product->InBranch($category->id)}style="display: block;"{/if}{/if}>
 									{foreach from=$category->kids item=kid}
 										<li>
-											<input type="checkbox" name="category_{$kid->id}" value="{$kid->id}" {if $product}{if $product->InCategory($kid->id)}checked="checked"{/if}{else}checked="checked"{/if} />
-												<img src="/resources/icons/silk/bullet_white.png" />
-											<span>{$kid->name}</span>
+											<input type="checkbox" name="category_{$kid->id}" value="{$kid->id}" checked="checked" />
+											
+											{assign var=kids2 value=$kid->LevelCollection($kid->id)}
+											
+											<span onclick="$('#kid2_{$kid->id}').toggle('fast')">
+												{if $kids2}
+													<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+												{else}
+													<img src="/resources/icons/silk/bullet_white.png" />
+												{/if}
+												{$kid->name}
+											</span>
+
+											{if $kids2}
+												<ul id="kid2_{$kid->id}" class="category_tree_kid" {if $product}{if $product->InBranch($kid->id)}style="display: block;"{/if}{/if}>
+												
+												{foreach from=$kids2 item=kid2}
+													{assign var=kids3 value=$kid2->LevelCollection($kid2->id)}
+													<li>
+														<input type="checkbox" name="category_{$kid2->id}" value="{$kid2->id}" checked="checked" />
+														
+														<span onclick="$('#kid3_{$kid2->id}').toggle('fast')">
+															{if $kids3}
+																<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+															{else}
+																<img src="/resources/icons/silk/bullet_white.png" />
+															{/if}
+															{$kid2->name}
+														</span>
+														
+														{if $kids3}
+															<ul id="kid3_{$kid2->id}" class="category_tree_kid" {if $product}{if $product->InBranch($kid2->id)}style="display: block;"{/if}{/if}>
+															{foreach from=$kids3 item=kid3}
+																{assign var=kids4 value=$kid3->LevelCollection($kid3->id)}
+																<li>
+																	<input type="checkbox" name="category_{$kid3->id}" value="{$kid3->id}" {if $product}{if $product->InCategory($kid3->id)}checked="checked"{/if}{/if} />
+																	
+																	<span onclick="$('#kid4_{$kid3->id}').toggle('fast')">
+																		{if $kids4}
+																			<img src="/resources/icons/silk/bullet_toggle_plus.png" alt="Expand/Collapse category">
+																		{else}
+																			<img src="/resources/icons/silk/bullet_white.png" />
+																		{/if}
+																		{$kid3->name}
+																	</span>
+																	
+																	
+																</li>
+															{/foreach}
+															</ul>
+														{/if}
+														
+													</li>
+												{/foreach}
+												</ul>
+											{/if}
+											
 										</li>
 									{/foreach}
 									</ul>

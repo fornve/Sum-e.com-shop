@@ -56,11 +56,11 @@
 			<td style="text-align: center;">
 
 				<a href="/ProductAdmin/ListOrderUp/{$product->id}/{$category->id}" title="Move product up in this category">
-					<img src="/resources/icons/silk/arrow_up.png" alt="Up">
+					<img src="/resources/icons/silk/arrow_up.png" alt="Up" />
 				</a>
 
 				<a href="/ProductAdmin/ListOrderDown/{$product->id}/{$category->id}" title="Move product down in this category">
-					<img src="/resources/icons/silk/arrow_down.png" alt="Down">
+					<img src="/resources/icons/silk/arrow_down.png" alt="Down" />
 				</a>
 
 			</td>

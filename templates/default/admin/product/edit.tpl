@@ -178,7 +178,7 @@
 								</td>
 							</tr>
 						{/foreach}
-						</tboody>
+						</tbody>
 						<tfooter>
 							<tr>
 								<td>New</td>
@@ -230,7 +230,7 @@
 										{else}
 											<img src="/resources/icons/silk/bullet_white.png" />
 										{/if}
-										{$kid->name} [{$kid->id} - {$kids2|@count}]
+										{$kid->name}
 									</span>
 
 									{if $kids2}
