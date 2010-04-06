@@ -1,4 +1,4 @@
-<div class="post">
+<div class="post_cell ui-widget ui-widget-content ui-corner-all">
     <h2 class="title">{if $shipping}Shipping '{$shipping->name}' editing{else}New shipping method{/if}</h2>
 
 	<div class="post_content">
@@ -36,7 +36,7 @@
 			<textarea cols="80" rows="10" name="description">{$shipping->description}</textarea>
 
 
-			<input style="float: right; clear: both;" type="image" src="/resources/images/button_save.png" value="Save" />
+			<input type="submit" value="{$lang->SAVE}" class="ui-state-default ui-corner-all" style="color: #000; padding: 5px 20px; margin: 20px; font-size: 18px;" />
 
 			<div style="clear: both;"></div>
 		</form>

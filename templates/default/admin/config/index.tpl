@@ -1,12 +1,12 @@
-<div class="post basket">
-	<h2 class="title">Main settings</h2>
+<div class="post">
 
-	<div class="post_content">
+	<div class="post_cell ui-widget ui-widget-content ui-corner-all">
+		<h2 class="title">Shop Configuration</h2>
 		<form action="/SettingsAdmin/" method="post">
-			<table>
+			<table class="admin_table">
 			{foreach from=$configs item=config}
 				<tr>
-					<th>{$config->title}</th>
+					<td>{$config->title}</td>
 					<td>
 						{if $config->type=='text'}
 							<input type="text" name="config_{$config->id}" value="{$config->value}" maxlength="255" />
@@ -31,30 +31,9 @@
 					</td>
 				</tr>
 			{/foreach}
-			</table>	<h2 class="title">Vendor settings</h2>
-
-			<table>
-			{foreach from=$vendor item=vendor_setting key=vendor_key}
-				{if $vendor->InSchema($vendor_key) && $vendor_key!='id'}
-					<tr>
-						<th>{$vendor_key}</th>
-						<td>
-							{if $vendor_key!='country'}
-								<input type="text" class="text" name="{$vendor_key}" value="{$vendor_setting}" maxlength="255" />
-							{else}
-								<select name="country">
-									{foreach from=$countries item=country}
-										<option value="{$country->code}" {if $country->code==$vendor_setting}selected="selected"{/if} style="background: #fff url('/resources/icons/flag/{$country->code|lower}.png') left center no-repeat; padding-left: 20px;">{$country->name}</option>
-									{/foreach}
-								</select>
-							{/if}
-						</td>
-					</tr>
-				{/if}
-			{/foreach}
 			</table>
 
-			<input type="image" src="/resources/images/button_save.png" alt="Save" value="Save" style="float: right;" />
+			<input type="submit" value="Save" class="submit ui-corner-all" style="font-size: 18px;" />
 
 			<div style="clear: both;"></div>
 		</form>

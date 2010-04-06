@@ -4,7 +4,7 @@
 	<div class="post_content">
 		<h3>Available modules</h3>
 
-		<table>
+		<table class="admin_table">
 
 			<thead>
 				<tr class="header">

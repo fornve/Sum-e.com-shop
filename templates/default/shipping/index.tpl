@@ -7,7 +7,7 @@
 
 	<div class="post_content">
 		<form action="/Shipping/View/" method="post">
-			<p>Your basket value is <strong>{$smarty.const.CURRENCY_SIGN}{$basket_total.value}</strong></p>
+			<p>Your basket value is <strong>{$smarty.const.CURRENCY_SIGN}{$basket_total.value*$vat_multiply|string_format:"%.2f"}</strong></p>
 			<div>
 				<table>
 				{foreach from=$shippings item=shipping}

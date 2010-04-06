@@ -17,6 +17,7 @@ define( 'CACHE_PREFIX', 'C4DEVELOPMENT' );
 define( 'PAGE_CACHE_DIR', '/tmp/shop/page_cache' ); // compiled pages cache
 
 define( 'CURRENCY_SIGN', '&pound;' );
+define( 'SALES_TAX_NAME', 'VAT' );
 
 define( 'INCLUDE_PATH', '/var/www/include/' );
 define( 'SMARTY_DIR', INCLUDE_PATH .'smarty/' );
