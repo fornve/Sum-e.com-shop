@@ -18,7 +18,7 @@
 
 		<h3 style="padding: 0; margin: 15px 0 0 0;">Order list for {$date_from|date_format:'%e %B'} - {$date_to|date_format:'%e %B'}</h3>
 
-		<table>
+		<table class="admin_table">
 			<thead>
 				<tr class="header">
 					<th>ID</th>
@@ -52,7 +52,7 @@
 
 		<h2 class="title noprint">Show orders / sales within date range</h2>
 		<form method="get" action="{$smarty.server.REQUEST_URI}" class="noprint">
-			<div>
+			<div style="width: 600px;">
 
 				<div style="width: 300px; float: left;">
 					<label for="date_from"><h3>Date from</h3></label>

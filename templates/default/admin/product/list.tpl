@@ -88,5 +88,5 @@
 
 <div>
 	<br />
-	<sup>*)</sup><span>To refresh <a href="/SettingsAdmin/FlushCache/">flush cache</a></span>
+	<sup>*)</sup><span>To refresh <a href="/ProductAdmin/FlushCache/">flush cache</a></span>
 </div>

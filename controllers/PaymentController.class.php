@@ -179,7 +179,7 @@ class PaymentController extends Controller
 			$payment->set_fields( $fields );
 			var_dump( $payment->process() );
 		}
-		var_dump( $input );
+		
 		$this->assign( 'expdate', $expdate );
 		$this->assign( 'startdate', $startdate );
 		$this->assign( 'payment_input', $input );
