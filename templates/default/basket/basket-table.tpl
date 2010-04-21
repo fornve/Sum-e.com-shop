@@ -37,7 +37,8 @@
 				</td>
 				<th><span style="color: black;">{$product->name}</span> {if $variants|@count}<br />(
 				{foreach from=$variants item=variant_object name=variantsloop}
-					{$variant_object->type}: {$variant_object->name}
+				
+					{if $variant_object->type=='custom_text'}Custom text: <strong>{$variant_object->value}</strong>{else}{$variant_object->type}: {$variant_object->name}{/if}
 					{if not $smarty.foreach.variantsloop.last},{/if}
 				{/foreach} )
 				{/if}
