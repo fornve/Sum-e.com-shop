@@ -23,6 +23,20 @@
 							{if $smarty.const.TINY_MCE}
 								{include file="admin/tiny_mce.tpl"}
 							{/if}
+							
+
+							<br />
+							<label>Keywords:</label>
+							<br />
+							<span class="quiet">Separated with commas</span>
+							<br />
+							<input class="textinput" type="text" name="keywords" value="{$category->keywords}" maxlength="255" />
+
+							<br />
+							<label>Meta description:</label>
+							<br />
+							<textarea cols="80" rows="2" class="mceNoEditor" name="meta_description">{$category->meta_description}</textarea>
+
 						</div>
 					</td>
 					
