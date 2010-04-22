@@ -25,7 +25,7 @@
 				{/if}
 			</td>
 			<td>
-				<a href="/Product/View/{$product->id}">{$product->name}</a>
+				<a href="/ProductAdmin/Edit/{$product->id}">{$product->name}</a>
 					<br />
 				{if $product->categories}
 					{strip}
