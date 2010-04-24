@@ -1,22 +1,22 @@
-    {if $basket}
+{if $basket}
 	<table>
-        <thead>
-        <tr class="header">
-            {if $basket_editable}
-                <th style="width: 50px;">Delete</th>
-            {/if}
-            <th colspan="2">Product</th>
-            <th>Price per item</th>
-            <th>Quantity</th>
-            <th>Total</th>
-        </tr>
-        </thead>
-        <tbody>
-    {assign var=basket_totals value=$basket->GetTotals()}
+		<thead>
+		<tr class="header">
+			{if $basket_editable}
+				<th style="width: 50px;">Delete</th>
+			{/if}
+			<th colspan="2">Product</th>
+			<th>Price per item</th>
+			<th>Quantity</th>
+			<th>Total</th>
+		</tr>
+		</thead>
+		<tbody>
+	{assign var=basket_totals value=$basket->GetTotals()}
 
-    {foreach from=$basket->items item=item key=item_key}
-        {foreach from=$item item=variant key=variant_key}
-        {assign var=product value=$basket->GetProduct($item_key)}
+	{foreach from=$basket->items item=item key=item_key}
+		{foreach from=$item item=variant key=variant_key}
+		{assign var=product value=$basket->GetProduct($item_key)}
 		{if $product}
 			{assign var=image value=$product->GetMainImage()}
 			{assign var=variants value=$basket->GetVariant($variant_key)}
@@ -31,8 +31,8 @@
 					</td>
 				{/if}
 				<td>
-					<a href="/Product/View/{$product->id}" title="{$product->name}">
-						<img style="padding: 0;" src="/Product/Image/64x64/{$image->id}/{$image->GetFilename()}" title="{$image->title}" />
+					<a href="http://{$smarty.server.SERVER_NAME}/Product/View/{$product->id}" title="{$product->name}">
+						<img style="padding: 0;" src="http://{$smarty.server.SERVER_NAME}/Product/Image/64x64/{$image->id}/{$image->GetFilename()}" title="{$image->title}" />
 					</a>
 				</td>
 				<th><span style="color: black;">{$product->name}</span> {if $variants|@count}<br />(
@@ -52,8 +52,8 @@
 				<td class="center"><strong>{$smarty.const.CURRENCY_SIGN}{math equation="x * y * vat" x=$variant.item_value y=$variant.quantity vat=$vat_multiply format="%.2f"}</strong></td>
 			</tr>
 		{/if}
-        {/foreach}
-    {/foreach}
+		{/foreach}
+	{/foreach}
 
 	{if $shipping}
 		<tr class="item">
@@ -68,35 +68,35 @@
 		</tr>
 	{/if}
 		</tbody>
-        <tfoot>
-            <tr class="footer">
-            {if $basket_editable}
-                <th class="center">
+		<tfoot>
+			<tr class="footer">
+			{if $basket_editable}
+				<th class="center">
 					{if $items}
 						<input type="hidden" name="items" value="{$items}" />
 					{/if}
-                   &nbsp;
-                </th>
-            {/if}
-                <th colspan="2">
-                    &nbsp;
-                </th>
+				   &nbsp;
+				</th>
+			{/if}
+				<th colspan="2">
+					&nbsp;
+				</th>
 
-                <th class="total" style="text-transform: uppercase;">
-                    Total
-                </th>
+				<th class="total" style="text-transform: uppercase;">
+					Total
+				</th>
 
-                <th>
-                    {$basket_totals.quantity} item{if $basket_totals.quantity > 1}s{/if}
-                </th>
+				<th>
+					{$basket_totals.quantity} item{if $basket_totals.quantity > 1}s{/if}
+				</th>
 
-                <th>
-                    {$smarty.const.CURRENCY_SIGN}{if $shipping}{$shipping->ValueWithOrder($basket_totals.value)*$vat_multiply|string_format:"%.2f"}{else}{$basket_totals.value*$vat_multiply|string_format:"%.2f"}{/if}
-                </th>
+				<th>
+					{$smarty.const.CURRENCY_SIGN}{if $shipping}{$shipping->ValueWithOrder($basket_totals.value)*$vat_multiply|string_format:"%.2f"}{else}{$basket_totals.value*$vat_multiply|string_format:"%.2f"}{/if}
+				</th>
 
-            </tr>
-        </tfoot>
-    </table>
-	{else}
+			</tr>
+		</tfoot>
+	</table>
+{else}
 	<div>Your basket is empty.</div>
-	{/if}
+{/if}
