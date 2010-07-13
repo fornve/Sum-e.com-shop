@@ -31,14 +31,15 @@
 					</td>
 				{/if}
 				<td>
+					{if $image}
 					<a href="http://{$smarty.server.SERVER_NAME}/Product/View/{$product->id}" title="{$product->name}">
 						<img style="padding: 0;" src="http://{$smarty.server.SERVER_NAME}/Product/Image/64x64/{$image->id}/{$image->GetFilename()}" title="{$image->title}" />
 					</a>
+					{/if}
 				</td>
 				<th><span style="color: black;">{$product->name}</span> {if $variants|@count}<br />(
 				{foreach from=$variants item=variant_object name=variantsloop}
-				
-					{if $variant_object->type=='custom_text'}Custom text: <strong>{$variant_object->value}</strong>{else}{$variant_object->type}: {$variant_object->name}{/if}
+					{if $variant_object->type=='custom_text'}Custom Text: <strong>{$variant_object->value}</strong>{else}{$variant_object->type}: {$variant_object->name}{/if}
 					{if not $smarty.foreach.variantsloop.last},{/if}
 				{/foreach} )
 				{/if}

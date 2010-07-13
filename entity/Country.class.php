@@ -16,7 +16,7 @@ class Country extends Entity
 		return $object;
 	}
 
-	static function GetAll( $entity = null )
+	static function GetAll( $entity = null, $nocache = false )
 	{
 		$cache = new Cache();
 

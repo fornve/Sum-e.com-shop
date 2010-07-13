@@ -33,10 +33,6 @@
 			</tbody>
 		</table>
 
-		<span>Add new product</span>
-	</a>
-
-		
-		<p><sup>*)</sup><span>To refresh <a href="/SettingsAdmin/FlushCache/">flush cache</a></span></p>
+		<p><sup>*)</sup><span>To refresh <a href="/PageAdmin/FlushCache/">flush cache</a></span></p>
 	</div>
 </div>

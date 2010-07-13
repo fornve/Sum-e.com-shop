@@ -2,8 +2,6 @@
 
 class Category_Description extends Entity
 {
-	protected $schema = array( 'category', 'description' );
-
 	static function Retrieve( $category )
 	{
 		if( !$category )

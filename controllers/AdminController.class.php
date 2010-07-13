@@ -17,7 +17,7 @@ class AdminController extends Controller
 
 	function Index()
 	{
-		$_SESSION[ 'last_release' ] = Common::HttpPost( "http://sumsoft.sunforum.co.uk/Index/GetVersion/", array( 'shop_name' => Vendor::Retrieve( $_SESSION[ 'admin' ]->vendor->id )->name, 'shop_address' => $_SERVER[ 'SERVER_NAME' ] ) );
+		//$_SESSION[ 'last_release' ] = Common::HttpPost( "http://sumsoft.sunforum.co.uk/Index/GetVersion/", array( 'shop_name' => Vendor::Retrieve( $_SESSION[ 'admin' ]->vendor->id )->name, 'shop_address' => $_SERVER[ 'SERVER_NAME' ] ) );
 
 		$this->assign( 'breadcrumbs', $this->breadcrumbs );
 		echo $this->Decorate( 'admin/index.tpl' );

@@ -2,7 +2,7 @@
 
 class User_Agent extends Entity
 {
-	protected $schema = array( 'id', 'name', 'agent', 'type', 'count', 'os' );
+	//protected $schema = array( 'id', 'name', 'agent', 'type', 'count', 'os' );
 
 	static function Retrieve( $id )
 	{
