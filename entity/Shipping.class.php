@@ -2,8 +2,6 @@
 
 class Shipping extends Entity
 {
-	protected $schema = array( 'id', 'name', 'vendor', 'flat_value', 'weight_multiply', 'limit_price', 'description', 'enabled' );
-
 	function Value( $order_value )
 	{
 		if( $order_value > $this->limit_price )

@@ -9,7 +9,7 @@ class Product extends Entity
 		if( !$id )
 			return null;
 
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 
 		if( $nocache )
 			$cache->delete( CACHE_PREFIX ."ShopProductRetrieve{$id}" );
@@ -69,15 +69,15 @@ class Product extends Entity
 
 	function CategoryCollection( $category_id )
 	{
-		$query = "SELECT 
-						product.* 
-					FROM 
-						product 
-					JOIN 
+		$query = "SELECT
+						product.*
+					FROM
+						product
+					JOIN
 							product_category
 						ON
 							product.id = product_category.product
-					WHERE 
+					WHERE
 								product_category.category = ?
 							AND
 								product.deleted = 0
@@ -90,9 +90,9 @@ class Product extends Entity
 	function MoveInCategory( $category_id, $iteration )
 	{
 		$products = Product::CategoryCollection( $category_id );
-		
+
 		$i = 0;
-		
+
 		if( $products ) foreach ( $products as $product )
 		{
 			$product_category = Product_Category::Retrieve( $product->id, $category_id );
@@ -111,7 +111,7 @@ class Product extends Entity
 			elseif( $product_category->order != $i )
 			{
 				$product_category->order = $i;
-				$product_category->Save(); 
+				$product_category->Save();
 			}
 		}
 	}
@@ -327,8 +327,8 @@ class Product extends Entity
 		$query = "SELECT  product.* FROM product JOIN product_category ON product.id = product_category.product WHERE ( product.name LIKE ? OR product.description LIKE ? OR product.keywords LIKE ? OR product.upc LIKE ? ) AND product.status = 1";
 		$attributes = array( "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%"  );
 
-		//price range 
-		if( $search_vars->price_ranges ) 
+		//price range
+		if( $search_vars->price_ranges )
 		{
 			foreach( $search_vars->price_ranges as $price_range )
 			{
@@ -337,19 +337,19 @@ class Product extends Entity
 				$attributes[] = $price_range->min_value;
 				$attributes[] = $price_range->max_value;
 			}
-			
+
 			$query .= " AND (". implode( 'OR', $price_range_query ) ." ) ";
 		}
 
 		// category
-		if( $search_vars->categories ) 
+		if( $search_vars->categories )
 		{
 			foreach( $search_vars->categories as $category )
 			{
 				$category_query[] = " product_category.category = ? ";
 				$attributes[] = $category;
 			}
-			
+
 			$query .= " AND (". implode( 'OR', $category_query ) ." ) ";
 		}
 
@@ -361,7 +361,7 @@ class Product extends Entity
 				$price_range_query[] = " ( product.condition =  ? ) ";
 				$attributes[] = $condition;
 			}
-							
+
 			$query .= " AND (". implode( 'OR', $price_range_query ) ." ) ";
 
 		}
@@ -386,7 +386,7 @@ class Product extends Entity
 		{
 			$products[] = Product::Retrieve( $element->id );
 		}
-		
+
 		return $products;
 	}
 
