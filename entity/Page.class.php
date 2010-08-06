@@ -2,14 +2,12 @@
 
 class Page extends Entity
 {
-	protected $schema = array( 'id', 'title', 'text', 'image', 'type' );
-
 	static function Retrieve( $id, $nocache = false )
 	{
 		if( !$id )
 			return null;
 
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 
 		if( $nocache )
 			$cache->delete( "Page{$id}" );
@@ -17,7 +15,7 @@ class Page extends Entity
 		if( $nocache || !$object = $cache->get( "Page{$id}" ) )
 		{
 			$query = "SELECT * FROM page WHERE id = ?";
-			$entity = new Entity();
+			$entity = Entity::getInstance();
 			$object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
 			if( !$object )
@@ -34,7 +32,7 @@ class Page extends Entity
 		if( strlen( $type ) < 1 )
 			return null;
 
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 
 		if( $nocache )
 			$cache->delete( "Page{$type}" );
@@ -42,7 +40,7 @@ class Page extends Entity
 		if( $nocache || !$object = $cache->get( "Page{$type}" ) )
 		{
 			$query = "SELECT * FROM page WHERE type = ?";
-			$entity = new Entity();
+			$entity = Entity::getInstance();
 			$object = $entity->GetFirstResult( $query, $type, __CLASS__ );
 			
 			if( !$object )
@@ -56,21 +54,21 @@ class Page extends Entity
 
 	function FlushCache()
 	{
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 		$cache->delete( "Page{$this->id}" );
 	}
 
 	public static function GetAll()
 	{
 		$query = "SELECT * FROM page ORDER BY title";
-		$entity = new Entity();
+		$entity = Entity::getInstance();
 		return $entity->Collection( $query, null, __CLASS__ );
 	}
 
 	public static function CleanType( $type )
 	{
 		$query = "UPDATE page SET type = '' WHERE type = ?";
-		$entity = new Entity();
+		$entity = Entity::getInstance();
 		$entity->Query( $query, $type );
 	}
 

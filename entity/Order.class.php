@@ -2,13 +2,13 @@
 
 class Order extends Entity
 {
-	protected $schema =
+	/*protected $schema =
 			array( 'id',
 			 'customer', 'customer_name', 'customer_company', 'customer_address', 'customer_suburb', 'customer_city', 'customer_postcode', 'customer_county', 'customer_country', 'customer_phone', 'customer_email', 'customer_note', 'customer_ip_address',
 			 'delivery_name', 'delivery_company', 'delivery_address', 'delivery_city', 'delivery_postcode', 'delivery_county', 'delivery_country',
 			 'billing_name', 'billing_company', 'billing_address', 'billing_city', 'billing_postcode', 'billing_county', 'billing_country',
 			 'payment', 'last_modified', 'purchase_date', 'status', 'finished_date', 'currency', 'value', 'shipping', 'shipping_value', 'vendor', 'despatched'
-			);
+			);*/
 
 	static function Retrieve( $id )
 	{
@@ -29,7 +29,7 @@ class Order extends Entity
 	}
 
 	static function PlaceOrder( $input )
-	{ 
+	{
 		$totals = $_SESSION[ 'basket' ]->GetTotals();
 		$order = new Order();
 		$order->customer_name		= "{$input->title} {$input->firstname} {$input->lastname}";
@@ -48,14 +48,14 @@ class Order extends Entity
 		$order->purchase_date		= date( "Y-m-d H:i:s" );
 		$order->customer_ip_address = $_SERVER[ 'REMOTE_ADDR' ];
 		$order->currency			= PAYPAL_CURRENCY_CODE;
-		
+
 		if( $_SESSION[ 'shipping' ] )
 		{
 			$shipping = Shipping::Retrieve( $_SESSION[ 'shipping' ] );
 			$order->shipping			= $shipping->id;
 			$order->shipping_value		= $shipping->Value( $totals[ 'value' ] );
 		}
-		
+
 		$order->Save();
 
 		foreach( $_SESSION[ 'basket' ]->items as $product_id => $group )
@@ -151,7 +151,7 @@ class Order extends Entity
 		if( $orders ) foreach( $orders as $order )
 		{
 			$order_status = $order->GetStatus();
-			
+
 			if( $order_status == 'Completed' || $order_status == 'Despatched' )
 			{
 				$sales->count++;
