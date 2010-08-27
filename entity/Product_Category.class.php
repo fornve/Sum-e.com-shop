@@ -22,7 +22,7 @@ class Product_Category extends Entity
 	function Create()
 	{
 		$query = "INSERT INTO product_category ( `product`, `category`, `order` ) VALUES ( ?, ?, ? )";
-		$this->Query( $query, array( $this->product, $this->category, $this->order ) );
+		$this->Query( $query, array( $this->product, $this->category, $this->order ), __CLASS__ );
 	}
 
 	static function Flush( $product )
@@ -36,7 +36,7 @@ class Product_Category extends Entity
 	{
 		$query = "SELECT * FROM product_category WHERE product = ?";
 		$entity = Entity::getInstance();
-		$result = $entity->Collection( $query, $product_id );
+		$result = $entity->Collection( $query, $product_id, __CLASS__ );
 
 		if( $result ) foreach( $result as $category )
 		{
@@ -112,7 +112,7 @@ class Product_Category extends Entity
 							ORDER BY
 									product_category.order";
 
-				$result = $entity->Collection( $query, array( $category_id, "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%" ), 'stdClass', $limit, $offset );
+				$result = $entity->Collection( $query, array( $category_id, "%{$sentence}%", "%{$sentence}%", "%{$sentence}%", "%{$sentence}%" ), __CLASS__, $limit, $offset );
 			}
 			else
 			{

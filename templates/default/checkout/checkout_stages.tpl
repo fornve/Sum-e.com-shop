@@ -1,4 +1,3 @@
-
 <table class="checkout_stages">
 	<tr>
 		<td{if $checkout_stage<2} class="selected">1. Basket{else}>1. <a href="/Basket/">Basket</a>{/if}</td>

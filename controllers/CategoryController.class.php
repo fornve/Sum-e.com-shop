@@ -17,7 +17,7 @@ class CategoryController extends Controller
 			if( $page < 1 )
 				$page = 1;
 
-			$limit = Config::GetValue( 'category_products_limit' );
+			$limit = Site_Config::GetValue( 'category_products_limit' );
 			$offset = ( floor( $page ) - 1 ) * $limit;
 			$all_products = count( Product_Category::CategoryProductCollection( $id, $sentence ) );
 			

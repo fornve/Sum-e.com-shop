@@ -35,7 +35,7 @@ class ProductController extends Controller
 		$this->assign( 'title', "{$product->name} - {$category->name}" );
 		$this->assign( 'product', $product );
 		//$this->assign( 'related_products', $product->RelatedCollection() );
-		$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
+		$this->assign( 'vat_multiply', ( 1 + Site_Config::GetVat() ) );
 		echo $this->Decorate( 'product/view.tpl' );
 	}
 

@@ -1,1 +1,1 @@
-{assign var=filename value='default/basket/mini.tpl'}{include file=$filename}
+{assign var=filename value='basket/mini.tpl'}{include file=$filename}

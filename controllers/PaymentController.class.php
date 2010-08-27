@@ -10,7 +10,7 @@ class PaymentController extends Controller
 	{
 		//$order_id = Order::PlaceOrder( $_SESSION[ 'customer_details' ] );// <-- to be finished!
 
-		$this->assign( 'tax_rate', 100 * Config::GetVat() );
+		$this->assign( 'tax_rate', 100 * Site_Config::GetVat() );
 		$this->assign( 'customer', $_SESSION[ 'customer_details' ] );
 		$this->assign( 'basket', $_SESSION[ 'basket' ] );
 		$this->assign( 'customer_country', Country::Retrieve( $_SESSION[ 'customer_details' ]->country ) );

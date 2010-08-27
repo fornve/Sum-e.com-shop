@@ -1,6 +1,6 @@
 <?php
 
-class Config extends Entity
+class Site_Config extends Entity
 {
 	protected $schema = array( 'id', 'title', 'name', 'value', 'type', 'description' );
 
@@ -9,7 +9,7 @@ class Config extends Entity
 		 if( !$id )
 			return null;
 
-		$query = "SELECT * FROM config WHERE id = ?";
+		$query = "SELECT * FROM site_config WHERE id = ?";
 		$entity = new Entity();
 		$object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
@@ -18,7 +18,7 @@ class Config extends Entity
 
 	static function GetValue( $name )
 	{
-		$query = "SELECT value FROM config WHERE name = ?";
+		$query = "SELECT value FROM site_config WHERE name = ?";
 		$entity = new Entity();
 		$object = $entity->GetFirstResult( $query, $name, __CLASS__ );
 		return $object->value;
@@ -26,7 +26,7 @@ class Config extends Entity
 
 	static function SetValue( $name, $value )
 	{
-		$query = "Update config SET value = ? WHERE name = ?";
+		$query = "Update site_config SET value = ? WHERE name = ?";
 		$entity = new Entity();
 		$entity->Query( $query, array( $value, $name ) );
 	}
@@ -39,7 +39,7 @@ class Config extends Entity
 
 	static function GetAll()
 	{
-		$query = "SELECT * FROM config";
+		$query = "SELECT * FROM site_config";
 		$entity = new Entity();
 		$object = $entity->Collection( $query, null, __CLASS__ );
 
@@ -55,7 +55,7 @@ class Config extends Entity
 		{
 			$object = array();
 
-			$config = Config::GetAll();
+			$config = self::GetAll();
 
 			if( $config ) foreach( $config as $item )
 			{
@@ -70,7 +70,7 @@ class Config extends Entity
 
 	static function DefineAll()
 	{
-		$object = Config::GetCached();
+		$object = self::GetCached();
 		if( $object ) foreach( $object as $key => $value )
 		{
 			$key = strtoupper( $key );

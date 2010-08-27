@@ -6,17 +6,31 @@
  */
 class Controller
 {
+	public $decoration = 'decoration.tpl'; // decoration file
+	public $uri = null;
+	public $controller = 'IndexController';
+	public $action = 'Index';
+	public $params = null;
 	function __construct()
 	{
-		Controller::Startup();
-		Controller::VisitHandle();
+		try
+		{
+			Controller::VisitHandle();
+		}
+		catch( EntityException $e )
+		{
+			die( "Site is down: ". $e->getMessage() );
+		}
+
 		//$this->entity = new Entity;
 		$this->smarty = new Smarty;
 		$this->smarty->compile_dir = SMARTY_COMPILE_DIR;
 		$this->smarty->template_dir = SMARTY_TEMPLATES_DIR;
 		
 		if( !file_exists( $this->smarty->compile_dir ) )
+		{
 			mkdir( $this->smarty->compile_dir );
+		}
 	}
 
 	function Dispatch( $default = 'Index', $second_chance = false, $uri = null )
@@ -60,8 +74,21 @@ class Controller
 
 			if( method_exists( get_class( $controller ), $method ) ) // check if property exists
 			{
-			//	if( !$this->PageCached( $this->controller, $this->method, $this->uri ) )
+				try
+				{
 					$controller->$method( $input[ 3 ], $input[ 4 ] );
+				}
+				catch( EntityException $e )
+				{
+					$this->error = $e;
+					$this->CatchableError();
+				}
+				catch( Exception $e )
+				{
+					$this->error = $e;
+					$this->CatchableError();
+				}
+
 				
 				exit;
 			}
@@ -80,6 +107,32 @@ class Controller
 		$this->NotFound();
 	}
 
+	function CatchableError()
+	{
+		Filelog::Write( "[Catchable error]: ". $this->error->getMessage() ."\n\n" );
+
+		$this->assign( 'breadcrumbs', array( array( 'name' => 'Error' ) ) );
+		$this->assign( 'error', $this->error->getMessage() );
+		$this->assign( 'e', $this->error );
+		echo $this->Decorate( "catchable-error.tpl" );
+		exit;
+	}
+
+	function NotFound()
+	{
+		header( "HTTP/1.0 404 Not Found" );
+
+		$this->assign( 'breadcrumbs', array( array( 'name' => 'Not found' ) ) );
+
+		if( PRODUCTION )
+		{
+			echo $this->Decorate( "404.tpl" );
+		}
+		else
+		{
+			echo $this->Decorate( "404-development.tpl" );
+		}
+	}
 	function assign( $variable, $value )
 	{
 		$this->smarty->assign( $variable, $value );
@@ -96,19 +149,27 @@ class Controller
 	{
 		if( !$dir ) $dir = SMARTY_TEMPLATES_DIR;
 
-		$this->assign( 'vat_multiply', ( 1 + Config::GetVat() ) );
+		$this->assign( 'vat_multiply', ( 1 + Site_Config::GetVat() ) );
 
-		if( file_exists( $dir . $templste ) )
+		if( file_exists( $dir . $template ) )
+		{
 			$content = $this->smarty->fetch( $dir . $template );
+		}
 		else
+		{
 			$content = $this->smarty->fetch( SMARTY_DEFAULT_TEMPLATES_DIR . $template );
+		}
 
 		if( !filter_input( INPUT_GET, 'ajax' ) )
 		{
 			$this->assign( 'content', $content );
 
 			$this->PreDecorate();
-			$content = $this->smarty->fetch( $dir .'decoration.tpl' );
+			if( !PRODUCTION )
+			{
+				$this->smarty->assign( 'memory_peak', round( memory_get_peak_usage() / 1024, 2 ) );
+			}
+			$content = $this->smarty->fetch( $dir . $this->decoration );
 			$this->PostDecorate();
 		}
 
@@ -133,7 +194,7 @@ class Controller
 		//define( 'TEMPLATE_NAME', $template );
 		//define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/{$template}/" );
 
-		Config::DefineAll();
+		Site_Config::DefineAll();
 
 		// clean basket if empty
 		if( isset( $_SESSION[ 'basket' ]->items ) && count( $_SESSION[ 'basket' ]->items ) < 1 )
@@ -147,6 +208,7 @@ class Controller
 		$this->smarty->assign( 'entity_query', $_SESSION[ 'entity_query' ] );
 		$this->smarty->Assign( 'cache_query', $_SESSION[ 'cache_query' ] );
 		unset( $_SESSION[ 'entity_query' ] );
+		unset( $_SESSION[ 'cache_query' ] );
 
 		$categories = Category::LevelCollection( 0, false, $this->entity );
 		$this->assign( 'categories', $categories );
@@ -175,8 +237,8 @@ class Controller
 			$user_agent = User_Agent::GetByName( $_SERVER[ 'HTTP_USER_AGENT' ] );
 			if( !$user_agent )
 			{
-					$user_agent = new User_Agent();
-					$user_agent->name = $_SERVER[ 'HTTP_USER_AGENT' ];
+				$user_agent = new User_Agent();
+				$user_agent->name = $_SERVER[ 'HTTP_USER_AGENT' ];
 
 			}
 			$user_agent->count++;
@@ -187,7 +249,7 @@ class Controller
 
 	private function PageCacheGet( $controller, $method, $uri )
 	{
-		if( Config::PageCache() && Page_Cache_Config::Get( $controller, $method ) )
+		if( Site_Config::PageCache() && Page_Cache_Config::Get( $controller, $method ) )
 		{
 			return PageCache::Get( $uri );
 		}
@@ -195,10 +257,21 @@ class Controller
 
 	private function PageCacheSet( $content )
 	{
-		if( Config::PageCache() && $expires = Page_Cache_Config::Get( $this->controller, $this->method ) )
+		if( Site_Config::PageCache() && $expires = Page_Cache_Config::Get( $this->controller, $this->method ) )
 		{
 			return PageCache::Set( $this->uri, $content, $expires );
 		}
 	}
+
+	static function UserError( $text )
+	{
+		$_SESSION[ 'user_notification' ][] = array( 'type' => 'error', 'text' => $text );
+	}
+
+	static function UserNotice( $text )
+	{
+		$_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => $text );
+	}
+
 }
   

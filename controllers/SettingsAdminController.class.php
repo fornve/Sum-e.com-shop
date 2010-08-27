@@ -12,7 +12,7 @@ class SettingsAdminController extends AdminController
 			SettingsAdminController::UpdateVanedor();
 		}
 
-		$this->assign( 'configs', Config::GetAll() );
+		$this->assign( 'configs', Site_Config::GetAll() );
 		$this->assign( 'countries', Country::GetAll() );
 		$this->assign( 'vendor', Vendor::Retrieve( $_SESSION[ 'admin' ]->vendor->id ) );
 		echo $this->Decorate( 'admin/config/index.tpl' );
@@ -20,7 +20,7 @@ class SettingsAdminController extends AdminController
 
 	private function UpdateConfig()
 	{
-		$all_config = Config::GetAll();
+		$all_config = Site_Config::GetAll();
 		
 		if( $all_config ) foreach ( $all_config as $config )
 		{
@@ -35,7 +35,7 @@ class SettingsAdminController extends AdminController
 
 			if( $flush_cache )
 			{
-				Config::FlushCache();
+				Site_Config::FlushCache();
 			}
 		}
 	}

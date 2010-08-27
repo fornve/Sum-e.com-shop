@@ -135,7 +135,7 @@ class CategoryAdminController extends AdminController
 		{
 			Log::Add( "CATEGORY_DELETE", 'CATEGORY', $_SESSION[ 'admin' ]->id, "Category [ {$category->id} ] - {$category->name}" );
 			$category->Delete();
-			Config::FlushCache();
+			Site_Config::FlushCache();
 			$_SESSION[ 'user_notification' ][] = array( 'text' => "Category deleted.", 'type' => 'notice' );
 			self::Redirect( "/" );
 		}

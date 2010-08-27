@@ -3,6 +3,8 @@
 error_reporting( E_ALL ^E_NOTICE );
 define( 'TIMER', microtime( true ) );
 define( 'PROJECT_PATH', substr( __file__, 0, strlen( __file__ ) - 18 ) );
+define( 'INCLUDE_PATH', '/var/www/include' );
+require_once( INCLUDE_PATH .'/class/Config.class.php' );
 
 /* configuration begins */
 
@@ -18,13 +20,14 @@ define( 'PAGE_CACHE_DIR', '/tmp/shop/page_cache' ); // compiled pages cache
 
 define( 'CURRENCY_SIGN', '&pound;' );
 define( 'SALES_TAX_NAME', 'VAT' );
+define( 'VAT_DISPLAY', true );
 
-define( 'INCLUDE_PATH', '/var/www/include/' );
-define( 'SMARTY_DIR', INCLUDE_PATH .'smarty/' );
+define( 'SMARTY_DIR', INCLUDE_PATH .'/smarty/' );
 define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/gray/" );
 define( 'SMARTY_DEFAULT_TEMPLATES_DIR', PROJECT_PATH ."/templates/default/" );
 define( 'PRODUCTION', false );
 
+define( 'LOG_DIRECTORY', PROJECT_PATH .'/log' );
 if( PRODUCTION )
 {
 	define( 'ADMIN_EMAIL', 'marek@dajnowski.net' );
@@ -60,7 +63,7 @@ require_once( SMARTY_DIR .'Smarty.class.php' );
 
 function __autoload( $name )
 {
-	$path_array = array( 'class/', 'entity/', 'controllers/', INCLUDE_PATH .'class/' );
+	$path_array = array( 'class/', 'entity/', 'controllers/', INCLUDE_PATH .'/class/' );
 
 	foreach( $path_array as $path )
 	{
