@@ -84,7 +84,7 @@ class Site_Config extends Entity
 
 	static function GetVat()
 	{
-		if( constant( 'VAT_DISPLAY' ) == 1 && defined( 'VAT_VALUE' ) )
+		if( defined( 'VAT_DISPLAY' ) && constant( 'VAT_DISPLAY' ) == 1 && defined( 'VAT_VALUE' ) )
 			$vat = constant( 'VAT_VALUE' ) / 100;
 		else
 			$vat = 0;

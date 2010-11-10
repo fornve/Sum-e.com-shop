@@ -42,21 +42,18 @@ class Imageserver extends Entity
 
 		if( file_exists( "/tmp/{$filename}" ) )
 		{
-			$uploader = new ImageserverUploader( PROJECT_NAME, md5( IMAGESERVER_TOKEN . date( "Y-m-d" ) ) );
-			$uploader->upload( "/tmp/{$filename}", PROJECT_NAME );
+			$uploader = new ImageserverUploader( PROJECT_NAME, md5( Config::get( 'imageserver.token' ) . date( "Y-m-d" ) ) );
+			$return = $uploader->upload( "/tmp/{$filename}", PROJECT_NAME );
+
 			$command = "rm '/tmp/{$filename}'";
 			`{$command}`;
 
-			$url = IMAGESERVER .'/'. PROJECT_NAME .'/';
-			$url .= $filename;
-
-			return $url;
+			return $return;
 		}
 	}
 
 	public static function SmartyGetUrl( $params, &$smarty )
 	{
-		var_dump( $params  ); exit;
 		return Imageserver::GetUrl( $params[ 'url' ] );
 	}
 
@@ -89,21 +86,23 @@ class Imageserver extends Entity
 			error_log( "Fileserver upload: {$filename} [". filesize( $filename ) ."]" );
 
 			if( file_exists( $filename ) && filesize( $filename ) > 0 )
-				$url = self::Put( $filename, $original_url );
+			{
+				$return = self::Put( $filename, $original_url );
+			}
 
 			$command = "rm '{$filename}'";
 			`{$command}`;
 
-			if( $url )
+			if( get_class( $return ) == 'File' )
 			{
 				$image = new Imageserver();
 				$image->file = null;
 				$image->original_url = $original_url;
-				$image->destination_url = $url;
+				$image->destination_url = Config::get( 'imageserver.resources' ) . $return->file;
 				$image->created = time();
 				$image->Save();
 			
-				return $url; 
+				return $image->destination_url; 
 			}
 		}
 
