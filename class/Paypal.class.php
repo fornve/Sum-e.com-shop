@@ -19,7 +19,7 @@ class Payment_Paypal_Driver implements Payment_Driver {
 	// this array details the required fields within the arrays $set_express_checkout_fields,
 	// $get_express_checkout_fields, $do_express_checkout_fields as well as the
 	// fields wihtin api_connection and api_authorization
-	private $required_fields = array
+	protected $required_fields = array
 	(
 		'USER'          => FALSE,
 		'PWD'           => FALSE,
@@ -36,7 +36,7 @@ class Payment_Paypal_Driver implements Payment_Driver {
 	//-- https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token={20 single byte character timestamped token}
 	//-- this token is passed back and forth throughout the stages of the express checkout process
 
-	private $set_express_checkout_fields = array
+	protected $set_express_checkout_fields = array
 	(
 		//-- REQUIRED --//
 		'METHOD'        => 'SetExpressCheckout',
@@ -84,14 +84,14 @@ class Payment_Paypal_Driver implements Payment_Driver {
 	// see under SetExpressCheckout Request here : https://www.paypal.com/en_US/ebook/PP_NVPAPI_DeveloperGuide/Appx_fieldreference.html#2557853
 	);
 
-	private $get_express_checkout_fields = array
+	protected $get_express_checkout_fields = array
 	(
 		'METHOD' => 'GetExpressCheckoutDetails',
 		'TOKEN'  => '' // this token is retrieved from the response to the SetExpressCheckout call
 	);
 
 	//-- associative array filled by the paypal api response to a call to the GetExpressCheckout method
-	private $get_express_checkout_response = array();
+	protected $get_express_checkout_response = array();
 	// responses contain these fields:
 	// TOKEN
 	// EMAIL
@@ -117,7 +117,7 @@ class Payment_Paypal_Driver implements Payment_Driver {
 	// PHONENUM      -  Note: PayPal returns a contact telephone number only if your Merchant account profile settings require that the buyer enter one.
 	// REDIRECTREQUIRED - flag to indicate whether you need to redirect the customer to back to PayPal after completing the transaction.
 
-	private $do_express_checkout_fields = array
+	protected $do_express_checkout_fields = array
 	(
 		//-- REQUIRED --
 		'METHOD'        => 'DoExpressCheckoutPayment',
@@ -149,7 +149,7 @@ class Payment_Paypal_Driver implements Payment_Driver {
 		*/
 	);
 
-	private $api_authroization_fields = array
+	protected $api_authroization_fields = array
 	(
 		'USER'          => '',
 		'PWD'           => '',
@@ -158,7 +158,7 @@ class Payment_Paypal_Driver implements Payment_Driver {
 	);
 
 
-	private $api_connection_fields = array
+	protected $api_connection_fields = array
 	(
 		'ENDPOINT'      => 'https://api-3t.paypal.com/nvp',
 		'PAYPALURL'     => 'https://www.paypal.com/webscr&cmd=_express-checkout&token=',
@@ -166,11 +166,11 @@ class Payment_Paypal_Driver implements Payment_Driver {
 		'GETDETAILS'    => TRUE
 	);
 
-	private $array_of_arrays;
+	protected $array_of_arrays;
 
-	private $test_mode = TRUE;
+	protected $test_mode = TRUE;
 
-	private $nvp_response_array = array();
+	protected $nvp_response_array = array();
 	// after successful transaction $nvp_response_array will contain
 	// TOKEN           - The timestamped token value that was returned by SetExpressCheckout
 	// TRANSACTIONID   - Unique transaction ID of the payment. 19 single-byte characters

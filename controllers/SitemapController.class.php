@@ -19,7 +19,7 @@ class SitemapController extends Controller
 		echo $sitemap->GenerateXML();
 	}
 
-	private static function Generate()
+	protected static function Generate()
 	{
 		// categories
 		$categories = Category::GetAll();

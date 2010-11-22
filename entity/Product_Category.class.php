@@ -77,7 +77,7 @@ class Product_Category extends Entity
 			return $collection;
 	}
 
-	private function CategoryProductCollectionItem( $category_id, $sentence, $limit = null, $offset = null, $nocache = false )
+	protected function CategoryProductCollectionItem( $category_id, $sentence, $limit = null, $offset = null, $nocache = false )
 	{
 		$entity = Entity::getInstance();
 		$cache_hash = md5("{$category_id}{$sentence}{$limit}{$offset}");

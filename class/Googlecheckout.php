@@ -12,13 +12,13 @@
 class Payment_Googlecheckout_Driver implements Payment_Driver
 {
 	// Fields required to do a transaction
-	private $required_fields = array
+	protected $required_fields = array
 	(
 		'action'			=> FALSE,
 		'xml_body'			=> FALSE
 	);
 
-	private $fields = array
+	protected $fields = array
 	(
 		'google_API_key'				=> '',
 		'google_merchant_id'			=> '',
@@ -28,7 +28,7 @@ class Payment_Googlecheckout_Driver implements Payment_Driver
 		'xml_body'						=> ''
 	);
 
-	private $test_mode = TRUE;
+	protected $test_mode = TRUE;
 
 	/**
 	 * Sets the config for the class.

@@ -93,9 +93,9 @@ class ProductAdminController extends AdminController
 	}
 
 
-	// private methods
+	// protected methods
 
-	private function UpdateProductGeneral( $product )
+	protected function UpdateProductGeneral( $product )
 	{
 		$input = Common::Inputs( array( 'quantity', 'price', 'name', 'weight', 'status', 'tax', 'description', 'keywords', 'upc', 'storage_location', 'condition' ), INPUT_POST );
 
@@ -107,7 +107,7 @@ class ProductAdminController extends AdminController
 		$product->Save();
 	}
 
-	private function UpdateProductImages( $product )
+	protected function UpdateProductImages( $product )
 	{ 
 
 		// upload file
@@ -163,7 +163,7 @@ class ProductAdminController extends AdminController
 			Product_Image::SetProductPrimary( $product, $input->main_image );
 	}
 
-	private function UpdateProductCategories( $product )
+	protected function UpdateProductCategories( $product )
 	{
 		$categories = Category::GetAll();
 
@@ -188,7 +188,7 @@ class ProductAdminController extends AdminController
 		}	
 	}
 
-	private function UpdateProductVariants( $product )
+	protected function UpdateProductVariants( $product )
 	{
 		// create new
 		$input = Common::Inputs( array( 'new_variant_type', 'new_variant_name', 'new_variant_price_change', 'new_variant_quantity' ), INPUT_POST );
@@ -253,7 +253,7 @@ class ProductAdminController extends AdminController
 
 	}
 
-	private function ChangeStatus()
+	protected function ChangeStatus()
 	{
 		$input = Common::Inputs( array( 'enable', 'disable' ) );
 

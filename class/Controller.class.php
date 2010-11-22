@@ -247,7 +247,7 @@ class Controller
 		}
 	}
 
-	private function PageCacheGet( $controller, $method, $uri )
+	protected function PageCacheGet( $controller, $method, $uri )
 	{
 		if( Site_Config::PageCache() && Page_Cache_Config::Get( $controller, $method ) )
 		{
@@ -255,7 +255,7 @@ class Controller
 		}
 	}
 
-	private function PageCacheSet( $content )
+	protected function PageCacheSet( $content )
 	{
 		if( Site_Config::PageCache() && $expires = Page_Cache_Config::Get( $this->controller, $this->method ) )
 		{

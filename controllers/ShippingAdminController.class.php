@@ -47,7 +47,7 @@ class ShippingAdminController extends AdminController
 		echo $this->Decorate( 'admin/shipping/edit.tpl' );
 	}
 
-	private function ChangeStatus()
+	protected function ChangeStatus()
 	{
 		$input = Common::Inputs( array( 'enable', 'disable' ) );
 		

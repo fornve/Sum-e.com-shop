@@ -18,7 +18,7 @@ class SettingsAdminController extends AdminController
 		echo $this->Decorate( 'admin/config/index.tpl' );
 	}
 
-	private function UpdateConfig()
+	protected function UpdateConfig()
 	{
 		$all_config = Site_Config::GetAll();
 		
@@ -40,7 +40,7 @@ class SettingsAdminController extends AdminController
 		}
 	}
 
-	private function UpdateVanedor()
+	protected function UpdateVanedor()
 	{
 		$vendor = Vendor::Retrieve( $_SESSION[ 'admin' ]->vendor->id );
 		$vendor->SetProperties( INPUT_POST );

@@ -73,7 +73,7 @@ class ProductController extends Controller
 		echo "product not found... needs own page with search and related";
 	}
 	
-	private static function IncrementVisited( $id )
+	protected static function IncrementVisited( $id )
 	{
 		if( $_SESSION[ 'visited_product' ][ $id ] )
 			return false;

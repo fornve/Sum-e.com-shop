@@ -20,7 +20,7 @@ class Paypalpro implements Payment
 	* *note - paypalpro API field names are not case sensitive
 	*/
 
-	private $required_fields = array
+	protected $required_fields = array
 	(
 
 		'ENDPOINT'       => FALSE,
@@ -48,7 +48,7 @@ class Paypalpro implements Payment
 
 	);
 
-	private $fields = array
+	protected $fields = array
 	(
 
 		'ENDPOINT'       => '',
@@ -105,7 +105,7 @@ class Paypalpro implements Payment
 		// https://www.paypal.com/en_US/ebook/PP_NVPAPI_DeveloperGuide/Appx_fieldreference.html#2145100
 	);
 
-	private $test_mode = TRUE;
+	protected $test_mode = TRUE;
 
 	/**
 	 * Sets the config for the class.

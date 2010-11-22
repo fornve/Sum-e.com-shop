@@ -56,7 +56,7 @@ class CheckoutController extends Controller
 	}
 
 	// pivate emethods
-	private function YourDetailsValidate( $input )
+	protected function YourDetailsValidate( $input )
 	{
 		$required_fields = array( 'firstname', 'lastname', 'address1', 'postcode', 'city', 'country', 'email', 'confirm_email' );
 

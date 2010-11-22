@@ -78,9 +78,9 @@ class PayPalApi
 		return $result;
 	}
 
-	// private methods
+	// protected methods
 
-	private function PayPalCall( $method, $args )
+	protected function PayPalCall( $method, $args )
 	{
 		foreach( $args as $key => $value )
 		{
@@ -92,7 +92,7 @@ class PayPalApi
 		return PayPalApi::ResponseHandler( $httpParsedResponseAr, $method );
 	}
 
-	private static function PPHttpPost( $methodName_, $nvpStr_)
+	protected static function PPHttpPost( $methodName_, $nvpStr_)
 	{
 		$environment = "sandbox";
 
@@ -155,7 +155,7 @@ class PayPalApi
 		return $httpParsedResponseAr;
 	}
 
-	private static function ResponseHandler( $httpParsedResponseAr, $method = null )
+	protected static function ResponseHandler( $httpParsedResponseAr, $method = null )
 	{
 		if( "Success" == $httpParsedResponseAr[ "ACK" ] )
 		{
@@ -168,7 +168,7 @@ class PayPalApi
 
 	}
 
-	private static function DecodeResult( $input )
+	protected static function DecodeResult( $input )
 	{
 		if( $input ) foreach( $input as $key => $value )
 		{

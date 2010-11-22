@@ -91,9 +91,9 @@ class PaymentController extends Controller
 		error_log( 'Testing notice: not crashed. ;)' );
 	}
 	
-	// private methods
+	// protected methods
 
-	private static function PostalOrderValidate( $input )
+	protected static function PostalOrderValidate( $input )
 	{
 		$required = array( 'firstname', 'lastname', 'address', 'postcode', 'city', 'country', 'email' );
 
