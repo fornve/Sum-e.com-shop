@@ -1,7 +1,7 @@
 <div class="basket post">
 	
 	{assign var=checkout_stage value=1}
-	{include file=checkout/checkout_stages.tpl}
+	{include file=checkout/checkout_stages.tpl checkout_stage=1}
 
     <h2 class="title">Basket</h2>
 

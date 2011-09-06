@@ -39,7 +39,7 @@ else
 {
 	define( 'ADMIN_EMAIL', 'tigi@sunforum.co.uk' );
 	define( 'SMARTY_COMPILE_DIR', '/tmp/shop' );
-	define( 'ASSETS_PATH', '/home/tigi/media/assets/shop' );
+	define( 'ASSETS_PATH', '/var/assets/shop' );
 	define( 'PAYPAL_ACCOUNT_EMAIL', 'dummy_1244752696_biz@dajnowski.net' );
 }
 require_once( 'database.php' );
