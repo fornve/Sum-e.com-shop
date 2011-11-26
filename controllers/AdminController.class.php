@@ -7,6 +7,7 @@
 class AdminController extends Controller
 {
 	public $breadcrumbs = array( array( 'link' => '/Admin/', 'name' => 'Admin' ) );
+
 	function __construct()
 	{
 		if( $_SERVER[ 'REQUEST_URI' ] != '/Admin/Login' )
@@ -22,7 +23,7 @@ class AdminController extends Controller
 		$this->assign( 'breadcrumbs', $this->breadcrumbs );
 		echo $this->Decorate( 'admin/index.tpl' );
 	}
-	
+
 	function Login()
 	{
 		if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )

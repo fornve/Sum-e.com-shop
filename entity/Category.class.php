@@ -4,15 +4,19 @@ class Category extends Entity
 {
 	protected $schema = array( 'id', 'name', 'parent', 'image', 'sort_order' );
 
-	static function Retrieve( $id, $nocache = false, $entity = null )
+	static function retrieve( $id, $nocache = false, $entity = null )
 	{
 		if( !$id )
+		{
 			return null;
+		}
 
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 
 		if( $nocache )
+		{
 			$cache->delete( CACHE_PREFIX ."Category{$id}" );
+		}
 
 		$object = $cache->get( CACHE_PREFIX ."Category{$id}" );
 
@@ -20,18 +24,21 @@ class Category extends Entity
 		{
 			$query = "SELECT * FROM category WHERE id = ?";
 
-			if( !$entity )
-				$entity = new Entity();
-				
+			$entity = Entity::getInstance();
+
 			$object = $entity->GetFirstResult( $query, $id, __CLASS__ );
 
 			if( !$object )
+			{
 				return null;
+			}
 
 			if( $object->parent )
-				$object->parent = Category::Retrieve( $object->parent, $nocache );
+			{
+				$object->parent = Category::retrieve( $object->parent, $nocache );
+			}
 
-			$object->description = Category_Description::Retrieve( $object->id );
+			$object->description = Category_Description::retrieve( $object->id );
 
 			$cache->set( CACHE_PREFIX ."Category{$id}", $object, false, CACHE_LIFETIME );
 		}
@@ -39,14 +46,14 @@ class Category extends Entity
 		return $object;
 	}
 
-	function GetDescription()
+	function getDescription()
 	{
-		return Category_Description::Retrieve( $object->id );
+		return Category_Description::retrieve( $object->id );
 	}
 
-	function FlushCache()
+	function flushCache()
 	{
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 		$cache->delete( CACHE_PREFIX ."Category{$this->id}" );
 		$cache->delete( CACHE_PREFIX ."CategoryTree{$this->id}" );
 		$cache->delete( CACHE_PREFIX ."CategoryTree{$this->parent}" );
@@ -54,14 +61,14 @@ class Category extends Entity
 		$cache->delete( CACHE_PREFIX ."CategoryLevel{$this->parent}" );
 	}
 
-	function ImageBasename()
+	function imageBasename()
 	{
 		return basename( $this->image );
 	}
 
-	static function LevelCollection( $parent = 0, $nocache = false, $entity = null )
+	static function levelCollection( $parent = 0, $nocache = false, $entity = null )
 	{
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 
 		if( $nocache )
 			$cache->delete( CACHE_PREFIX ."CategoryLevel{$parent}" );
@@ -83,7 +90,7 @@ class Category extends Entity
 
 			if( $collection ) foreach( $collection as $item )
 			{
-				$object = Category::Retrieve( $item->id, $nocache, $entity );
+				$object = Category::retrieve( $item->id, $nocache, $entity );
 				$objects[] = $object;
 			}
 
@@ -93,16 +100,14 @@ class Category extends Entity
 		return $objects;
 	}
 
-	static function GetAll()
+	static function getAll()
 	{
-		$entity = new Entity();
-		$query = "SELECT * FROM category";
-		return $entity->Collection( $query );
+		return parent::getAll( __CLASS__ );
 	}
 
-	static function GetTree( $nocache = false )
+	static function getTree( $nocache = false )
 	{
-		$cache = new Cache();
+		$cache = Cache::getInstance();
 
 		if( $nocache )
 			$cache->delete( CACHE_PREFIX ."CategoryTree" );
@@ -116,15 +121,16 @@ class Category extends Entity
 				$parent->kids = Category::LevelCollection( $parent->id );
 				$root[] = $parent;
 			}
+
 			$cache->set( CACHE_PREFIX ."CategoryTree", $root, false, CACHE_LIFETIME );
 		}
 
 		return $root;
 	}
 
-	static function Search( $sentence, $search_vars )
+	static function search( $sentence, $search_vars )
 	{
-		$query = "SELECT 
+		$query = "SELECT
 						category.*
 					FROM
 						category
@@ -135,7 +141,7 @@ class Category extends Entity
 					WHERE
 						( category_description.description LIKE ? OR category.name LIKE ? )
 						";
-		
+
 		$attributes = array( "%{$sentence}%", "%{$sentence}%" );
 
 		// category
@@ -152,8 +158,8 @@ class Category extends Entity
 
 
 		$query .= " GROUP BY category.id";
-		$entity = new Entity();
+		$entity = Entity::getInstance();
 
-		return $entity->Collection( $query, $attributes, __CLASS__ );
+		return $entity->collection( $query, $attributes, __CLASS__ );
 	}
 }
