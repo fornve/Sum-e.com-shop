@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package shop 
+ * @package shop
  * @subpackage framework
  */
 class Controller
@@ -11,6 +11,7 @@ class Controller
 	public $controller = 'IndexController';
 	public $action = 'Index';
 	public $params = null;
+
 	function __construct()
 	{
 		try
@@ -26,7 +27,8 @@ class Controller
 		$this->smarty = new Smarty;
 		$this->smarty->compile_dir = SMARTY_COMPILE_DIR;
 		$this->smarty->template_dir = SMARTY_TEMPLATES_DIR;
-		
+		$this->smarty->allow_php_tag = true;
+
 		if( !file_exists( $this->smarty->compile_dir ) )
 		{
 			mkdir( $this->smarty->compile_dir );
@@ -68,7 +70,7 @@ class Controller
 		if( class_exists( $controller_name ) )
 		{
 			$controller = new $controller_name;
-			
+
 			if( strlen( $method ) == 0 )
 				$method = 'Index';
 
@@ -89,7 +91,7 @@ class Controller
 					$this->CatchableError();
 				}
 
-				
+
 				exit;
 			}
 		}
@@ -103,7 +105,7 @@ class Controller
 				exit;
 			}
 		}
-		
+
 		$this->NotFound();
 	}
 
@@ -150,6 +152,7 @@ class Controller
 		if( !$dir ) $dir = SMARTY_TEMPLATES_DIR;
 
 		$this->assign( 'vat_multiply', ( 1 + Site_Config::GetVat() ) );
+		$this->assign( 'basedir', SMARTY_DEFAULT_TEMPLATES_DIR );
 
 		if( file_exists( $dir . $template ) )
 		{
@@ -165,10 +168,12 @@ class Controller
 			$this->assign( 'content', $content );
 
 			$this->PreDecorate();
+
 			if( !PRODUCTION )
 			{
 				$this->smarty->assign( 'memory_peak', round( memory_get_peak_usage() / 1024, 2 ) );
 			}
+
 			$content = $this->smarty->fetch( $dir . $this->decoration );
 			$this->PostDecorate();
 		}
@@ -274,4 +279,4 @@ class Controller
 	}
 
 }
-  
+

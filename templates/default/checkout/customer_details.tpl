@@ -2,7 +2,7 @@
 <div class="post">
 
 	{assign var=checkout_stage value=3}
-	{include file=checkout/checkout_stages.tpl}
+	{include file="checkout/checkout_stages.tpl"}
 
 	<h2 class="title">Your details</h2>
 

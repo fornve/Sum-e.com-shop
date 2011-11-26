@@ -1,8 +1,8 @@
 <div class="post basket">
 
 	{assign var=checkout_stage value=4}
-	{include file=checkout/checkout_stages.tpl}
-	
+	{include file="checkout/checkout_stages.tpl"}
+
 	<h2 class="title">Review your order and choose payment method</h2>
 
 	<div class="post_content">
