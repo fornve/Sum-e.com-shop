@@ -1,2 +1,2 @@
-{assign var=filename value='/var/www/shop/templates/default/admin/order/update_form.tpl'}
+{assign var=filename value="{$config->get('project-path')}/templates/default/admin/order/update_form.tpl"}
 {include file=$filename}

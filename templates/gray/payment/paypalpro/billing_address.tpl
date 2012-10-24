@@ -1,2 +1,2 @@
-{assign var=filename value='/var/www/shop/templates/default/payment/paypalpro/billing_address.tpl'}
+{assign var=filename value="{$config->get('project-path')}/templates/default/payment/paypalpro/billing_address.tpl"}
 {include file=$filename}

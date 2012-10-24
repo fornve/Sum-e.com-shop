@@ -11,6 +11,8 @@ class Controller
 	public $controller = 'IndexController';
 	public $action = 'Index';
 	public $params = null;
+	public $scripts = array();
+	public $styles = array();
 
 	function __construct()
 	{
@@ -33,9 +35,22 @@ class Controller
 		{
 			mkdir( $this->smarty->compile_dir );
 		}
+
+		$this->assign( 'config', new ConfigWrapper() );
+
 	}
 
-	function Dispatch( $default = 'Index', $second_chance = false, $uri = null )
+	public function addScript( $script )
+	{
+		$this->scripts[] = $script;
+	}
+
+	public function addStyle( $style, $media = 'all' )
+	{
+		$this->styles[] = array( 'file' => $style, 'media' => $media );
+	}
+
+	function dispatch( $default = 'Index', $second_chance = false, $uri = null )
 	{
 		if( !$second_chance )
 			$uri = $_SERVER['REQUEST_URI'];
@@ -166,8 +181,10 @@ class Controller
 		if( !filter_input( INPUT_GET, 'ajax' ) )
 		{
 			$this->assign( 'content', $content );
+			$this->assign( 'scripts', $this->scripts );
+			$this->assign( 'styles', $this->styles );
 
-			$this->PreDecorate();
+			$this->preDecorate();
 
 			if( !PRODUCTION )
 			{

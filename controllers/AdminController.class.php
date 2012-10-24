@@ -16,7 +16,7 @@ class AdminController extends Controller
 		parent::__construct();
 	}
 
-	function Index()
+	function index()
 	{
 		//$_SESSION[ 'last_release' ] = Common::HttpPost( "http://sumsoft.sunforum.co.uk/Index/GetVersion/", array( 'shop_name' => Vendor::Retrieve( $_SESSION[ 'admin' ]->vendor->id )->name, 'shop_address' => $_SERVER[ 'SERVER_NAME' ] ) );
 
@@ -24,7 +24,7 @@ class AdminController extends Controller
 		echo $this->Decorate( 'admin/index.tpl' );
 	}
 
-	function Login()
+	function login()
 	{
 		if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 		{
@@ -46,11 +46,12 @@ class AdminController extends Controller
 			}
 		}
 
+		$this->addScript( '/resources/js/jquery.validate.js' );
 		$this->assign( 'breadcrumbs', array( array( 'link' => '/Admin/Login', 'name' => 'Admin Login' ) ) );
 		echo $this->Decorate( 'admin/login.tpl' );
 	}
 
-	function Logout()
+	function logout()
 	{
 		$_SESSION[ 'user_notification' ][] = array( 'type' => 'notice', 'text' => "Admin logged out." );
 		unset( $_SESSION['admin'] );
@@ -58,7 +59,7 @@ class AdminController extends Controller
 		exit;
 	}
 
-	function ListAll()
+	function listAll()
 	{
 		if( !$_SESSION[ 'admin' ] )
 			self::Redirect( '/' );
@@ -67,7 +68,7 @@ class AdminController extends Controller
 		echo $this->Decorate( 'admin/admin/list.tpl' );
 	}
 
-	function Edit()
+	function edit()
 	{
 		if( $_SERVER['REQUEST_METHOD'] == 'POST' )
 		{
@@ -90,7 +91,7 @@ class AdminController extends Controller
 		self::Redirect( '/Admin/ListAll/' );
 	}
 
-	function Delete( $id )
+	function delete( $id )
 	{
 		$admin = Admin::Retrieve( $id );
 		if( $admin->id == $_SESSION[ 'admin' ]->id )
@@ -109,7 +110,7 @@ class AdminController extends Controller
 
 	}
 
-	function ChangePassword( $id )
+	function changePassword( $id )
 	{
 		$admin = Admin::Retrieve( $id );
 
@@ -153,11 +154,11 @@ class AdminController extends Controller
 		echo $this->Decorate( "admin/admin/list.tpl" );
 	}*/
 
-	static function EnsureAdminAndProductOwner( $id )
+	static function ensureAdminAndProductOwner( $id )
 	{
 	}
 
-	static function EnsureAdmin()
+	static function ensureAdmin()
 	{
 		if( !$_SESSION[ 'admin' ] )
 		{

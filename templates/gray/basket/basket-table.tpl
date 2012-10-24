@@ -1,2 +1,2 @@
-{assign var=filename value='/var/www/shop/templates/default/basket/basket-table.tpl'}
+{assign var=filename value="{$config->get('project-path')}/templates/default/basket/basket-table.tpl"}
 {include file=$filename}

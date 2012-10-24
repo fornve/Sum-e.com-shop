@@ -3,11 +3,16 @@
 /* Startup :fixme It should be in separate file */
 
 error_reporting( E_ALL ^E_WARNING ^E_NOTICE );
-define( 'TIMER', microtime( true ) );
-define( 'PROJECT_PATH', substr( __file__, 0, strlen( __file__ ) - 18 ) );
-define( 'INCLUDE_PATH', '/var/www/include' );
+ini_set('display_errors', 'On');
 
-require_once( INCLUDE_PATH .'/class/Config.class.php' );
+require_once( 'class/Config.class.php' );
+
+Config::set( 'timer', microtime( true ) );
+Config::set( 'project-path', substr( __file__, 0, strlen( __file__ ) - 18 ) );
+Config::set( 'include-path', '/var/www/include' );
+Config::set( 'production', false );
+
+define( 'PRODUCTION', Config::_( 'production' ) ); // legacy
 
 spl_autoload_register( 'autoload' );
 
@@ -17,7 +22,7 @@ function autoload( $name )
 		'class/',
 		'entity/',
 		'controllers/',
-		INCLUDE_PATH .'/class/'
+		Config::get( 'include-path' ) .'/class/'
 	);
 
 	foreach( $path_array as $path )
@@ -32,28 +37,28 @@ function autoload( $name )
 
 /* configuration begins */
 
-define( 'PROJECT_NAME', 'shop' );
+Config::set( 'project-name', 'shop' );
 
-define( 'CACHE_TYPE', 'memcache' );
+Config::set( 'CACHE_TYPE', 'memcache' );
 define( 'CACHE_HOST', '127.0.0.1' );
 define( 'CACHE_PORT', 11211 );
 define( 'CACHE_LIFETIME', 12000 ); // in seconds
-define( 'CACHE_PREFIX', 'C4DEVELOPMENT' );
+define( 'CACHE_PREFIX', Config::_( 'project-name' ) );
 
 define( 'PAGE_CACHE_DIR', '/tmp/shop/page_cache' ); // compiled pages cache
 
-define( 'CURRENCY_SIGN', '&pound;' );
+define( 'CURRENCY_SIGN', '$;' );
 define( 'SALES_TAX_NAME', 'VAT' );
-define( 'VAT_DISPLAY', true );
+define( 'VAT_DISPLAY', false );
 
-define( 'SMARTY_DIR', INCLUDE_PATH .'/Smarty-3.0.6/libs/' );
-define( 'SMARTY_TEMPLATES_DIR', PROJECT_PATH ."/templates/gray/" );
-define( 'SMARTY_DEFAULT_TEMPLATES_DIR', PROJECT_PATH ."/templates/default/" );
+define( 'SMARTY_DIR', Config::get( 'include-path' ) .'/Smarty-3.0.6/libs/' );
+define( 'SMARTY_TEMPLATES_DIR', Config::get( 'project-path' ) ."/templates/gray/" );
+define( 'SMARTY_DEFAULT_TEMPLATES_DIR', Config::get( 'project-path' ) ."/templates/default/" );
 define( 'PRODUCTION', false );
 
-define( 'LOG_DIRECTORY', PROJECT_PATH .'/log' );
+define( 'LOG_DIRECTORY', Config::get( 'project-path' ) .'/log' );
 
-if( PRODUCTION )
+if( Config::get( 'production' ) )
 {
 	define( 'ADMIN_EMAIL', 'marek@dajnowski.net' );
 	define( 'SMARTY_COMPILE_DIR', '/tmp/shop' );
@@ -72,9 +77,9 @@ require_once( 'database.php' );
 
 /* end of configuration */
 
-if( !file_exists( INCLUDE_PATH .'/class/Entity.class.php' ) )
+if( !file_exists( Config::get( 'include-path' ) .'/class/Entity.class.php' ) )
 {
-	die('LiteEntityLib not found. Please install https://github.com/fornve/LiteEntityLib to '. INCLUDE_PATH );
+	die('LiteEntityLib not found. Please install https://github.com/fornve/LiteEntityLib to '. Config::get( 'include-path' ) );
 }
 
 if( !file_exists( SMARTY_COMPILE_DIR ) )

@@ -59,7 +59,7 @@
 		<div style="clear: both;"></div>
 
 		<div>
-			{include file='/var/www/include/templates/pager.tpl'}
+			{include file="{$config->get('include-path')}/templates/pager.tpl"}
 		</div>
 	</div>
 	{else}

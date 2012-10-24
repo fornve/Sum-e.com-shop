@@ -1,34 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>{if $title}{$title} | {/if}Shop - Carp 4 </title>
-    {if $metas|@count}
- 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   {foreach from=$metas item=meta}
-        <meta {if $meta.name} name="{$meta.name}"{/if} {if $meta.content}content="{$meta.content|truncate:250:''}"{/if} />
-    {/foreach}
-    {/if}
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/css/gray.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
-    <link href="/resources/css/thickbox.css" rel="stylesheet" type="text/css" media="screen" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{if $title}{$title} | {/if}Shop - Carp 4 </title>
+	{if $metas|@count}
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	{foreach from=$metas item=meta}
+		<meta {if $meta.name} name="{$meta.name}"{/if} {if $meta.content}content="{$meta.content|truncate:250:''}"{/if} />
+	{/foreach}
+	{/if}
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="/resources/css/blueprint.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/resources/css/gray.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/resources/css/print.css" rel="stylesheet" type="text/css" media="print" />
+	<link href="/resources/css/thickbox.css" rel="stylesheet" type="text/css" media="screen" />
 
 	<script type="text/javascript" src="/resources/js/jquery.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
+
+	{foreach $scripts as $script}
+		<script type="text/javascript" src="{$script}"></script>
+	{/foreach}
+
+	{foreach $styles as $style}
+		<link href="{$style.file}" rel="stylesheet" type="text/css" media="{$style.media}" />
+	{/foreach}
+
 	{if $smarty.session.admin}
 		<link href="/resources/themes/ui-darkness/ui.all.css" rel="stylesheet" type="text/css" media="screen" />
 	{/if}
 	{if $smarty.session.admin && $smarty.const.TINY_MCE}
 		<script type="text/javascript" src="/resources/js/tiny_mce/tiny_mce.js"></script>
 	{/if}
-    <script type="text/javascript" src="/resources/js/thickbox.js"></script>
-    <script type="text/javascript" src="/resources/js/common.js"></script>
+	<script type="text/javascript" src="/resources/js/thickbox.js"></script>
+	<script type="text/javascript" src="/resources/js/common.js"></script>
 
-    {if $smarty.session.user_notification}
-    <script type="text/javascript">
-            $(document).ready(function(){ldelim}userNotification('{foreach from=$smarty.session.user_notification item=message}{assign var=notification_type value=$message.type}<p>{$message.text}</p>{/foreach}','{$notification_type}');{rdelim});
+	{if $smarty.session.user_notification}
+	<script type="text/javascript">
+			$(document).ready(function(){ldelim}userNotification('{foreach from=$smarty.session.user_notification item=message}{assign var=notification_type value=$message.type}<p>{$message.text}</p>{/foreach}','{$notification_type}');{rdelim});
 
 	</script>
     {/if}
@@ -67,7 +77,7 @@
 <div id="page">
 
     <div id="breadcrumbs">
-		{include file='misc/breadcrumbs.tpl'}
+		{include file="misc/breadcrumbs.tpl"}
     </div>
 
 	<div id="content">
@@ -77,8 +87,7 @@
 	<!-- end #content -->
 	<div id="sidebar">
         <div id="basket">
-			{assign var=basedir value=$smarty.const.SMARTY_DEFAULT_TEMPLATES_DIR}
-			{include file="$basedir/basket/mini.tpl"}
+			{include file="{$config->get('project-path')}/templates/default/basket/mini.tpl"}
         </div>
 
 		<ul>
@@ -120,17 +129,17 @@
 <!-- end #footer -->
 </div>
 
-    {if $entity_query}
-    <div id="query_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver;">
-            <span onclick="$('#query_debug').hide('fast')">Close</span>
-            <ol style="">
-                    {foreach from=$entity_query item=query}
-                    <li style="font-size: 11px;background-color: mistyrose; margin: 2px 0; padding: 2px;">{$query}</li>
-                    {/foreach}
-            </ol>
-            <span onclick="$('#query_debug').hide('fast')">Close</span>
-    </div>
-    {/if}
+	{if $entity_query}
+	<div id="query_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver;">
+			<span onclick="$('#query_debug').hide('fast')">Close</span>
+			<ol style="">
+					{foreach from=$entity_query item=query}
+					<li style="font-size: 11px;background-color: mistyrose; margin: 2px 0; padding: 2px;">{$query}</li>
+					{/foreach}
+			</ol>
+			<span onclick="$('#query_debug').hide('fast')">Close</span>
+	</div>
+	{/if}
 
 	{if $cache_query}
 	<div id="cache_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver; overflow: scroll;">
@@ -144,13 +153,13 @@
 	</div>
 	{/if}
 
-    {if $smarty.session.basket}
-    <div id="basket_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver;">
-        <span onclick="$('#query_debug').hide('fast')">Close</span>
-            {include file="basket/basket_debug.tpl"}
-        <span onclick="$('#query_debug').hide('fast')">Close</span>
-    </div>
-    {/if}
+	{if $smarty.session.basket}
+	<div id="basket_debug" style="display: none; position: fixed; bottom: 0; left: 0; padding: 5px; border: 1px solid gray; background-color: silver;">
+		<span onclick="$('#query_debug').hide('fast')">Close</span>
+			{include file="basket/basket_debug.tpl"}
+		<span onclick="$('#query_debug').hide('fast')">Close</span>
+	</div>
+	{/if}
 
 	{literal}
 <script type="text/javascript">
